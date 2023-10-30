@@ -12,7 +12,9 @@ import ErrorPage from './components/404';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
-import Header from './components/Header';
+import Cart from './components/Cart';
+
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: 'register',
                 element: <Register />,
+            },
+            {
+                path: 'cart',
+                element: <Cart />,
             },
         ],
     },
