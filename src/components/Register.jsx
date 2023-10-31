@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
 
 const Register = () => {
-
     const [userEmail, setUserEmail] = useState('');
     const [isValidUserEmail, setIsValidUserEmail] = useState(false);
 
@@ -10,8 +9,8 @@ const Register = () => {
     const [isValidUserPassword, setIsValidUserPassword] = useState(false);
 
     const [userConfirmPassword, setUserConfirmPassword] = useState('');
-    const [isValidUserConfirmPassword, setIsValidUserConfirmPassword] = useState(false);
-
+    const [isValidUserConfirmPassword, setIsValidUserConfirmPassword] =
+        useState(false);
 
     return (
         <Card>
@@ -22,7 +21,11 @@ const Register = () => {
                 <Form>
                     <Form.Group className="mb-3" controlId="userEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" required/>
+                        <Form.Control
+                            type="email"
+                            placeholder="Enter email"
+                            required
+                        />
                         <Form.Text className="text-muted">
                             We&apos;ll never share your email with anyone else.
                         </Form.Text>

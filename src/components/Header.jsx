@@ -7,11 +7,20 @@ const Header = () => {
         <>
             <Navbar bg="dark" data-bs-theme="dark">
                 <Container className="d-flex ">
-                    <Link className='navbar-brand'>Shopping Site</Link>
+                    <Link className="navbar-brand">Shopping Site</Link>
                     <Nav className="me-auto">
-                        <Link className="nav-link" to={"/"}>Home</Link>
-                        <Link className="nav-link" to={"/login"}>Login</Link>
-                        <Link className="nav-link" to={"/register"}>Register</Link>
+                        <Link className="nav-link" to={'/'}>
+                            Home
+                        </Link>
+                        <Link className="nav-link" to={'/login'}>
+                            Login
+                        </Link>
+                        <Link className="nav-link" to={'/register'}>
+                            Register
+                        </Link>
+                        <Link className="nav-link" to={'/cart'}>
+                            Cart
+                        </Link>
                     </Nav>
                 </Container>
             </Navbar>

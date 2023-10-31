@@ -14,14 +14,13 @@ export const authSlice = createSlice({
             // which detects changes to a "draft state" and produces a brand new
             // immutable state based off those changes.
             // Also, no return statement is required from these functions.
-            
+
             /* -------------Set User Here from JWT--------- */
             state.user = 'John';
-
         },
         logout: (state) => {
-            state.user = null
-        },        
+            state.user = null;
+        },
     },
 });
 

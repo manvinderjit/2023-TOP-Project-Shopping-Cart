@@ -1,31 +1,31 @@
-import { Container } from "react-bootstrap";
-import ProductCard from "./ProductCard";
-import ProductCarousel from "./ProductCarousel";
-import { useEffect, useState } from "react";
+import { Container } from 'react-bootstrap';
+import ProductCard from './ProductCard';
+import ProductCarousel from './ProductCarousel';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
-
-    const[categoryList, setCategoryList] = useState([]);
-    const[productList, setProductList] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);
+    const [productList, setProductList] = useState([]);
+    const cartItems = useSelector((state) => state.cart.cartItems);
 
     useEffect(() => {
-        async function fetchData () {
-            const response = await fetch(
-                    `http://localhost:5000/api/products`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',                            
-                        },                        
-                })
-                .then( raw => raw.json())
-                .then( data => (data) )
-                .catch( error => console.log( error ));
-                setCategoryList(response.categoryList);
-                setProductList(response.productList);
+        async function fetchData() {
+            const response = await fetch(`http://localhost:5000/api/products`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then((raw) => raw.json())
+                .then((data) => data)
+                .catch((error) => console.log(error));
+            setCategoryList(response.categoryList);
+            setProductList(response.productList);
         }
         fetchData();
-    }, [])
-    
+    }, []);
+
     return (
         <>
             <Container className="p-0">
@@ -34,15 +34,16 @@ const Home = () => {
                 </Container>
                 <Container className="my-4 d-flex justify-content-evenly align-content-start flex-wrap">
                     {productList.map((product) => (
-                        
-                        <ProductCard key={product._id} productDetails={product}></ProductCard>
-                        
+                        <ProductCard
+                            key={product._id}
+                            productDetails={product}
+                        ></ProductCard>
                     ))}
-                    
                 </Container>
+                <Container>Items in cart: {cartItems.length}</Container>
             </Container>
         </>
     );
-}
+};
 
-export default Home
+export default Home;

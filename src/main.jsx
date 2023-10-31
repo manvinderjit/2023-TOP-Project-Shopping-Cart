@@ -14,7 +14,6 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Cart from './components/Cart';
 
-
 const router = createBrowserRouter([
     {
         path: '/',
@@ -45,7 +44,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <Provider store={store}>
             <RouterProvider router={router} />
-            {/* <Header/> */}
         </Provider>
     </React.StrictMode>,
 );

@@ -1,4 +1,4 @@
-import {Carousel, Image} from 'react-bootstrap';
+import { Carousel, Image } from 'react-bootstrap';
 
 const ProductCarousel = () => {
     return (
@@ -26,7 +26,6 @@ const ProductCarousel = () => {
                     overflow: 'hidden',
                 }}
             >
-                
                 <Image src="/src/images/second-carousel-img.jpg" fluid />
                 <Carousel.Caption className="text-primary">
                     <h3>Second slide label</h3>
@@ -35,7 +34,8 @@ const ProductCarousel = () => {
                     </p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item style={{
+            <Carousel.Item
+                style={{
                     height: '25rem',
                     objectFit: 'contain',
                     overflow: 'hidden',
