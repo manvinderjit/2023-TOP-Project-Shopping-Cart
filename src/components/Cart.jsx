@@ -1,29 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Container, Toast, ToastContainer, Row, Col, Image } from 'react-bootstrap';
-import { removeFromCart, removeAllFromCart, decrementItemQuantity, addToCart } from '../features/cart/cartSlice';
-import { useState } from 'react';
+import { removeFromCart, removeAllFromCart, decrementItemQuantity, addToCart, calculateTotalAmount } from '../features/cart/cartSlice';
+import { setToastMessage, resetToastMessage } from '../features/toastMsg/toastMsgSlice';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
+    const toast = useSelector((state) => state.toast);
     const cartItems = useSelector((state) => state.cart.cartItems);
     const dispatch = useDispatch();
     const [showMessageToast, setShowMessageToast] = useState(false);
     const [textContentOfToast, setTextContentOfToast] = useState('');
 
+    useEffect(() => {
+        dispatch(calculateTotalAmount());
+    },[cartItems, dispatch])
+
     const emptyCart = async () => {
         await dispatch(removeAllFromCart());
+        dispatch(setToastMessage({ message: 'Cart Emptied!'}));
+        setTimeout(() => {
+            dispatch(resetToastMessage());
+        }, 4000);
         
-        checkIfCartIsEmpty()
-            ? setTextContentOfToast('Cart emptied')
-            : setTextContentOfToast('Error! Could not empty cart. Try again');
-        setShowMessageToast(true);
-    }
-
-    const checkIfCartIsEmpty = () => {
-        return cartItems.length === 0
-            ? true
-            : false;
     }
 
     const handleDecrementItemQuantity = (id) => {
@@ -36,6 +36,10 @@ const Cart = () => {
 
     const removeItemFromCart = (event) => {
         dispatch(removeFromCart(event.target.value));
+        dispatch(setToastMessage({ message: 'Item removed from cart!' }));
+        setTimeout(() => {
+            dispatch(resetToastMessage());
+        }, 4000);
     }
     
     return (
@@ -49,13 +53,13 @@ const Cart = () => {
                 >
                     <Toast
                         onClose={() => setShowMessageToast(false)}
-                        show={showMessageToast}
+                        show={toast.toastMessageVisibility}
                         delay={3000}
                         autohide
                     >
                         <Toast.Body className="bg-success text-light">
                             <strong className="me-auto fs-6">
-                                {textContentOfToast}
+                                {toast.toastMessageContent}
                             </strong>
                         </Toast.Body>
                     </Toast>
@@ -94,16 +98,34 @@ const Cart = () => {
                                             {item.price}
                                         </Col>
                                         <Col className="border m-0 p-2 d-flex justify-content-evenly align-items-center col-1">
-                                            <Button className="btn-sm btn-light" onClick={() => { handleDecrementItemQuantity(item._id) }}>
+                                            <Button
+                                                className="btn-sm btn-light"
+                                                onClick={() => {
+                                                    handleDecrementItemQuantity(
+                                                        item._id,
+                                                    );
+                                                }}
+                                            >
                                                 -
                                             </Button>
                                             {item.itemQuantity}
-                                            <Button className="btn-sm btn-light" onClick={() => handleIncrementItemQuantity(item)}>
+                                            <Button
+                                                className="btn-sm btn-light"
+                                                onClick={() =>
+                                                    handleIncrementItemQuantity(
+                                                        item,
+                                                    )
+                                                }
+                                            >
                                                 +
-                                            </Button >
+                                            </Button>
                                         </Col>
                                         <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
-                                            {item.price * item.itemQuantity}
+                                            {(
+                                                item.price *
+                                                item.itemQuantity *
+                                                100
+                                            ).toFixed(2) / 100}
                                         </Col>
                                         <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
                                             <Button
@@ -124,7 +146,8 @@ const Cart = () => {
                     {cartItems.length > 0 ? (
                         <>
                             <Row className="d-flex justify-content-end">
-                                SubTotal: ${cart.totalAmount}
+                                SubTotal: ${cart.totalAmount}, Qty: $
+                                {cart.totalCartQuantity}
                             </Row>
                             <Row>
                                 <Col className="d-flex justify-content-start">

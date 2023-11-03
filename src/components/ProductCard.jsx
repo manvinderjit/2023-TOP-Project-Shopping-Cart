@@ -4,6 +4,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../features/cart/cartSlice';
+import store from '../../src/app/store.js';
+import { calculateTotalAmount } from '../features/cart/cartSlice';
 
 const ProductCard = ({ productDetails }) => {
     const dispatch = useDispatch();
@@ -29,6 +31,7 @@ const ProductCard = ({ productDetails }) => {
                     className="mx-2"
                     onClick={() => {
                         dispatch(addToCart(productDetails));
+                        dispatch(calculateTotalAmount());
                     }}
                 >
                     Add to Cart
