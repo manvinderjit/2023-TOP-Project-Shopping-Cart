@@ -13,6 +13,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Cart from './components/Cart';
+import Dash from './components/Dash';
+import Logout from './components/Logout';
 
 const router = createBrowserRouter([
     {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
             {
                 path: 'cart',
                 element: <Cart />,
+            },
+            {
+                path: 'dash',
+                element: <Dash />,
+            },
+            {
+                path: 'logout',
+                element: <Logout />,
             },
         ],
     },

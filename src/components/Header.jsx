@@ -1,8 +1,14 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+
 const Header = () => {
+
+    const auth = useSelector(state => state.auth);
+    
     return (
         <>
             <Navbar bg="dark" data-bs-theme="dark">
@@ -12,12 +18,25 @@ const Header = () => {
                         <Link className="nav-link" to={'/'}>
                             Home
                         </Link>
-                        <Link className="nav-link" to={'/login'}>
-                            Login
-                        </Link>
-                        <Link className="nav-link" to={'/register'}>
-                            Register
-                        </Link>
+                        {auth.token && auth.token !== null ? (
+                            <>
+                                <Link className="nav-link" to={'/dash'}>
+                                    Dash
+                                </Link>
+                                <Link className="nav-link" to={'/logout'}>
+                                    Logout
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link className="nav-link" to={'/login'}>
+                                    Login
+                                </Link>
+                                <Link className="nav-link" to={'/register'}>
+                                    Register
+                                </Link>
+                            </>
+                        )}
                         <Link className="nav-link" to={'/cart'}>
                             Cart
                         </Link>

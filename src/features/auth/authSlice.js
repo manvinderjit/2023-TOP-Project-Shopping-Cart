@@ -38,8 +38,7 @@ export const loginUser = createAsyncThunk(
                 body: JSON.stringify(userData),
             })
                 .then((raw) => raw.json())
-                .then((data) => (response = data));
-
+                .then((data) => (response = data));                
             return response;
         } catch (error) {
             console.error(error);
@@ -57,19 +56,21 @@ export const authSlice = createSlice({
         loginStatus: null,
         id: '',
         email: '',
+        username: '',
         error: null,
         registerStatus: null,
         message: null,
     },
-    reducers: {
-        registerUser: (state) => {},
-        // loginUser: (state, action) => {
-        //     const { token } = action.payload;
-        //     state.token = token;
-        // },
+    reducers: {        
         logout: (state, action) => {
             state.user = null;
             state.token = null;
+            state.id = '';
+            state.email = '';
+            state.username = '';
+            state.error = null;
+            state.registerStatus = null;
+            state.message = null;
         },
     },
     extraReducers: (builder) => {
@@ -95,10 +96,13 @@ export const authSlice = createSlice({
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
             if (action.payload.token) {
+                const { id, username } = jwtDecode(action.payload.token);
                 return {
                     ...state,
                     loginStatus: 'success',
-                    message: action.payload.token,
+                    id,
+                    username,
+                    token: action.payload.token,
                 };
             } else {
                 return {

@@ -1,7 +1,8 @@
 import { Card, Form, Button } from 'react-bootstrap';
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux/es/hooks/useSelector';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -12,6 +13,7 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
+    const navigate = useNavigate();
     // console.log(auth);
 
     const handleInputOnChange = (e) => {
@@ -26,8 +28,15 @@ const Login = () => {
         dispatch(loginUser(formData));
     };
 
+    useEffect(() => {
+        if(auth.token && auth.token !== null){
+            navigate('/dash');
+        }
+    },[auth.token]);
+
     return (
         <Card>
+            {auth.token}
             <Card.Header className="bg-primary text-light fs-5">
                 Log In
             </Card.Header>
