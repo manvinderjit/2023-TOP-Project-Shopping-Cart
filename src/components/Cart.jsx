@@ -15,6 +15,7 @@ const Cart = () => {
 
     useEffect(() => {
         dispatch(calculateTotalAmount());
+        console.log(cart);
     },[cartItems, dispatch])
 
     const emptyCart = async () => {

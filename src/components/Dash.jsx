@@ -1,16 +1,21 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchUserDash } from "../features/auth/authSlice";
 
 const Dash = () => {
     const auth = useSelector(state => state.auth);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log(auth.token);
         if(!auth.token || auth.token == null) {
             navigate('/login');
+        } else {
+            dispatch(fetchUserDash(auth.token));
         }
-    },[auth.token]);
+    },[auth.token], dispatch, navigate);
 
     return (
         <>

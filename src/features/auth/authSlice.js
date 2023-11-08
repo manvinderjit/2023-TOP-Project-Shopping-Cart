@@ -47,6 +47,37 @@ export const loginUser = createAsyncThunk(
     },
 );
 
+export const fetchUserDash = createAsyncThunk(
+    'auth/fetchUserDash',
+    async (token, getState, { rejectWithValue }) => {
+        try {
+            let response;
+            await fetch(`${apiUrl}/dash`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+                .then((raw) => {
+                    console.log(raw, !raw.ok, raw.status);
+                    if(!raw.ok) {
+                        console.log(getState().auth);
+                    } else{
+                        return raw.json();
+                    }
+                })
+                .then((data) => (response = data))
+                .catch(error => response = error);
+                
+            return response;
+        } catch (error) {
+            console.error(error);
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
@@ -95,6 +126,7 @@ export const authSlice = createSlice({
             return { ...state, loginStatus: 'pending' };
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
+            console.log('ap', action.payload);
             if (action.payload.token) {
                 const { id, username } = jwtDecode(action.payload.token);
                 return {
@@ -108,6 +140,7 @@ export const authSlice = createSlice({
                 return {
                     ...state,
                     loginStatus: 'error',
+                    token: null,
                     error: action.payload.error,
                 };
             }
