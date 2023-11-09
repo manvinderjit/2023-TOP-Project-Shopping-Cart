@@ -9,11 +9,13 @@ const Dash = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(auth.token);
+        // console.log(auth.token);
         if(!auth.token || auth.token == null) {
             navigate('/login');
         } else {
-            dispatch(fetchUserDash(auth.token));
+            const result = dispatch(fetchUserDash(auth.token));
+            console.log('c', result);
+            
         }
     },[auth.token], dispatch, navigate);
 

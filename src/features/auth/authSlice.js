@@ -49,26 +49,25 @@ export const loginUser = createAsyncThunk(
 
 export const fetchUserDash = createAsyncThunk(
     'auth/fetchUserDash',
-    async (token, getState, { rejectWithValue }) => {
+    async (token, { dispatch, rejectWithValue }) => {
         try {
             let response;
             await fetch(`${apiUrl}/dash`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
-            })
+            })  
                 .then((raw) => {
-                    console.log(raw, !raw.ok, raw.status);
-                    if(!raw.ok) {
-                        console.log(getState().auth);
+                    if(raw.status === 403) {
+                        dispatch(logout());                        
                     } else{
                         return raw.json();
                     }
                 })
                 .then((data) => (response = data))
-                .catch(error => response = error);
+                .catch((error) => (response = error));
                 
             return response;
         } catch (error) {
@@ -152,6 +151,7 @@ export const authSlice = createSlice({
                 error: action.payload.error,
             };
         });
+        
     }
 });
 
