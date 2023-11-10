@@ -15,6 +15,8 @@ import Register from './components/Register';
 import Cart from './components/Cart';
 import Dash from './components/Dash';
 import Logout from './components/Logout';
+import Orders from './components/Orders.jsx';
+import Profile from './components/Profile.jsx';
 
 const router = createBrowserRouter([
     {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
             {
                 path: 'dash',
                 element: <Dash />,
+            },
+            {
+                path: 'orders',
+                element: <Orders />,
+            },
+            {
+                path: 'profile',
+                element: <Profile />,
             },
             {
                 path: 'logout',

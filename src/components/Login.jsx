@@ -14,7 +14,6 @@ const Login = () => {
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
     const navigate = useNavigate();
-    // console.log(auth);
 
     const handleInputOnChange = (e) => {
         setFormData((prevState) => ({

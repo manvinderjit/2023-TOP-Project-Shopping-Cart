@@ -1,4 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { apiUrl } from '../../app/api';
+import { logout, selectCurrentToken } from '../auth/authSlice';
+
+export const checkoutOrder = createAsyncThunk(
+    'auth/checkout',
+    async (cartItemsList, { dispatch, getState, rejectWithValue }) => {
+        try {
+            let response;
+            await fetch(`${apiUrl}/checkout`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${selectCurrentToken(getState())}`,
+                },
+                body: JSON.stringify(cartItemsList),
+            })
+                .then((raw) => {
+                    if (raw.status === 403) {
+                        dispatch(logout());
+                    } else {
+                        return raw.json();
+                    }
+                })
+                .then((data) => (response = data))
+                .catch((error) => (response = error));
+
+            return response;
+        } catch (error) {
+            console.error(error);
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
 
 export const cartSlice = createSlice({
     name: 'cart',
@@ -68,6 +101,33 @@ export const cartSlice = createSlice({
             state.totalCartQuantity = newCartTotal.totalQuantity;
         },
     },
+    extraReducers: (builder) => {
+        builder.addCase(checkoutOrder.pending, (state, action) => {
+            return { ...state, registerStatus: 'pending' };
+        });
+        builder.addCase(checkoutOrder.fulfilled, (state, action) => {
+            if (action.payload._id && action.payload.username) {
+                return {
+                    ...state,
+                    registerStatus: 'success',
+                    message: action.payload.message,
+                };
+            } else {
+                return {
+                    ...state,
+                    registerStatus: 'error',
+                    error: action.payload.error,
+                };
+            }
+        });
+        builder.addCase(checkoutOrder.rejected, (state, action) => {
+            return {
+                ...state,
+                registerStatus: 'rejected',
+                error: action.payload.error,
+            };
+        });
+    }
 });
 
 // Action creators are generated for each case reducer function
