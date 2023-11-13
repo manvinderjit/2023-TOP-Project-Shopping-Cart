@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
-import { fetchUserOrders } from '../features/user/ordersSlice';
+import { fetchUserOrders, getOrderDetails } from '../features/user/ordersSlice';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 
 const Orders = () => {
@@ -20,6 +20,11 @@ const Orders = () => {
 
     // const { ordersList } = useLoaderData();
     // console.log(ordersList);
+
+    // const handleManageOrder = (e) => {
+    //     dispatch(getOrderDetails(e.target.id));
+    //     navigate(`../order/${e.target.id}`);
+    // }
 
     return (
         <>
@@ -87,14 +92,17 @@ const Orders = () => {
                                             <Link
                                                 className="btn btn-primary btn-sm"
                                                 to={`../order/${order.id}`}
-                                                
                                             >
                                                 Track
                                             </Link>
                                         </Col>
                                         <Col>
-                                            <Button className="btn-sm">
-                                                Cancel
+                                            <Button
+                                                className="btn-sm"
+                                                // onClick={handleManageOrder}
+                                                id={order.id}
+                                            >
+                                                Manage
                                             </Button>
                                         </Col>
                                     </Row>

@@ -42,11 +42,14 @@ export const ordersSlice = createSlice({
     },
     reducers: {
         getOrderDetails: (state, action) => {
-            state.userOrders.map( order => {
-                if(order._id === action.payload) {
-                    state.selectedOrder = order;
-                }
-            })
+            state.selectedOrder = null;
+            if(state.userOrders && action.payload){
+                state.userOrders.map((order) => {
+                    if (order._id === action.payload) {
+                        state.selectedOrder = order;
+                    }
+                });
+            }
         },        
     },
     extraReducers: (builder) => {
