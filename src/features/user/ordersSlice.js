@@ -3,12 +3,12 @@ import { apiUrl } from '../../app/api';
 import { selectCurrentToken, logout } from '../auth/authSlice';
 
 export const fetchUserOrders = createAsyncThunk(
-    'auth/fetchUserDash',
+    'orders/fetchUserOrders',
     async (_, { dispatch, getState, rejectWithValue }) => {
         try {
             let response;
             const token = selectCurrentToken(getState());
-            await fetch(`${apiUrl}/dash`, {
+            await fetch(`${apiUrl}/orders`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,20 +33,31 @@ export const fetchUserOrders = createAsyncThunk(
 );
 
 export const ordersSlice = createSlice({
-    name:'orders',
+    name: 'orders',
     initialState: {
         userOrders: null,
         fetchUserOrdersStatus: null,
+        selectedOrder: null,
         error: null,
     },
-    reducers: {},
-    extraReducers: builder => {
+    reducers: {
+        getOrderDetails: (state, action) => {
+            state.userOrders.map( order => {
+                if(order._id === action.payload) {
+                    state.selectedOrder = order;
+                }
+            })
+        },        
+    },
+    extraReducers: (builder) => {
         builder.addCase(fetchUserOrders.pending, (state, action) => {
             return { ...state, fetchUserOrdersStatus: 'pending' };
         });
         builder.addCase(fetchUserOrders.fulfilled, (state, action) => {
-            console.log(action.payload);
-            if (action.payload.ordersList && action.payload.ordersList.length > 0) {
+            if (
+                action.payload.ordersList &&
+                action.payload.ordersList.length > 0
+            ) {
                 return {
                     ...state,
                     userOrders: action.payload.ordersList,
@@ -67,7 +78,9 @@ export const ordersSlice = createSlice({
                 error: action.payload.error,
             };
         });
-    }
-})
+    },
+});
+
+export const { getOrderDetails } = ordersSlice.actions; 
 
 export default ordersSlice.reducer;
