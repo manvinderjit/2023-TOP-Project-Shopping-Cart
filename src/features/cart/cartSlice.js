@@ -4,16 +4,20 @@ import { logout, selectCurrentToken } from '../auth/authSlice';
 
 export const checkoutOrder = createAsyncThunk(
     'auth/checkout',
-    async (cartItemsList, { dispatch, getState, rejectWithValue }) => {
+    async (_, { dispatch, getState, rejectWithValue }) => {
         try {
-            let response;
+            const orderDetails = {
+                items: getState().cart.cartItems,
+                totalAmount: getState().cart.totalAmount,
+            };
+            let response;            
             await fetch(`${apiUrl}/checkout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${selectCurrentToken(getState())}`,
                 },
-                body: JSON.stringify(cartItemsList),
+                body: JSON.stringify(orderDetails),
             })
                 .then((raw) => {
                     if (raw.status === 403) {
@@ -39,9 +43,11 @@ export const cartSlice = createSlice({
         cartItems: localStorage.getItem('cartItems')
             ? JSON.parse(localStorage.getItem('cartItems'))
             : [],
-        status: null,
+        checkoutStatus: null,
         totalAmount: 0,
         totalCartQuantity: 0,
+        error: null,
+        message: null,
     },
     reducers: {
         addToCart: (state, action) => {
@@ -103,19 +109,22 @@ export const cartSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(checkoutOrder.pending, (state, action) => {
-            return { ...state, registerStatus: 'pending' };
+            return { ...state, checkoutStatus: 'pending' };
         });
         builder.addCase(checkoutOrder.fulfilled, (state, action) => {
-            if (action.payload._id && action.payload.username) {
+            if (action.payload.orderDetails) {
+                localStorage.removeItem('cartItems');
                 return {
                     ...state,
-                    registerStatus: 'success',
-                    message: action.payload.message,
+                    cartItems: [],
+                    totalAmount: 0,
+                    checkoutStatus: 'success',
+                    message: `${action.payload.message}, Id is ${action.payload.orderDetails.id}`,
                 };
             } else {
                 return {
                     ...state,
-                    registerStatus: 'error',
+                    checkoutStatus: 'error',
                     error: action.payload.error,
                 };
             }
@@ -123,7 +132,7 @@ export const cartSlice = createSlice({
         builder.addCase(checkoutOrder.rejected, (state, action) => {
             return {
                 ...state,
-                registerStatus: 'rejected',
+                checkoutStatus: 'rejected',
                 error: action.payload.error,
             };
         });

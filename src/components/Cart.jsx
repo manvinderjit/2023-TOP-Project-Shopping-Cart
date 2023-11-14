@@ -1,21 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Container, Toast, ToastContainer, Row, Col, Image } from 'react-bootstrap';
-import { removeFromCart, removeAllFromCart, decrementItemQuantity, addToCart, calculateTotalAmount } from '../features/cart/cartSlice';
+import { removeFromCart, removeAllFromCart, decrementItemQuantity, addToCart, calculateTotalAmount, checkoutOrder } from '../features/cart/cartSlice';
 import { setToastMessage, resetToastMessage } from '../features/toastMsg/toastMsgSlice';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
     const toast = useSelector((state) => state.toast);
+    const auth = useSelector((state) => state.auth);
     const cartItems = useSelector((state) => state.cart.cartItems);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showMessageToast, setShowMessageToast] = useState(false);
     const [textContentOfToast, setTextContentOfToast] = useState('');
 
     useEffect(() => {
-        dispatch(calculateTotalAmount());
-        console.log(cart);
+        dispatch(calculateTotalAmount());        
     },[cartItems, dispatch])
 
     const emptyCart = async () => {
@@ -41,6 +42,15 @@ const Cart = () => {
         setTimeout(() => {
             dispatch(resetToastMessage());
         }, 4000);
+    }
+
+    const handleCheckout = () => {
+        if (!auth.token || auth.token == null) {
+            navigate('/login');
+        } else {
+            dispatch(checkoutOrder());
+            navigate('/orders');
+        }
     }
     
     return (
@@ -163,7 +173,7 @@ const Cart = () => {
                                     <Row>
                                         <Button
                                             className="mx-2 "
-                                            onClick={emptyCart}
+                                            onClick={handleCheckout}
                                         >
                                             Checkout
                                         </Button>
