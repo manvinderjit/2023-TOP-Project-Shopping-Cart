@@ -32,6 +32,37 @@ export const fetchUserOrders = createAsyncThunk(
     },
 );
 
+export const cancelAnOrder = createAsyncThunk(
+    'orders/cancelAnOrder',
+    async (orderId, { dispatch, getState, rejectWithValue }) => {
+        try {
+            let response;
+            const token = selectCurrentToken(getState());
+            await fetch(`${apiUrl}/orders/cancel`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ 'orderId': orderId }),
+            })
+                .then((raw) => {
+                    if (raw.status === 403) {
+                        dispatch(logout());
+                    } else {
+                        return raw.json();
+                    }
+                })
+                .then((data) => (response = data))
+                .catch((error) => (response = error));
+            return response;
+        } catch (error) {
+            console.error(error);
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
 export const ordersSlice = createSlice({
     name: 'orders',
     initialState: {

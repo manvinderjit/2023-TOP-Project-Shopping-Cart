@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {getOrderDetails} from "../features/user/ordersSlice";
+import { getOrderDetails, cancelAnOrder } from "../features/user/ordersSlice";
 import { useEffect, useState } from "react";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col, Modal } from "react-bootstrap";
 
 const OrderDetails = () => {
     const { orderId } = useParams();
@@ -10,17 +10,26 @@ const OrderDetails = () => {
     const navigate = useNavigate();
     const auth = useSelector((state) => state.auth);
     const orderDetails = useSelector((state) => state.orders.selectedOrder);
+    const[showCancelOrderConfirmation, setShowCancelOrderConfirmation] = useState(false);
     
     useEffect(() => {
         if (!auth.token || auth.token == null) {
             navigate('/login');
-        } else{
+        } else {
             dispatch(getOrderDetails(orderId));
         }
     }, [orderDetails]);
+
+    const handleShowCancelOrder = () => setShowCancelOrderConfirmation(true);
+    const handleCloseCancelOrder = () => setShowCancelOrderConfirmation(false);
+    const handleCancelOrder = (e) => {
+        dispatch(cancelAnOrder(e.target.id));
+        handleCloseCancelOrder();
+        navigate('/orders');
+    }
     
     return (
-        <Container>            
+        <Container>
             <div>
                 {orderDetails ? (
                     <>
@@ -80,7 +89,12 @@ const OrderDetails = () => {
                                     </Link>
                                 </Col>
                                 <Col>
-                                    <Button className="btn-sm">Cancel</Button>
+                                    <Button
+                                        className="btn-sm"
+                                        onClick={handleShowCancelOrder}
+                                    >
+                                        Cancel
+                                    </Button>
                                 </Col>
                             </Row>
                         </Row>
@@ -96,11 +110,39 @@ const OrderDetails = () => {
                                 ).toDateString()}
                             </Col>
                         </Row>
+                        <Modal
+                            show={showCancelOrderConfirmation}
+                            onHide={handleCloseCancelOrder}
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title>Cancel Order</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                Are you sure you want to cancel order{' '}
+                                {orderDetails.id}?
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button
+                                    variant="secondary"
+                                    onClick={handleCloseCancelOrder}
+                                >
+                                    Go Back
+                                </Button>
+                                <Button
+                                    variant="primary"
+                                    onClick={handleCancelOrder}
+                                    id={orderDetails.id}
+                                >
+                                    Confirm
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
                     </>
                 ) : (
                     'Order Not Found'
                 )}
             </div>
+
             <hr />
             <div>
                 <Link to="/orders" className="btn btn-primary btn-sm">
