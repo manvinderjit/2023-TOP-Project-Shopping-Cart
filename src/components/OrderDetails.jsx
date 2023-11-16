@@ -30,11 +30,11 @@ const OrderDetails = () => {
     
     return (
         <Container>
-            <div>
+            <Container>
                 {orderDetails ? (
                     <>
-                        <Row key={orderDetails.id} className="mb-3">
-                            <Row className="bg-secondary text-light p-2">
+                        <Container key={orderDetails.id} className="mb-3">
+                            <Row className="bg-secondary text-light py-2">
                                 <Col>Order No: {orderDetails.id}</Col>
                                 <Col>
                                     Date:
@@ -52,13 +52,13 @@ const OrderDetails = () => {
                                     <br /> ${orderDetails.totalAmount}
                                 </Col>
                             </Row>
-                            <Row className="d-flex flex-row p-2">
+                            <Row className="d-flex flex-row py-2">
                                 {orderDetails.items.map((item) => {
                                     return (
                                         <>
                                             <Row
                                                 key={item.itemId}
-                                                className="p-2"
+                                                className="py-2"
                                             >
                                                 <Col className="text-start">
                                                     {item.itemDetails.name}
@@ -80,26 +80,26 @@ const OrderDetails = () => {
                                 })}
                             </Row>
                             <Row className="mt-2">
-                                <Col>
+                                {/* <Col>
                                     <Link
                                         className="btn btn-primary btn-sm"
                                         to={`../order/${orderDetails.id}`}
                                     >
                                         Track
                                     </Link>
-                                </Col>
+                                </Col> */}
                                 <Col>
                                     <Button
                                         className="btn-sm"
                                         onClick={handleShowCancelOrder}
                                     >
-                                        Cancel
+                                        Cancel Order
                                     </Button>
                                 </Col>
                             </Row>
-                        </Row>
+                        </Container>
                         <hr />
-                        <Row className="d-flex flex-column">
+                        <Container className="d-flex flex-column">
                             <Col>
                                 <h5>Shipping Status: {orderDetails.status}</h5>
                             </Col>
@@ -109,7 +109,7 @@ const OrderDetails = () => {
                                     orderDetails.updatedAt,
                                 ).toDateString()}
                             </Col>
-                        </Row>
+                        </Container>
                         <Modal
                             show={showCancelOrderConfirmation}
                             onHide={handleCloseCancelOrder}
@@ -141,14 +141,14 @@ const OrderDetails = () => {
                 ) : (
                     'Order Not Found'
                 )}
-            </div>
+            </Container>
 
             <hr />
-            <div>
+            <Container>
                 <Link to="/orders" className="btn btn-primary btn-sm">
-                    Back To My Orders
+                    Back To All Orders
                 </Link>
-            </div>
+            </Container>
         </Container>
     );
 }

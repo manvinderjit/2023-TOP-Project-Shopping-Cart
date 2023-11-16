@@ -36,7 +36,7 @@ const Orders = () => {
                     <Container >
                         {orders.userOrders.map((order) => {
                             return (
-                                <Row key={order.id} className="mb-3">
+                                <Container key={order.id} className="mb-3">
                                     <Row className="bg-secondary text-light p-2">
                                         <Col>Order No: {order.id}</Col>
                                         <Col>
@@ -93,20 +93,11 @@ const Orders = () => {
                                                 className="btn btn-primary btn-sm"
                                                 to={`../order/${order.id}`}
                                             >
-                                                Track
-                                            </Link>
-                                        </Col>
-                                        <Col>
-                                            <Button
-                                                className="btn-sm"
-                                                // onClick={handleManageOrder}
-                                                id={order.id}
-                                            >
                                                 Manage
-                                            </Button>
-                                        </Col>
+                                            </Link>
+                                        </Col>                                        
                                     </Row>
-                                </Row>
+                                </Container>
                             );
                         })}
                     </Container>
