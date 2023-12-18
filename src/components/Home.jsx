@@ -9,13 +9,33 @@ import { calculateTotalAmount } from '../features/cart/cartSlice';
 store.dispatch(calculateTotalAmount());
 
 const Home = () => {
-    const [categoryList, setCategoryList] = useState([]);
+    const [carouselData, setCarouselData] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);    
     const [productList, setProductList] = useState([]);
     const cartItems = useSelector((state) => state.cart.cartItems);
     const cart = useSelector((state) => state.cart);
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchCarouselData() {
+            const response = await fetch(
+                `http://localhost:5000/api/promos/carousel`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                },
+            )
+                .then((raw) => raw.json())
+                .then((data) => data)
+                .catch((error) => console.log(error));
+            setCarouselData(response.carouselPromos);
+        }
+        fetchCarouselData();
+    }, []);
+
+    useEffect(() => {
+        async function fetchProductsData() {
             const response = await fetch(`http://localhost:5000/api/products`, {
                 method: 'GET',
                 headers: {
@@ -28,14 +48,14 @@ const Home = () => {
             setCategoryList(response.categoryList);
             setProductList(response.productList);
         }
-        fetchData();
+        fetchProductsData();
     }, []);
 
     return (
         <>
             <Container className="p-0">
                 <Container className="p-0">
-                    <ProductCarousel />
+                    <ProductCarousel carouselData={carouselData} />
                 </Container>
                 <Container className="my-4 d-flex justify-content-evenly align-content-start flex-wrap">
                     {productList.map((product) => (
