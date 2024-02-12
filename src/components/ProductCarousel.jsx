@@ -1,4 +1,5 @@
 import { Carousel, Image } from 'react-bootstrap';
+import { apiUrl } from '../app/api';
 
 const ProductCarousel = ({ carouselData }) => {    
     return (
@@ -14,7 +15,7 @@ const ProductCarousel = ({ carouselData }) => {
                         }}
                     >
                         <Image
-                            src={`http://localhost:5000/${carouselSlide.imageUrl}`}
+                            src={`${apiUrl}/${carouselSlide.imageUrl}`}
                             fluid
                         />
                         <Carousel.Caption className="text-warning">

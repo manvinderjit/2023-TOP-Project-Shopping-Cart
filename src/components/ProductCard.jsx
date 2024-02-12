@@ -6,13 +6,17 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../features/cart/cartSlice';
 import store from '../../src/app/store.js';
 import { calculateTotalAmount } from '../features/cart/cartSlice';
+import { apiUrl } from '../app/api.js';
 
 const ProductCard = ({ productDetails }) => {
     const dispatch = useDispatch();
 
     return (
         <Card style={{ width: '18rem' }} className="p-0 mb-4">
-            <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+            <Card.Img
+                variant="top"
+                src={`${apiUrl}/products/image/${productDetails.imageFilename}`}
+            />
             <Card.Body>
                 <Card.Title>{productDetails.name}</Card.Title>
                 <hr />

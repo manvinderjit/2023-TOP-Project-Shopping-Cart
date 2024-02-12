@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import store from '../../src/app/store.js';
 import { calculateTotalAmount } from '../features/cart/cartSlice';
+import { apiUrl } from '../app/api.js';
 
 store.dispatch(calculateTotalAmount());
 
@@ -18,7 +19,7 @@ const Home = () => {
     useEffect(() => {
         async function fetchCarouselData() {
             const response = await fetch(
-                `http://localhost:5000/api/promos/carousel`,
+                `${apiUrl}/promos/carousel`,
                 {
                     method: 'GET',
                     headers: {
@@ -36,7 +37,7 @@ const Home = () => {
 
     useEffect(() => {
         async function fetchProductsData() {
-            const response = await fetch(`http://localhost:5000/api/products`, {
+            const response = await fetch(`${apiUrl}/products`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
