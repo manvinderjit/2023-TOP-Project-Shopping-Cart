@@ -13,7 +13,6 @@ import Profile from '../components/Profile.jsx';
 import OrderDetails from '../components/OrderDetails.jsx';
 
 const Router = () => {
-
     const orders = useSelector((state) => state.orders);
 
     const router = createBrowserRouter([
@@ -70,6 +69,6 @@ const Router = () => {
     ]);
 
     return <RouterProvider router={router} />;
-}
+};
 
 export default Router;

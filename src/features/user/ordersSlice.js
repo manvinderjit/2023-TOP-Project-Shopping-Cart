@@ -44,7 +44,7 @@ export const cancelAnOrder = createAsyncThunk(
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify({ 'orderId': orderId }),
+                body: JSON.stringify({ orderId: orderId }),
             })
                 .then((raw) => {
                     if (raw.status === 403) {
@@ -74,14 +74,14 @@ export const ordersSlice = createSlice({
     reducers: {
         getOrderDetails: (state, action) => {
             state.selectedOrder = null;
-            if(state.userOrders && action.payload){
+            if (state.userOrders && action.payload) {
                 state.userOrders.map((order) => {
                     if (order._id === action.payload) {
                         state.selectedOrder = order;
                     }
                 });
             }
-        },        
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchUserOrders.pending, (state, action) => {
@@ -115,6 +115,6 @@ export const ordersSlice = createSlice({
     },
 });
 
-export const { getOrderDetails } = ordersSlice.actions; 
+export const { getOrderDetails } = ordersSlice.actions;
 
 export default ordersSlice.reducer;

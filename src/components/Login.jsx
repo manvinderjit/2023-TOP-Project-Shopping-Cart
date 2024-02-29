@@ -5,7 +5,6 @@ import { loginUser } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
     const [formData, setFormData] = useState({
         userEmail: null,
         userPassword: null,
@@ -28,10 +27,10 @@ const Login = () => {
     };
 
     useEffect(() => {
-        if(auth.token && auth.token !== null){
+        if (auth.token && auth.token !== null) {
             navigate('/dash');
         }
-    },[auth.token]);
+    }, [auth.token]);
 
     return (
         <Card>

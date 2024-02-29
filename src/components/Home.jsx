@@ -11,22 +11,19 @@ store.dispatch(calculateTotalAmount());
 
 const Home = () => {
     const [carouselData, setCarouselData] = useState([]);
-    const [categoryList, setCategoryList] = useState([]);    
+    const [categoryList, setCategoryList] = useState([]);
     const [productList, setProductList] = useState([]);
     const cartItems = useSelector((state) => state.cart.cartItems);
     const cart = useSelector((state) => state.cart);
 
     useEffect(() => {
         async function fetchCarouselData() {
-            const response = await fetch(
-                `${apiUrl}/promos/carousel`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+            const response = await fetch(`${apiUrl}/promos/carousel`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
                 },
-            )
+            })
                 .then((raw) => raw.json())
                 .then((data) => data)
                 .catch((error) => console.log(error));

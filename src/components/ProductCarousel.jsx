@@ -1,10 +1,10 @@
 import { Carousel, Image } from 'react-bootstrap';
 import { apiUrl } from '../app/api';
 
-const ProductCarousel = ({ carouselData }) => {    
+const ProductCarousel = ({ carouselData }) => {
     return (
         <Carousel>
-            {Object.values(carouselData).map((carouselSlide) => {                
+            {Object.values(carouselData).map((carouselSlide) => {
                 return (
                     <Carousel.Item
                         key={carouselSlide.name}
@@ -24,7 +24,7 @@ const ProductCarousel = ({ carouselData }) => {
                         </Carousel.Caption>
                     </Carousel.Item>
                 );
-            })}            
+            })}
         </Carousel>
     );
 };

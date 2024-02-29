@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { getOrderDetails, cancelAnOrder } from "../features/user/ordersSlice";
-import { useEffect, useState } from "react";
-import { Container, Button, Row, Col, Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { getOrderDetails, cancelAnOrder } from '../features/user/ordersSlice';
+import { useEffect, useState } from 'react';
+import { Container, Button, Row, Col, Modal } from 'react-bootstrap';
 
 const OrderDetails = () => {
     const { orderId } = useParams();
@@ -10,8 +10,9 @@ const OrderDetails = () => {
     const navigate = useNavigate();
     const auth = useSelector((state) => state.auth);
     const orderDetails = useSelector((state) => state.orders.selectedOrder);
-    const[showCancelOrderConfirmation, setShowCancelOrderConfirmation] = useState(false);
-    
+    const [showCancelOrderConfirmation, setShowCancelOrderConfirmation] =
+        useState(false);
+
     useEffect(() => {
         if (!auth.token || auth.token == null) {
             navigate('/login');
@@ -26,8 +27,8 @@ const OrderDetails = () => {
         dispatch(cancelAnOrder(e.target.id));
         handleCloseCancelOrder();
         navigate('/orders');
-    }
-    
+    };
+
     return (
         <Container>
             <Container>
@@ -151,6 +152,6 @@ const OrderDetails = () => {
             </Container>
         </Container>
     );
-}
+};
 
 export default OrderDetails;

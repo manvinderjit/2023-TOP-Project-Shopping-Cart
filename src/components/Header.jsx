@@ -4,11 +4,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-
 const Header = () => {
+    const auth = useSelector((state) => state.auth);
 
-    const auth = useSelector(state => state.auth);
-    
     return (
         <>
             <Navbar bg="dark" data-bs-theme="dark">

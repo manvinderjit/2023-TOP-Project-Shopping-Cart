@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const Logout = () => {
-
     const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -15,7 +14,6 @@ const Logout = () => {
         } else {
             dispatch(logout());
         }
-        
     });
 
     return <></>;

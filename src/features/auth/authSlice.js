@@ -15,13 +15,13 @@ export const registerUser = createAsyncThunk(
                 body: JSON.stringify(userData),
             })
                 .then((raw) => raw.json())
-                .then((data) => response = data)
-                
+                .then((data) => (response = data));
+
             return response;
         } catch (error) {
             console.error(error);
             return rejectWithValue(error.response.data);
-        }        
+        }
     },
 );
 
@@ -38,7 +38,7 @@ export const loginUser = createAsyncThunk(
                 body: JSON.stringify(userData),
             })
                 .then((raw) => raw.json())
-                .then((data) => (response = data));                
+                .then((data) => (response = data));
             return response;
         } catch (error) {
             console.error(error);
@@ -91,7 +91,7 @@ export const authSlice = createSlice({
         registerStatus: null,
         message: null,
     },
-    reducers: {        
+    reducers: {
         logout: (state, action) => {
             state.user = null;
             state.token = null;
@@ -108,8 +108,12 @@ export const authSlice = createSlice({
             return { ...state, registerStatus: 'pending' };
         });
         builder.addCase(registerUser.fulfilled, (state, action) => {
-            if(action.payload._id && action.payload.username){
-                return { ...state, registerStatus: 'success', message: action.payload.message };
+            if (action.payload._id && action.payload.username) {
+                return {
+                    ...state,
+                    registerStatus: 'success',
+                    message: action.payload.message,
+                };
             } else {
                 return {
                     ...state,
@@ -119,7 +123,11 @@ export const authSlice = createSlice({
             }
         });
         builder.addCase(registerUser.rejected, (state, action) => {
-             return { ...state, registerStatus: 'rejected', error: action.payload.error };
+            return {
+                ...state,
+                registerStatus: 'rejected',
+                error: action.payload.error,
+            };
         });
         builder.addCase(loginUser.pending, (state, action) => {
             return { ...state, loginStatus: 'pending' };
@@ -150,8 +158,7 @@ export const authSlice = createSlice({
                 error: action.payload.error,
             };
         });
-        
-    }
+    },
 });
 
 // Action creators are generated for each case reducer function

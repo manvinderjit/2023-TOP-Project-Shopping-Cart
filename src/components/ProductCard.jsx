@@ -40,12 +40,12 @@ const ProductCard = ({ productDetails }) => {
                 >
                     Add to Cart
                 </Button>
-                <Link
+                {/* <Link
                     to={`/products/${productDetails._id}`}
                     className="btn btn-primary mx-2"
                 >
                     View
-                </Link>
+                </Link> */}
             </Card.Body>
         </Card>
     );

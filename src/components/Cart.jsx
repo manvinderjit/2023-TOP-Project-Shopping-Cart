@@ -1,7 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Container, Toast, ToastContainer, Row, Col, Image } from 'react-bootstrap';
-import { removeFromCart, removeAllFromCart, decrementItemQuantity, addToCart, calculateTotalAmount, checkoutOrder } from '../features/cart/cartSlice';
-import { setToastMessage, resetToastMessage } from '../features/toastMsg/toastMsgSlice';
+import {
+    Button,
+    Container,
+    Toast,
+    ToastContainer,
+    Row,
+    Col,
+    Image,
+} from 'react-bootstrap';
+import {
+    removeFromCart,
+    removeAllFromCart,
+    decrementItemQuantity,
+    addToCart,
+    calculateTotalAmount,
+    checkoutOrder,
+} from '../features/cart/cartSlice';
+import {
+    setToastMessage,
+    resetToastMessage,
+} from '../features/toastMsg/toastMsgSlice';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -16,21 +34,20 @@ const Cart = () => {
     const [textContentOfToast, setTextContentOfToast] = useState('');
 
     useEffect(() => {
-        dispatch(calculateTotalAmount());        
-    },[cartItems, dispatch])
+        dispatch(calculateTotalAmount());
+    }, [cartItems, dispatch]);
 
     const emptyCart = async () => {
         await dispatch(removeAllFromCart());
-        dispatch(setToastMessage({ message: 'Cart Emptied!'}));
+        dispatch(setToastMessage({ message: 'Cart Emptied!' }));
         setTimeout(() => {
             dispatch(resetToastMessage());
         }, 4000);
-        
-    }
+    };
 
     const handleDecrementItemQuantity = (id) => {
         dispatch(decrementItemQuantity(id));
-    }
+    };
 
     const handleIncrementItemQuantity = (item) => {
         dispatch(addToCart(item));
@@ -42,7 +59,7 @@ const Cart = () => {
         setTimeout(() => {
             dispatch(resetToastMessage());
         }, 4000);
-    }
+    };
 
     const handleCheckout = () => {
         if (!auth.token || auth.token == null) {
@@ -51,8 +68,8 @@ const Cart = () => {
             dispatch(checkoutOrder());
             navigate('/orders');
         }
-    }
-    
+    };
+
     return (
         <>
             <Container className="d-flex flex-column">

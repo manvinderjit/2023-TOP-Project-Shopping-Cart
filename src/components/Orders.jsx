@@ -5,18 +5,18 @@ import { fetchUserOrders, getOrderDetails } from '../features/user/ordersSlice';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 
 const Orders = () => {
-    const auth = useSelector(state => state.auth);
-    const orders = useSelector(state => state.orders);
+    const auth = useSelector((state) => state.auth);
+    const orders = useSelector((state) => state.orders);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
         if (!auth.token || auth.token == null) {
             navigate('/login');
-        } else{
+        } else {
             dispatch(fetchUserOrders());
         }
-    },[auth.token]);
+    }, [auth.token]);
 
     // const { ordersList } = useLoaderData();
     // console.log(ordersList);
@@ -33,7 +33,7 @@ const Orders = () => {
             ) : (
                 <Container>
                     <h3>Your Orders</h3>
-                    <Container >
+                    <Container>
                         {orders.userOrders.map((order) => {
                             return (
                                 <Container key={order.id} className="mb-3">
@@ -95,7 +95,7 @@ const Orders = () => {
                                             >
                                                 Manage
                                             </Link>
-                                        </Col>                                        
+                                        </Col>
                                     </Row>
                                 </Container>
                             );

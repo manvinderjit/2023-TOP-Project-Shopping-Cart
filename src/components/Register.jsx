@@ -11,7 +11,8 @@ const Register = () => {
     const [isValidUserPassword, setIsValidUserPassword] = useState(false);
 
     const [userConfirmPassword, setUserConfirmPassword] = useState('');
-    const [isValidUserConfirmPassword, setIsValidUserConfirmPassword] = useState(false);
+    const [isValidUserConfirmPassword, setIsValidUserConfirmPassword] =
+        useState(false);
 
     const [formData, setFormData] = useState({
         userEmail: null,
@@ -20,7 +21,7 @@ const Register = () => {
     });
 
     const dispatch = useDispatch();
-    const auth = useSelector(state => state.auth);
+    const auth = useSelector((state) => state.auth);
     // console.log(auth);
 
     const handleInputOnChange = (e) => {
@@ -33,7 +34,7 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(registerUser(formData));
-    }
+    };
 
     return (
         <Card>
