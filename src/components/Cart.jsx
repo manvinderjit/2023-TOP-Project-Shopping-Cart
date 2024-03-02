@@ -22,6 +22,7 @@ import {
 } from '../features/toastMsg/toastMsgSlice';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { apiUrl } from '../app/api';
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
@@ -110,11 +111,12 @@ const Cart = () => {
                             <Col className="h6 border m-0 p-2">Remove</Col>
                         </Row>
                         {cartItems.map((item) => {
+                            console.log(item);
                             return (
                                 <>
                                     <Row>
                                         <Col className="h6 border m-0 p-2 d-flex justify-content-center align-items-center d-flex">
-                                            <Image src="holder.js/100px180?text=Image cap"></Image>
+                                            <Image src={`${apiUrl}/products/image/${item.imageFilename}`} width={'100%'} className='rounded'></Image>
                                         </Col>
                                         <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
                                             {item.name}
