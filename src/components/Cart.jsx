@@ -110,8 +110,7 @@ const Cart = () => {
                             <Col className="h6 border m-0 p-2">Total Price</Col>
                             <Col className="h6 border m-0 p-2">Remove</Col>
                         </Row>
-                        {cartItems.map((item) => {
-                            console.log(item);
+                        {cartItems.map((item) => {                            
                             return (
                                 <>
                                     <Row>

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { fetchUserOrders, getOrderDetails } from '../features/user/ordersSlice';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
+import { apiUrl } from '../app/api';
 
 const Orders = () => {
     const auth = useSelector((state) => state.auth);
@@ -63,7 +65,18 @@ const Orders = () => {
                                                         key={item.itemId}
                                                         className="p-2"
                                                     >
-                                                        <Col className="text-start">
+                                                        <Col>
+                                                            <Image
+                                                                src={`${apiUrl}/products/image/${item.itemDetails.imageFilename}`}
+                                                                
+                                                                className="rounded"
+                                                                style={{
+                                                                    height: '90px',
+                                                                    maxHeight: '90px'
+                                                                }}
+                                                            ></Image>
+                                                        </Col>
+                                                        <Col className="d-flex align-items-center text-start">
                                                             {
                                                                 item.itemDetails
                                                                     .name
@@ -74,11 +87,11 @@ const Orders = () => {
                                                                     .description
                                                             }
                                                         </Col>
-                                                        <Col>
+                                                        <Col className="d-flex align-items-center justify-content-center">
                                                             Qty:{' '}
                                                             {item.itemQuantity}
                                                         </Col>
-                                                        <Col>
+                                                        <Col className="d-flex align-items-center justify-content-center">
                                                             Price:{' '}
                                                             {item.itemPrice}
                                                         </Col>

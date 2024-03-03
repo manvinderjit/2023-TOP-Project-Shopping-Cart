@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getOrderDetails, cancelAnOrder } from '../features/user/ordersSlice';
 import { useEffect, useState } from 'react';
-import { Container, Button, Row, Col, Modal } from 'react-bootstrap';
+import { Container, Button, Row, Col, Modal, Image } from 'react-bootstrap';
+import { apiUrl } from '../app/api';
 
 const OrderDetails = () => {
     const { orderId } = useParams();
@@ -31,6 +32,7 @@ const OrderDetails = () => {
 
     return (
         <Container>
+            <h2>Manage Order</h2>
             <Container>
                 {orderDetails ? (
                     <>
@@ -61,6 +63,16 @@ const OrderDetails = () => {
                                                 key={item.itemId}
                                                 className="py-2"
                                             >
+                                                <Col>
+                                                    <Image
+                                                        src={`${apiUrl}/products/image/${item.itemDetails.imageFilename}`}
+                                                        className="rounded"
+                                                        style={{
+                                                            height: '90px',
+                                                            maxHeight: '90px',
+                                                        }}
+                                                    ></Image>
+                                                </Col>
                                                 <Col className="text-start">
                                                     {item.itemDetails.name}
                                                     <br></br>
