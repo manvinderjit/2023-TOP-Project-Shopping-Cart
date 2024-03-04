@@ -72,7 +72,7 @@ const Login = () => {
             </Card.Header>
             <Card.Body className="bg-light-subtle">
                 <Card.Text>
-                    <strong>Username: </strong>user@abc.com
+                    <strong>Username: </strong>email@abc.com
                 </Card.Text>
                 <Card.Text>
                     <strong>Password: </strong>Admin1
