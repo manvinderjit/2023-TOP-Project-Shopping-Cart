@@ -75,24 +75,6 @@ const Cart = () => {
         <>
             <Container className="d-flex flex-column">
                 <h2>Your Cart Items</h2>
-
-                <ToastContainer
-                    style={{ zIndex: 1, marginTop: '5rem' }}
-                    position="top-center"
-                >
-                    <Toast
-                        onClose={() => setShowMessageToast(false)}
-                        show={toast.toastMessageVisibility}
-                        delay={3000}
-                        autohide
-                    >
-                        <Toast.Body className="bg-success text-light">
-                            <strong className="me-auto fs-6">
-                                {toast.toastMessageContent}
-                            </strong>
-                        </Toast.Body>
-                    </Toast>
-                </ToastContainer>
                 {cartItems.length === 0 ? (
                     <h5>Your cart is currently empty!</h5>
                 ) : (
@@ -110,12 +92,16 @@ const Cart = () => {
                             <Col className="h6 border m-0 p-2">Total Price</Col>
                             <Col className="h6 border m-0 p-2">Remove</Col>
                         </Row>
-                        {cartItems.map((item) => {                            
+                        {cartItems.map((item) => {
                             return (
-                                <>
-                                    <Row>
+                                
+                                    <Row key={item._id}>
                                         <Col className="h6 border m-0 p-2 d-flex justify-content-center align-items-center d-flex">
-                                            <Image src={`${apiUrl}/products/image/${item.imageFilename}`} width={'100%'} className='rounded'></Image>
+                                            <Image
+                                                src={`${apiUrl}/products/image/${item.imageFilename}`}
+                                                width={'100%'}
+                                                className="rounded"
+                                            ></Image>
                                         </Col>
                                         <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
                                             {item.name}
@@ -166,7 +152,7 @@ const Cart = () => {
                                             </Button>
                                         </Col>
                                     </Row>
-                                </>
+                                
                             );
                         })}
                     </Container>

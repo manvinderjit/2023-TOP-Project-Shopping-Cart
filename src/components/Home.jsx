@@ -1,4 +1,4 @@
-import { Container } from 'react-bootstrap';
+import { Container, Toast, ToastContainer } from 'react-bootstrap';
 import ProductCard from './ProductCard';
 import ProductCarousel from './ProductCarousel';
 import { useEffect, useState } from 'react';
@@ -63,7 +63,10 @@ const Home = () => {
                         ></ProductCard>
                     ))}
                 </Container>
-                <Container>Items in cart: {cart.totalCartQuantity}</Container>
+                
+                <Container>
+                    Items in cart: {cart.totalCartQuantity}
+                    </Container>
             </Container>
         </>
     );
