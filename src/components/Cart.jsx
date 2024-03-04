@@ -79,124 +79,128 @@ const Cart = () => {
                     <h5>Your cart is currently empty!</h5>
                 ) : location.pathname === '/cart' ? (
                     <>
-                    <Container className="d-flex my-4 flex-column justify-content-evenly">
-                        <Row>
-                            <Col className="h6 border m-0 p-2">Image</Col>
-                            <Col className="h6 border m-0 p-2">Name</Col>
-                            <Col className="h6 border m-0 p-2 col-3">
-                                Description
-                            </Col>
-                            <Col className="h6 border m-0 p-2">Unit Price</Col>
-                            <Col className="h6 border m-0 p-2 col-1">
-                                Quantity
-                            </Col>
-                            <Col className="h6 border m-0 p-2">Total Price</Col>
-                            <Col className="h6 border m-0 p-2">Remove</Col>
-                        </Row>
-                        {cartItems.map((item) => {
-                            return (
-                                <Row key={item._id}>
-                                    <Col className="h6 border m-0 p-2 d-flex justify-content-center align-items-center d-flex">
-                                        <Image
-                                            src={`${apiUrl}/products/image/${item.imageFilename}`}
-                                            width={'100%'}
-                                            className="rounded"
-                                        ></Image>
-                                    </Col>
-                                    <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
-                                        {item.name}
-                                    </Col>
-                                    <Col className="border m-0 p-2 d-flex justify-content-center align-items-center col-3">
-                                        {item.description}
-                                    </Col>
-                                    <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
-                                        {item.price}
-                                    </Col>
-                                    <Col className="border m-0 p-2 d-flex justify-content-evenly align-items-center col-1">
-                                        <Button
-                                            className="btn-sm btn-light"
-                                            onClick={() => {
-                                                handleDecrementItemQuantity(
-                                                    item._id,
-                                                );
-                                            }}
-                                        >
-                                            -
-                                        </Button>
-                                        {item.itemQuantity}
-                                        <Button
-                                            className="btn-sm btn-light"
-                                            onClick={() =>
-                                                handleIncrementItemQuantity(
-                                                    item,
-                                                )
-                                            }
-                                        >
-                                            +
-                                        </Button>
-                                    </Col>
-                                    <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
-                                        {(
-                                            item.price *
-                                            item.itemQuantity *
-                                            100
-                                        ).toFixed(2) / 100}
-                                    </Col>
-                                    <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
-                                        <Button
-                                            className="btn btn-sm"
-                                            onClick={removeItemFromCart}
-                                            value={item._id}
-                                        >
-                                            Remove
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            );
-                        })}
-                    </Container>
-                    <Container className="d-flex flex-column gap-3">
-                    {cartItems.length > 0 ? (
-                        <>
-                            <Row className="d-flex justify-content-end">
-                                SubTotal: ${cart.totalAmount}, Qty: $
-                                {cart.totalCartQuantity}
-                            </Row>
+                        <Container className="d-flex my-4 flex-column justify-content-evenly">
                             <Row>
-                                <Col className="d-flex justify-content-start">
-                                    <Button
-                                        className="mx-2 "
-                                        onClick={emptyCart}
-                                    >
-                                        Empty Cart
-                                    </Button>
+                                <Col className="h6 border m-0 p-2">Image</Col>
+                                <Col className="h6 border m-0 p-2">Name</Col>
+                                <Col className="h6 border m-0 p-2 col-3">
+                                    Description
                                 </Col>
-                                <Col className="d-flex justify-content-end">
-                                    <Row>
-                                        <Button
-                                            className="mx-2 "
-                                            onClick={handleCheckout}
-                                        >
-                                            Checkout
-                                        </Button>
+                                <Col className="h6 border m-0 p-2">
+                                    Unit Price
+                                </Col>
+                                <Col className="h6 border m-0 p-2 col-1">
+                                    Quantity
+                                </Col>
+                                <Col className="h6 border m-0 p-2">
+                                    Total Price
+                                </Col>
+                                <Col className="h6 border m-0 p-2">Remove</Col>
+                            </Row>
+                            {cartItems.map((item) => {
+                                return (
+                                    <Row key={item._id}>
+                                        <Col className="h6 border m-0 p-2 d-flex justify-content-center align-items-center d-flex">
+                                            <Image
+                                                src={`${apiUrl}/products/image/${item.imageFilename}`}
+                                                width={'100%'}
+                                                className="rounded"
+                                            ></Image>
+                                        </Col>
+                                        <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
+                                            {item.name}
+                                        </Col>
+                                        <Col className="border m-0 p-2 d-flex justify-content-center align-items-center col-3">
+                                            {item.description}
+                                        </Col>
+                                        <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
+                                            {item.price}
+                                        </Col>
+                                        <Col className="border m-0 p-2 d-flex justify-content-evenly align-items-center col-1">
+                                            <Button
+                                                className="btn-sm btn-light"
+                                                onClick={() => {
+                                                    handleDecrementItemQuantity(
+                                                        item._id,
+                                                    );
+                                                }}
+                                            >
+                                                -
+                                            </Button>
+                                            {item.itemQuantity}
+                                            <Button
+                                                className="btn-sm btn-light"
+                                                onClick={() =>
+                                                    handleIncrementItemQuantity(
+                                                        item,
+                                                    )
+                                                }
+                                            >
+                                                +
+                                            </Button>
+                                        </Col>
+                                        <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
+                                            {(
+                                                item.price *
+                                                item.itemQuantity *
+                                                100
+                                            ).toFixed(2) / 100}
+                                        </Col>
+                                        <Col className="border m-0 p-2 d-flex justify-content-center align-items-center">
+                                            <Button
+                                                className="btn btn-sm"
+                                                onClick={removeItemFromCart}
+                                                value={item._id}
+                                            >
+                                                Remove
+                                            </Button>
+                                        </Col>
                                     </Row>
-                                </Col>
-                            </Row>
+                                );
+                            })}
+                        </Container>
+                        <Container className="d-flex flex-column gap-3">
+                            {cartItems.length > 0 ? (
+                                <>
+                                    <Row className="d-flex justify-content-end">
+                                        SubTotal: ${cart.totalAmount}, Qty: $
+                                        {cart.totalCartQuantity}
+                                    </Row>
+                                    <Row>
+                                        <Col className="d-flex justify-content-start">
+                                            <Button
+                                                className="mx-2 "
+                                                onClick={emptyCart}
+                                            >
+                                                Empty Cart
+                                            </Button>
+                                        </Col>
+                                        <Col className="d-flex justify-content-end">
+                                            <Row>
+                                                <Button
+                                                    className="mx-2 "
+                                                    onClick={handleCheckout}
+                                                >
+                                                    Checkout
+                                                </Button>
+                                            </Row>
+                                        </Col>
+                                    </Row>
 
-                            <Row className="d-flex justify-content-end">
-                                <Link
-                                    className="d-flex justify-content-end"
-                                    to={'/'}
-                                >
-                                    Continue Shopping
-                                </Link>
-                            </Row>
-                        </>
-                    ) : (
-                        <></>
-                    )}
-                </Container>
-                </>
+                                    <Row className="d-flex justify-content-end">
+                                        <Link
+                                            className="d-flex justify-content-end"
+                                            to={'/'}
+                                        >
+                                            Continue Shopping
+                                        </Link>
+                                    </Row>
+                                </>
+                            ) : (
+                                <></>
+                            )}
+                        </Container>
+                    </>
                 ) : (
                     <Container className="d-flex flex-column justify-content-evenly ">
                         {cartItems.map((item) => {
@@ -270,13 +274,16 @@ const Cart = () => {
                             );
                         })}
                         <Row className="d-flex align-items-center justify-content-center p-2">
-                            <Button href="/cart" style={{ width: '200px' }}>
-                                Got to Cart
-                            </Button>
+                            <Link
+                                className="btn btn-primary "
+                                to={'/cart'}
+                                style={{ width: '200px' }}
+                            >
+                                Cart
+                            </Link>
                         </Row>
                     </Container>
                 )}
-                
             </Container>
         </>
     );
