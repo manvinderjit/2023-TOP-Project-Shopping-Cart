@@ -51,7 +51,7 @@ const Header = ({ handleShowCartCanvas }) => {
                         onClick={() => handleShowCartCanvas()}
                     >
                         <span style={{ width: '20px', height: '20px' }}>
-                            {cart.totalCartQuantity}
+                            {cart.cartItems.length}
                         </span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
