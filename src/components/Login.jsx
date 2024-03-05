@@ -35,8 +35,13 @@ const Login = () => {
     }, [auth.token]);
 
     return (
-        <Card>
-            {auth.token}
+        <Card>            
+            <>
+                {auth.loginStatus === 'rejected' ||
+                auth.loginStatus === 'error' ? (
+                    <p className=" alert alert-danger">{auth.error}</p>
+                ) : null}
+            </>
             <Card.Header className="bg-primary text-light fs-5">
                 Log In
             </Card.Header>
@@ -83,8 +88,14 @@ const Login = () => {
             </Card.Header>
             <Card.Body className="bg-light-subtle">
                 <Card.Text>
-                    <a href="https://ia.manvinderjit.com" target='_blank' rel='noreferrer'>https://ia.manvinderjit.com</a>
-                </Card.Text>                
+                    <a
+                        href="https://ia.manvinderjit.com"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        https://ia.manvinderjit.com
+                    </a>
+                </Card.Text>
             </Card.Body>
         </Card>
     );

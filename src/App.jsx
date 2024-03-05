@@ -20,7 +20,7 @@ function App() {
         <>
             <Header handleShowCartCanvas={ handleShowCartCanvas } />
             <ToastAlert />
-            <div className="my-auto d-flex justify-content-center">
+            <div className="my-auto d-flex justify-content-center pt-5">
                 <Outlet context={{ showCartCanvas, handleCloseCartCanvas }} />
             </div>
             <Footer />
