@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const toastSlice = createSlice({
     name: 'toast',
-    initialState: {        
+    initialState: {
         toastMessageVisibility: false,
         toastMessageContent: null,
     },
@@ -12,12 +12,11 @@ export const toastSlice = createSlice({
             const newToastMessage = action.payload.message;
             state.toastMessageVisibility = true;
             state.toastMessageContent = newToastMessage;
-            
         },
         resetToastMessage: (state) => {
             state.toastMessageVisibility = false;
             state.toastMessageContent = null;
-        }
+        },
     },
 });
 

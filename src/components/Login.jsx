@@ -1,11 +1,12 @@
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button, CardHeader } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import ListGroup from 'react-bootstrap/ListGroup';
+
 
 const Login = () => {
-
     const [formData, setFormData] = useState({
         userEmail: null,
         userPassword: null,
@@ -14,7 +15,6 @@ const Login = () => {
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
     const navigate = useNavigate();
-    // console.log(auth);
 
     const handleInputOnChange = (e) => {
         setFormData((prevState) => ({
@@ -29,14 +29,19 @@ const Login = () => {
     };
 
     useEffect(() => {
-        if(auth.token && auth.token !== null){
+        if (auth.token && auth.token !== null) {
             navigate('/dash');
         }
-    },[auth.token]);
+    }, [auth.token]);
 
     return (
-        <Card>
-            {auth.token}
+        <Card>            
+            <>
+                {auth.loginStatus === 'rejected' ||
+                auth.loginStatus === 'error' ? (
+                    <p className=" alert alert-danger">{auth.error}</p>
+                ) : null}
+            </>
             <Card.Header className="bg-primary text-light fs-5">
                 Log In
             </Card.Header>
@@ -64,6 +69,33 @@ const Login = () => {
                         Log Me In
                     </Button>
                 </Form>
+            </Card.Body>
+            <br />
+            <br />
+            <Card.Header className="bg-secondary text-light fs-5 rounded">
+                Demo Credentials
+            </Card.Header>
+            <Card.Body className="bg-light-subtle">
+                <Card.Text>
+                    <strong>Username: </strong>email@abc.com
+                </Card.Text>
+                <Card.Text>
+                    <strong>Password: </strong>Admin1
+                </Card.Text>
+            </Card.Body>
+            <Card.Header className="bg-secondary text-light fs-5 rounded">
+                For RESTFul APIs, visit:
+            </Card.Header>
+            <Card.Body className="bg-light-subtle">
+                <Card.Text>
+                    <a
+                        href="https://ia.manvinderjit.com"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        https://ia.manvinderjit.com
+                    </a>
+                </Card.Text>
             </Card.Body>
         </Card>
     );

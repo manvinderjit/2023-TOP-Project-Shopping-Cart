@@ -4,15 +4,28 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../features/cart/cartSlice';
+import { setToastMessage, resetToastMessage } from '../features/toastMsg/toastMsgSlice.js';
 import store from '../../src/app/store.js';
 import { calculateTotalAmount } from '../features/cart/cartSlice';
+import { apiUrl } from '../app/api.js';
 
 const ProductCard = ({ productDetails }) => {
     const dispatch = useDispatch();
 
+    const handleToastMessage = (newMessage) => {
+        dispatch(resetToastMessage());
+        dispatch(setToastMessage({ message: newMessage }));
+        setTimeout(() => {
+            dispatch(resetToastMessage());
+        }, 4000);
+    };
+
     return (
         <Card style={{ width: '18rem' }} className="p-0 mb-4">
-            <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+            <Card.Img
+                variant="top"
+                src={`${apiUrl}/products/image/${productDetails.imageFilename}`}
+            />
             <Card.Body>
                 <Card.Title>{productDetails.name}</Card.Title>
                 <hr />
@@ -32,16 +45,17 @@ const ProductCard = ({ productDetails }) => {
                     onClick={() => {
                         dispatch(addToCart(productDetails));
                         dispatch(calculateTotalAmount());
+                        handleToastMessage(`${productDetails.name} added to cart`);
                     }}
                 >
                     Add to Cart
                 </Button>
-                <Link
+                {/* <Link
                     to={`/products/${productDetails._id}`}
                     className="btn btn-primary mx-2"
                 >
                     View
-                </Link>
+                </Link> */}
             </Card.Body>
         </Card>
     );
