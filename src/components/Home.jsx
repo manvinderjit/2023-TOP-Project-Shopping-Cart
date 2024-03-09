@@ -7,6 +7,7 @@ import store from '../../src/app/store.js';
 import { calculateTotalAmount } from '../features/cart/cartSlice';
 import { apiUrl } from '../app/api.js';
 import CartSummary from './CartSummary.jsx';
+import SearchBar from './SearchBar.jsx';
 
 store.dispatch(calculateTotalAmount());
 
@@ -55,7 +56,8 @@ const Home = () => {
             <Container className="p-0">
                 <Container className="p-0">
                     <ProductCarousel carouselData={carouselData} />
-                </Container>                
+                </Container>       
+                <SearchBar/>         
                 <Container className="my-4 d-flex justify-content-evenly align-content-start flex-wrap">
                     {productList.map((product) => (
                         <ProductCard
