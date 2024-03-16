@@ -35,3 +35,18 @@ The `Shopping App` is deployed using following technologies:
 - `CI/CD Pipeline With GitHub`: A CI/CD pipeline is created to automatically deploy newly implemented features to the production environment.
 - `Cloud Flare Pages`: The application is deployed via Cloud Flare pages that automatically builds and deploys when changes are pushed to the `prodtest` branch (will change to `production` branch once the project is complete).
 
+# 2. Objectives
+
+## 2.1 Skill Demonstration Objectives
+The Shopping Cart is created to demonstrate the following coding abilities:
+
+    1. Build a React app utilizing RESTful APIs.
+
+    2. Demonstrate use of React-Redux for global state management.
+
+    3. Exhibit capability to work with JWT tokens for authentication.
+
+    4. Demonstrate familiarity with and use of Bootstrap, React Bootstrap, and React Router Dom packages.
+
+    5. Utilizing a CI/CD pipeline for integration and deployment of new features automatically.
+    
