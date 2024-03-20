@@ -110,6 +110,7 @@ export const cartSlice = createSlice({
             state.totalAmount = newCartTotal.totalAmount;
             state.totalCartQuantity = newCartTotal.totalQuantity;
         },
+        
     },
     extraReducers: (builder) => {
         builder.addCase(checkoutOrder.pending, (state, action) => {
