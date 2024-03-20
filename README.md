@@ -50,3 +50,13 @@ The Shopping Cart is created to demonstrate the following coding abilities:
 
     5. Utilizing a CI/CD pipeline for integration and deployment of new features automatically.
     
+## 2.2 Functional Objectives
+The Shopping Cart webapp has the following functional objectives:
+
+    1. Allows customers to purchase computer hardware from a retailer and manage their orders.
+
+    2. Allows the retailer to list various products and promos on the Shopping Cart app by using the Inventory App's CMS functionality.
+
+Inventory App GitHub Repo [Click Here for Inventory App GitHub Repo Page](https://github.com/manvinderjit/2023-TOP-Project-Inventory-Application).
+
+Inventory App Live Link [Click Here for Inventory App Live Link](https://ia.manvinderjit.com/).
