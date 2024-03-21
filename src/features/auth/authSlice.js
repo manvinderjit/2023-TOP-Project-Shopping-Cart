@@ -106,6 +106,12 @@ export const authSlice = createSlice({
             state.registerStatus = null;
             state.message = null;
         },
+        resetErrorsAndMessages:(state) => {
+            state.error = null;
+            state.message = null;
+            state.registerStatus = null;
+            state.loginStatus = null;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(registerUser.pending, (state, action) => {
@@ -166,7 +172,7 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { login, logout, setCredentials } = authSlice.actions;
+export const { login, logout, setCredentials, resetErrorsAndMessages } = authSlice.actions;
 
 export default authSlice.reducer;
 
