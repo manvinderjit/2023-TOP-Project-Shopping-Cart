@@ -1,62 +1,30 @@
-# Shopping WebApp by Manvinderjit
+# React + TypeScript + Vite
 
-`Live Link`: [Shopping App](https://2023-top-project-shopping-cart.pages.dev/)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-A Vite-React Webapp e-commerce portal allows customers to purchase products. It makes use of Bootstrap 5, React Bootstrap, React Redux, React Router Dom, and JWT technologies.
+Currently, two official plugins are available:
 
-Is a part of a two-app ecosystem for an organization selling computer hardware. Leverages RESTful APIs provided by the [Inventory Management App](https://ia.manvinderjit.com/), which is the other app in the ecosystem. 
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-The app ecosystem consists of two user roles:
-- `Customers:` They use this [Shopping App](https://2023-top-project-shopping-cart.pages.dev/) to place orders.
-- `Employees`: They use the [Inventory App](https://ia.manvinderjit.com) to perform inventory and logistics operations, including processing orders received through this `Shopping App`. Promos and products displayed on the `Shopping App` are also managed through the `Inventory App`.
+## Expanding the ESLint configuration
 
-# 1. Description
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-Shopping App is an e-commerce store that supports the following functions:
+- Configure the top-level `parserOptions` property like this:
 
-1. `E-commerce Store`: It allows customers to purchase items.
-2. `Register and Login`: Customers can register and log-in to place orders.
-3. `Cart Functionality`: Customers can add items to cart and checkout.
-4. `Order History`: Customers can view their order history.
-5. `Manage Orders`: Customers can manage their orders and cancel them as required.
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
+```
 
-## Tech Stack
-
-### Core Development Stack
-The `Shopping App` makes use of the following technologies and packages:
-- `React Vite`: React is used for the front-end with Vite build tool.
-- `React Redux`: React Redux is used for state management.
-- `React Bootstrap 5`: Bootstrap is used for CSS styling.
-- `HTML Fetch`: RESTful API calls are made using HTML Fetch.
-- `JWT Tokens`: Authentication is established through JWT tokens stored in Redux state.
-
-### Deployment Stack
-The `Shopping App` is deployed using following technologies:
-- `CI/CD Pipeline With GitHub`: A CI/CD pipeline is created to automatically deploy newly implemented features to the production environment.
-- `Cloud Flare Pages`: The application is deployed via Cloud Flare pages that automatically builds and deploys when changes are pushed to the `prodtest` branch (will change to `production` branch once the project is complete).
-
-# 2. Objectives
-
-## 2.1 Skill Demonstration Objectives
-The Shopping Cart is created to demonstrate the following coding abilities:
-
-    1. Build a React app utilizing RESTful APIs.
-
-    2. Demonstrate use of React-Redux for global state management.
-
-    3. Exhibit capability to work with JWT tokens for authentication.
-
-    4. Demonstrate familiarity with and use of Bootstrap, React Bootstrap, and React Router Dom packages.
-
-    5. Utilizing a CI/CD pipeline for integration and deployment of new features automatically.
-    
-## 2.2 Functional Objectives
-The Shopping Cart webapp has the following functional objectives:
-
-    1. Allows customers to purchase computer hardware from a retailer and manage their orders.
-
-    2. Allows the retailer to list various products and promos on the Shopping Cart app by using the Inventory App's CMS functionality.
-
-Inventory App GitHub Repo [Click Here for Inventory App GitHub Repo Page](https://github.com/manvinderjit/2023-TOP-Project-Inventory-Application).
-
-Inventory App Live Link [Click Here for Inventory App Live Link](https://ia.manvinderjit.com/).
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
