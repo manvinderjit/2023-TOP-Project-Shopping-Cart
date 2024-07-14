@@ -1,15 +1,54 @@
+import { useState, useEffect } from "react";
 import Slider from "../hero/Slider";
-import demoImg from "../hero/demo.png";
-import demoImg2 from "../hero/demo2.jpg";
-import demoImg3 from "../hero/demo3.jpg";
-import demoImg4 from "../hero/demo4.jpg";
 
-const carouselImagesData: string[] = [demoImg, demoImg2, demoImg3, demoImg4];
+interface CarouselImagesData {
+  caption: {
+    heading: string;
+    description: string;
+  };
+  name: string;
+  category: string;
+  imageUrl: string;
+  url: string;
+  id: null;
+}
+
+//const carouselImagesData: string[] = [demoImg, demoImg2, demoImg3, demoImg4];
 const Hero = ():React.JSX.Element => {
-    
+
+  const [carouselImagesData, setCarouselImagesData] = useState<CarouselImagesData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+      const controller = new AbortController();
+      async function fetchData() {
+        const response = await fetch(
+          `https://ia.manvinderjit.com/api/promos/carousel`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            signal: AbortSignal.timeout(3000),
+          }
+        )
+          .then((raw) => raw.json())
+          .then((data) => data)
+          .catch((error) => console.log(error));
+        setCarouselImagesData(response.carouselPromos);
+        setLoading(false);
+      }
+      fetchData();
+      return () => controller.abort();
+    }, []);
+
     const content: React.JSX.Element = (
       <div className="max-w-screen-2xl w-full h-[500px] mx-auto my-auto">
-        <Slider carouselImagesData = {carouselImagesData} />
+        {loading ? (
+          "...loading"
+        ) : (
+          <Slider carouselImagesData = { carouselImagesData }/>
+        )}
       </div>
     );
 

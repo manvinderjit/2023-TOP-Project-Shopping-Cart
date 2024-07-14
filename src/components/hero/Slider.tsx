@@ -1,12 +1,33 @@
 import { useEffect, useState } from "react";
 
-interface CarouselImagesDatable {
-  carouselImagesData: string[]
+interface CarouselImageData {    
+    caption: {
+      heading: string;
+      description: string;
+    };
+    name: string;
+    category: string;
+    imageUrl: string;
+    url: string;
+    id: null;
+} 
+
+interface CarouselImagesData {
+  carouselImagesData: CarouselImageData[]
 }
 
-const Slider = ( {carouselImagesData}: CarouselImagesDatable):React.JSX.Element => {
-
+const Slider = ({ carouselImagesData }: CarouselImagesData ):React.JSX.Element => {
+    
     const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+    
+    useEffect(() => {
+      const heroSliderTimer = setTimeout(() => {
+        showNextImage();
+      }, 3000);
+      return () => {
+        clearTimeout(heroSliderTimer);
+      };
+    });
 
     const showNextImage = () => {
       setCurrentImageIndex( index => {
@@ -34,17 +55,26 @@ const Slider = ( {carouselImagesData}: CarouselImagesDatable):React.JSX.Element 
         className="w-full h-full relative mx-auto my-auto"
       >
         <div className="w-full h-full flex flex-row overflow-hidden">
-          {carouselImagesData.map((img, index) => (
+          {Object.values(carouselImagesData).map((img, index) => (
             <img
-              key={img}
-              src={img}
-              alt={img}
+              key={index}                  
+              src={`https://ia.manvinderjit.com/api/${img.imageUrl}`}
+              alt={img.name}
               aria-hidden={currentImageIndex !== index}
-              className="w-full h-full object-cover block flex-shrink-0 flex-grow-0 translate-x-0 translate-y-0 duration-300 ease-in-out"
+              className="w-full h-full object-cover block flex-shrink-0 flex-grow-0 translate-x-0 translate-y-0 duration-[900ms] ease-in-out"
               style={{ translate: `${-100 * currentImageIndex}%` }}
             />
           ))}
-          
+        </div>
+        <div className="w-full absolute flex flex-col top-2/3 gap-4 bg-gray-900 bg-opacity-35 p-4">
+          <h2 className="text-center font-semibold text-4xl text-white">
+            {carouselImagesData[currentImageIndex].caption.heading}
+          </h2>
+          <p className="text-center font-medium text-lg text-white">
+            {
+              carouselImagesData[currentImageIndex].caption.description
+            }
+          </p>
         </div>
         <button
           aria-label="previousSliderImage"
@@ -82,7 +112,7 @@ const Slider = ( {carouselImagesData}: CarouselImagesDatable):React.JSX.Element 
             />
           </svg>
         </button>
-        <div className="w-full absolute bottom-5 flex justify-center">
+        <div className="w-full absolute bottom-8 flex justify-center">
           <div className="flex gap-2">
             {carouselImagesData.map((_, index) => (
               <button
@@ -95,20 +125,11 @@ const Slider = ( {carouselImagesData}: CarouselImagesDatable):React.JSX.Element 
                     : "w-7 h-[0.35rem] bg-gray-400 bg-opacity-100 border border-gray-700"
                 }
               />
-                
-              
             ))}
           </div>
-        </div>
+        </div>                  
       </section>
     );
-
-    useEffect(() => {
-      const heroSliderTimer = setTimeout(() => { showNextImage(); }, 3000);
-      return () => {
-        clearTimeout(heroSliderTimer);
-      };     
-    });
   
     return content;
 }
