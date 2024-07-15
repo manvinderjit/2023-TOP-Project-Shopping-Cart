@@ -1,19 +1,21 @@
+import { Link } from "react-router-dom";
+
 const NavItemsTop = (): React.JSX.Element => {
 
     const content: React.JSX.Element =   
     (
       <ul className="flex flex-row mr-auto">
         <li className="flex flex-col justify-center text-center w-24 text-l">
-          <a href="/home">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li className="flex flex-col justify-center text-center w-24 text-l">
-          <a href="/login">Login</a>
+          <Link to="/login">Login</Link>
         </li>
         <li className="flex flex-col justify-center text-center w-24 text-l">
-          <a href="/register">Register</a>
+          <Link to="/register">Register</Link>
         </li>
         <li className="flex flex-col justify-center text-center w-24 text-l">
-          <a href="/cart">Cart</a>
+          <Link to="/cart">Cart</Link>
         </li>
       </ul>
     );

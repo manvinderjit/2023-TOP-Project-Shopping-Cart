@@ -13,7 +13,6 @@ interface CarouselImagesData {
   id: null;
 }
 
-//const carouselImagesData: string[] = [demoImg, demoImg2, demoImg3, demoImg4];
 const Hero = ():React.JSX.Element => {
 
   const [carouselImagesData, setCarouselImagesData] = useState<CarouselImagesData[]>([]);
@@ -43,7 +42,7 @@ const Hero = ():React.JSX.Element => {
     }, []);
 
     const content: React.JSX.Element = (
-      <div className="max-w-screen-2xl w-full h-[500px] mx-auto my-auto">
+      <div className="max-w-screen-2xl w-full h-[500px] mx-auto">
         {loading ? (
           "...loading"
         ) : (
