@@ -26,7 +26,7 @@ const Register = (): React.JSX.Element => {
             <div>
               <div className="flex justify-between items-center">
                 <label
-                  htmlFor="email"
+                  htmlFor="password"
                   className="block text-sm font-medium leading-6"
                 >
                   Password
@@ -45,7 +45,7 @@ const Register = (): React.JSX.Element => {
             <div>
               <div className="flex justify-between items-center">
                 <label
-                  htmlFor="email"
+                  htmlFor="confirm-password"
                   className="block text-sm font-medium leading-6"
                 >
                   Confirm Password
