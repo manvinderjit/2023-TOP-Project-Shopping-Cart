@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+import { memo } from "react";
 import Slider from "../hero/Slider";
+import { useGetCarouselQuery } from '../../features/api/apiSlice';
+import Spinner from "../utility/Spinner";
 
 interface CarouselImagesData {
   caption: {
@@ -13,45 +15,48 @@ interface CarouselImagesData {
   id: null;
 }
 
-const Hero = ():React.JSX.Element => {
-
-  const [carouselImagesData, setCarouselImagesData] = useState<CarouselImagesData[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-      const controller = new AbortController();
-      async function fetchData() {
-        const response = await fetch(
-          `https://ia.manvinderjit.com/api/promos/carousel`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            signal: AbortSignal.timeout(3000),
-          }
-        )
-          .then((raw) => raw.json())
-          .then((data) => data)
-          .catch((error) => console.log(error));
-        setCarouselImagesData(response.carouselPromos);
-        setLoading(false);
-      }
-      fetchData();
-      return () => controller.abort();
-    }, []);
-
-    const content: React.JSX.Element = (
-      <div className="max-w-screen-2xl w-full h-[500px] mx-auto">
-        {loading ? (
-          "...loading"
-        ) : (
-          <Slider carouselImagesData = { carouselImagesData }/>
-        )}
-      </div>
-    );
-
-    return content;
+interface CarouselData {
+  data: { carouselPromos: CarouselImagesData[]};
+  isLoading: boolean,
+  isSuccess: boolean,
+  isError: boolean,
+  error: string,
 }
 
-export default Hero;
+const Hero = ():React.JSX.Element => {
+  const {
+    data: carouselPromos,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  }: CarouselData = useGetCarouselQuery();
+
+    let content: React.JSX.Element = <></>;
+    if (isLoading) {
+      content = <Spinner/>
+    } else if (isSuccess) {
+      content =  <Slider carouselImagesData={carouselPromos.carouselPromos} />;
+    } else if (isError) {
+      content = <div>{error}</div>;
+    }
+    return (
+      <div className="max-w-screen-2xl w-full h-[500px] mx-auto">
+        {content}
+      </div>
+    );
+    
+}
+
+function areItemsEqual({ item: prevItem }, { item: nextItem }){
+    return Object.keys(prevItem).every(key => {
+        return (
+          prevItem[key] ===
+          nextItem[key]
+        );
+    })
+}
+
+const MemoizedHero = memo(Hero, areItemsEqual);
+
+export default MemoizedHero;

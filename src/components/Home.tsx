@@ -1,10 +1,11 @@
 import Hero from "./layout/Hero";
+import Products from "./products/Products";
 
 const Home = () => {
   return (
     <>
       <Hero />
-      <div>Home</div>
+      <Products/>
     </>
   );
 }
