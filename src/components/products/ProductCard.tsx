@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../features/cart/cartSlice";
 import { addToastAlert, removeToastAlert } from "../../features/toast/toastSlice";
 import { nanoid } from "@reduxjs/toolkit";
@@ -24,7 +24,6 @@ const apiUrl = `https://ia.manvinderjit.com/api`;
 
 const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
 
-  // const cart = useSelector((state) => state.cart.cartItems);  
   const dispatch = useDispatch();
 
   const _productDetailsAddToCart = {
@@ -36,7 +35,6 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
 
   const _addToCart = () => {
     dispatch(addItemToCart(_productDetailsAddToCart));
-    // const toastId = Date.now();
     const toastId = nanoid();
     dispatch(
       addToastAlert({

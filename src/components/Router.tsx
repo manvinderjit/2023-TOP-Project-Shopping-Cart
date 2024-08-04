@@ -5,9 +5,13 @@ import Login from "./Login";
 import Cart from "./Cart";
 import Register from "./Register";
 import ErrorPage from "./ErrorPage";
+import UserDashboard from "./UserDashboard";
+import { useAppDispatch } from "../application/reduxHooks";
+import Checkout from "./Checkout";
 
 export const routerConfig = [
   {
+    id: "root",
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
@@ -28,10 +32,14 @@ export const routerConfig = [
         path: "cart",
         element: <Cart />,
       },
-      // {
-      //     path: "dash",
-      //     element: <Dash />,
-      // },
+      {
+        path: "dashboard",
+        element: <UserDashboard />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
+      },
       // {
       //     path: "orders",
       //     element: <Orders />,
@@ -60,6 +68,5 @@ export const routerConfig = [
 ];
 
 const router = createBrowserRouter(routerConfig);
-
 
 export default router;

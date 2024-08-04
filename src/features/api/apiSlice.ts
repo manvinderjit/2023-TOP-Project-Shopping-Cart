@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setCredentials, logOut } from "../auth/authSlice";
+import { setCredentials, logOut } from "../auth/authSlice.js";
+import { CategoriesListData, ProductsListData, ProductDataAndCategoryDataLists } from "../../types/types.js";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'https://ia.manvinderjit.com',
@@ -22,11 +23,25 @@ export const apiSlice = createApi({
     getCarousel: builder.query({
       query: () => "/promos/carousel",
     }),
-    // The `getCarousel` endpoint is a "query" operation that returns product data
-    getProducts: builder.query({
+    // The `getCarousel` endpoint is a "query" operation that returns product data and product category list
+    getProducts: builder.query<ProductDataAndCategoryDataLists, undefined>({
       query: () => "/products",
+    }),
+    loginUser: builder.mutation({
+      query: (body: { userEmail: string; userPassword: string }) => ({
+        url: `/login`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    getUserOrders: builder.query({
+      query: (token) => ({
+        url: "/orders",
+        headers: { Authorization: `Bearer ${token}` },
+      }),
     }),
   }),
 });
 
-export const { useGetCarouselQuery, useGetProductsQuery } = apiSlice;
+export const { useGetCarouselQuery, useGetProductsQuery, useLoginUserMutation, useGetUserOrdersQuery } = apiSlice;

@@ -24,7 +24,7 @@ const Products = ():React.JSX.Element => {
     isSuccess,
     isError,
     error,
-  } = useGetProductsQuery();
+  } = useGetProductsQuery(undefined);
 
   let content: React.JSX.Element = <></>;
 
@@ -32,16 +32,14 @@ const Products = ():React.JSX.Element => {
     content = <Spinner/>
   } else if (isSuccess) {
     content =  <div className="flex justify-between">
-              {apiData.productList.map((product: ProductData): React.JSX.Element => {
-                return (
-                  <>
+                {apiData.productList.map((product: ProductData): React.JSX.Element => {
+                  return (
                     <ProductCard key={product.id} productData={product} />
-                  </>
-                )
-              })}
-            </div>
+                  )
+                })}
+              </div>
   } else if (isError) {
-    content = <div>{error}</div>
+    content = <div>{error as string}</div>
   }
 
   return (

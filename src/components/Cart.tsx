@@ -1,8 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { emptyCart, removeItemFromCart, changeItemQuantity, calculateCartTotal } from '../features/cart/cartSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addToastAlert, removeToastAlert } from "../features/toast/toastSlice";
 import { nanoid } from "@reduxjs/toolkit";
+import { useAppSelector } from "../application/reduxHooks";
+import { getCurrentToken } from "../features/auth/authSlice";
+import { useEffect } from "react";
 
 interface CartItemDetails {
   id: string,
@@ -24,10 +27,48 @@ const Cart = ():React.JSX.Element => {
   const cartItems = useSelector((state: CartItems) => state.cart.cartItems);
   const subTotal = useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
+  const token = useAppSelector(getCurrentToken);
+  const navigate = useNavigate();
   dispatch(calculateCartTotal());  
 
   const _emptyCart = () => {
     dispatch(emptyCart());
+  }
+
+  const handleCheckout = () => {
+
+    if(cartItems.length <= 0){
+      const toastId = nanoid();
+      dispatch(
+        addToastAlert({
+          toastId,
+          toastTextContent: "You have no items in your cart!",
+          toastType: "warning",
+        })
+      );
+      setTimeout(() => {
+        navigate("/home");
+      }, 500);
+
+      setTimeout(() => {
+        dispatch(removeToastAlert(toastId));
+      }, 3000);
+    }
+
+    if(!token || token === null) {
+      const toastId = nanoid();
+      dispatch(addToastAlert({ toastId, toastTextContent: 'Please Login before checking out!', toastType: 'warning'}));
+      
+      setTimeout(() => {
+        navigate("/login");
+      }, 500);
+
+      setTimeout(() => {
+        dispatch(removeToastAlert(toastId));
+      }, 3000)
+    } else {
+      navigate('/checkout');
+    }
   }
   
   const subtotalWithShipping = parseFloat(
@@ -85,28 +126,25 @@ const Cart = ():React.JSX.Element => {
                           id="item-quantity"
                           className="w-16 p-2 text-center rounded-md focus:border-blue-700 focus:border"
                           value={item.itemQuantity}
-                          onChange={(e) =>
-                            
-                            {dispatch(
+                          onChange={(e) => {
+                            dispatch(
                               changeItemQuantity({
                                 id: item.id,
                                 newItemQuantity: e.target.value,
                               })
-                            )
+                            );
                             const toastId = nanoid();
                             dispatch(
                               addToastAlert({
                                 toastId: toastId,
                                 toastTextContent: `Quantity changed for ${item.name} to ${e.target.value}!`,
                                 toastType: "success",
-                              })                              
+                              })
                             );
                             setTimeout(() => {
                               dispatch(removeToastAlert(toastId));
                             }, 3000);
-                            
-                            }
-                          }
+                          }}
                         >
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -168,17 +206,26 @@ const Cart = ():React.JSX.Element => {
               </div>
             </div>
             <div className="border-t-[1px] pt-4 flex justify-center items-center">
-              <button className="w-48 h-12 rounded-xl bg-violet-500 hover:bg-violet-400">
+              <button
+                onClick={handleCheckout}
+                className="w-48 h-12 rounded-xl bg-violet-500 hover:bg-violet-400"
+              >
                 Checkout
               </button>
             </div>
-            <div className="border-t-[1px] pt-4 flex justify-center items-center">
+            <div className="border-t-[1px] pt-4 flex justify-center items-center gap-4">
               <button
                 onClick={_emptyCart}
                 className="w-48 h-12 rounded-xl border border-violet-500 hover:bg-violet-400 "
               >
                 Empty Cart
               </button>
+              <Link
+                to={'/'}
+                className="w-48 h-12 rounded-xl border border-violet-500 hover:bg-violet-400 flex justify-center items-center font-normal"
+              >
+                Continue Shopping
+              </Link>
             </div>
           </div>
         </div>

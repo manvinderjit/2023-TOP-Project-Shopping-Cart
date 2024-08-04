@@ -1,8 +1,13 @@
 import Logo from "./Logo";
 import CartButton from "./CartButton";
 import NavItemsTop from "./NavItemsTop";
+import { useAppSelector } from "../../application/reduxHooks";
+import { getCurrentUserDetails } from "../../features/auth/authSlice";
+import { Navigate } from "react-router-dom";
 
-const NavTop = (): React.JSX.Element => {        
+const NavTop = (): React.JSX.Element => {
+  const username = useAppSelector(getCurrentUserDetails);
+  // if(username === null) <Navigate to='/login' replace = {true}/>;
 
     const content: React.JSX.Element = (
       <nav className="flex flex-row w-3/4 mx-auto gap-4">

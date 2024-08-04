@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { removeToastAlert } from "../features/toast/toastSlice";
 import { getAllToastAlerts } from "../features/toast/toastSlice";
+import { useEffect } from "react";
 
 let alertBackgroundColor: string = 'bg-blue-400';
 let alertTextColor:string = 'text-blue-800';
