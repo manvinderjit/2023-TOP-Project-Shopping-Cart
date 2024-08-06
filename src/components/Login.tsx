@@ -14,8 +14,8 @@ const Login = ():React.JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');  
+  const [userEmail, setUserEmail] = useState<string>('');
+  const [userPassword, setUserPassword] = useState<string>('');  
   const [inputUserEmailError, setInputUserEmailError] = useState<boolean>(false);
   const [inputUserEmailErrorMsg, setInputUserEmailErrorMsg] = useState<string>('');
   const [inputUserPasswordError, setInputUserPasswordError] = useState<boolean>(false);

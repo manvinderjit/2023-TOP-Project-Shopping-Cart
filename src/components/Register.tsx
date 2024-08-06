@@ -1,6 +1,104 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+const PASSWORD_REGEX = /(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
+
+const checkContainsUpperCase = (str: string): boolean => {
+  return /A-Z/.test(str);
+};
+
 const Register = (): React.JSX.Element => {
+
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [isUserEmailValid, setIsUserEmailValid] = useState<boolean | null>(null);
+  const [userEmailErrorMsg, setUserEmailErrorMsg] = useState<string>("");
+
+  const [userPassword, setUserPassword] = useState<string>("");
+  const [isUserPasswordValid, setIsUserPasswordValid] = useState<boolean | null>(null);
+  const [userPasswordErrorMsg, setUserPasswordErrorMsg] = useState<string>("");
+  
+  const [userConfirmPassword, setUserConfirmPassword] = useState<string>("");
+  const [userConfirmPassErrorMsg, setUserConfirmPassErrorMsg] = useState<string>("");
+
+  const validateEmail = (email: string) => {
+    if (!email.match(EMAIL_REGEX)) {
+      setIsUserEmailValid(false);
+      setUserEmailErrorMsg(
+        email.trim() === "" ? "Email can not be empty!" : "Email must be in a valid format!"
+      );
+    } else if (email.match(EMAIL_REGEX)) {
+      setIsUserEmailValid(true);
+      setUserEmailErrorMsg("");
+    } else {
+      setIsUserEmailValid(null);
+      setUserEmailErrorMsg("");
+    }
+  };
+
+  const validatePassword = (passwordValue: string, confirmPasswordValue:string) => {
+    // Check if password is empty
+    if(passwordValue.trim() === '') {
+      setIsUserPasswordValid(false);
+      setUserPasswordErrorMsg('Password can\'t be empty!');
+    } // Check if password is invalid
+    else if (!passwordValue.match(PASSWORD_REGEX)) { 
+      setIsUserPasswordValid(false);
+      // Check if password length is at least five
+      if (passwordValue.length < 5) {
+        setUserPasswordErrorMsg("Password must be atleast 5 characters!");
+      } 
+      // Check if password has an Uppercase character
+      else if (!checkContainsUpperCase(passwordValue)) {
+        setUserPasswordErrorMsg("Password must have atleast 1 uppercase!");
+      }
+    } 
+    // Check if passwords don't match
+    else if (passwordValue.match(PASSWORD_REGEX) && passwordValue !== confirmPasswordValue) {
+      setIsUserPasswordValid(false);
+      setUserPasswordErrorMsg('Passwords must match');
+      setUserConfirmPassErrorMsg("Passwords must match");
+    } 
+    // Check if passwords are valid and match
+    else if (passwordValue.match(PASSWORD_REGEX) && passwordValue === confirmPasswordValue) {
+      setIsUserPasswordValid(true);
+      setUserPasswordErrorMsg('');
+      setUserConfirmPassErrorMsg("");
+    }
+    // Check if confirm password is empty
+    if (confirmPasswordValue.trim() === "") {
+      setIsUserPasswordValid(false);
+      setUserConfirmPassErrorMsg("Confirm Password can't be empty!");
+    } 
+  }
+
+  const onInputValueChange = (e) => {
+    if (e.currentTarget.name === 'userEmail') {
+      setUserEmail(e.currentTarget.value.trim());
+      validateEmail(e.currentTarget.value.trim());
+    }
+    if (e.currentTarget.name === "userPassword") {
+      setUserPassword(e.currentTarget.value.trim());
+      validatePassword(e.currentTarget.value.trim(), userConfirmPassword);
+    }
+    if (e.currentTarget.name === "confirmPassword") {
+      setUserConfirmPassword(e.currentTarget.value.trim());
+      validatePassword(userPassword, e.currentTarget.value);
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    validateEmail(userEmail);
+    validatePassword(userPassword, userConfirmPassword);
+    if (isUserEmailValid && isUserPasswordValid) {
+      alert(`${isUserEmailValid} ${isUserPasswordValid} 'valid'`);
+      //await registerUser({ userEmail, userPassword });
+    }
+  }
+
   const content: React.JSX.Element = (
     <section id="section-login" className="h-full flex-grow flex">
       <div className="w-full min-h-full flex flex-col justify-center ">
@@ -9,24 +107,35 @@ const Register = (): React.JSX.Element => {
             Sign Up For Our Website
           </h2>
         </div>
+        <div className="flex justify-center mb-4">
+          {/* {isRegistrationError === true ? (
+            <p className=" text-red-400">{`Error! ${RegistrationError?.data?.error}`}</p>
+          ) : (
+            <></>
+          )} */}
+        </div>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6 flex flex-col gap-3" action="">
+          <form className="flex flex-col gap-3" action="">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium">
+              <label htmlFor="userEmail" className="block text-sm font-medium">
                 Email Address
               </label>
               <input
-                id="email"
-                name="email"
-                type="text"
+                id="userEmail"
+                name="userEmail"
+                type="email"
+                onChange={onInputValueChange}                
                 required
                 className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
               />
+              <span className={`flex justify-center pt-1 h-6 text-red-400`}>
+                {!isUserEmailValid ? userEmailErrorMsg : ""}
+              </span>
             </div>
             <div>
               <div className="flex justify-between items-center">
                 <label
-                  htmlFor="password"
+                  htmlFor="userPassword"
                   className="block text-sm font-medium leading-6"
                 >
                   Password
@@ -34,13 +143,17 @@ const Register = (): React.JSX.Element => {
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
+                  id="userPassword"
+                  name="userPassword"
                   type="password"
+                  onChange={onInputValueChange}
                   required
                   className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                 />
               </div>
+              <span className={`flex justify-center pt-1 h-6 text-red-400`}>                
+                {!isUserPasswordValid ? userPasswordErrorMsg : ""}
+              </span>
             </div>
             <div>
               <div className="flex justify-between items-center">
@@ -53,17 +166,22 @@ const Register = (): React.JSX.Element => {
               </div>
               <div className="mt-2">
                 <input
-                  id="confirm-password"
-                  name="confirm-password"
-                  type="confirm-password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  onChange={onInputValueChange}
                   required
                   className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                 />
               </div>
+              <span className={`flex justify-center pt-1 h-6 text-red-400`}>
+                {!isUserPasswordValid ? userConfirmPassErrorMsg : ''}
+              </span>
             </div>
             <div>
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign Up
@@ -71,7 +189,7 @@ const Register = (): React.JSX.Element => {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-white">
+          <p className="mt-4 text-center text-sm text-white">
             <span className="mr-2">Already have an account?</span>
             <Link
               to="/login"
