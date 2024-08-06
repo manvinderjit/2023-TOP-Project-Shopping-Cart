@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useRegisterUserMutation } from "../features/api/apiSlice";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -23,7 +24,17 @@ const Register = (): React.JSX.Element => {
   const [userConfirmPassword, setUserConfirmPassword] = useState<string>("");
   const [userConfirmPassErrorMsg, setUserConfirmPassErrorMsg] = useState<string>("");
 
-  const validateEmail = (email: string) => {
+  const [
+    registerUser,
+    {
+      data: registrationData,
+      isSuccess: isRegistrationSuccess,
+      isError: isRegistrationError,
+      error: registrationError,
+    },
+  ] = useRegisterUserMutation();
+
+  const validateEmail = (email: string): void => {
     if (!email.match(EMAIL_REGEX)) {
       setIsUserEmailValid(false);
       setUserEmailErrorMsg(
@@ -38,7 +49,7 @@ const Register = (): React.JSX.Element => {
     }
   };
 
-  const validatePassword = (passwordValue: string, confirmPasswordValue:string) => {
+  const validatePassword = (passwordValue: string, confirmPasswordValue:string): void => {
     // Check if password is empty
     if(passwordValue.trim() === '') {
       setIsUserPasswordValid(false);
@@ -74,8 +85,8 @@ const Register = (): React.JSX.Element => {
     } 
   }
 
-  const onInputValueChange = (e) => {
-    if (e.currentTarget.name === 'userEmail') {
+  const onInputValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.name === "userEmail") {
       setUserEmail(e.currentTarget.value.trim());
       validateEmail(e.currentTarget.value.trim());
     }
@@ -87,32 +98,36 @@ const Register = (): React.JSX.Element => {
       setUserConfirmPassword(e.currentTarget.value.trim());
       validatePassword(userPassword, e.currentTarget.value);
     }
-  }
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     validateEmail(userEmail);
     validatePassword(userPassword, userConfirmPassword);
-    if (isUserEmailValid && isUserPasswordValid) {
-      alert(`${isUserEmailValid} ${isUserPasswordValid} 'valid'`);
-      //await registerUser({ userEmail, userPassword });
+    if (isUserEmailValid && isUserPasswordValid) {      
+      await registerUser({ userEmail, userPassword });
     }
-  }
+  };
 
   const content: React.JSX.Element = (
     <section id="section-login" className="h-full flex-grow flex">
       <div className="w-full min-h-full flex flex-col justify-center ">
-        <div className="mb-6">
+        <div className="mb-4">
           <h2 className="text-center text-2xl font-bold">
             Sign Up For Our Website
           </h2>
         </div>
         <div className="flex justify-center mb-4">
-          {/* {isRegistrationError === true ? (
-            <p className=" text-red-400">{`Error! ${RegistrationError?.data?.error}`}</p>
+          {isRegistrationError === true ? (
+            <p className=" text-red-400">{`Error! ${registrationError?.data?.error}`}</p>
           ) : (
             <></>
-          )} */}
+          )}
+          {isRegistrationSuccess === true ? (
+            <p className=" text-emerald-600">{`Success! ${registrationData?.message}`}</p>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="flex flex-col gap-3" action="">
@@ -124,7 +139,7 @@ const Register = (): React.JSX.Element => {
                 id="userEmail"
                 name="userEmail"
                 type="email"
-                onChange={onInputValueChange}                
+                onChange={onInputValueChange}
                 required
                 className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
               />
@@ -151,7 +166,7 @@ const Register = (): React.JSX.Element => {
                   className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                 />
               </div>
-              <span className={`flex justify-center pt-1 h-6 text-red-400`}>                
+              <span className={`flex justify-center pt-1 h-6 text-red-400`}>
                 {!isUserPasswordValid ? userPasswordErrorMsg : ""}
               </span>
             </div>
@@ -175,7 +190,7 @@ const Register = (): React.JSX.Element => {
                 />
               </div>
               <span className={`flex justify-center pt-1 h-6 text-red-400`}>
-                {!isUserPasswordValid ? userConfirmPassErrorMsg : ''}
+                {!isUserPasswordValid ? userConfirmPassErrorMsg : ""}
               </span>
             </div>
             <div>

@@ -27,6 +27,13 @@ export const apiSlice = createApi({
     getProducts: builder.query<ProductDataAndCategoryDataLists, undefined>({
       query: () => "/products",
     }),
+    registerUser: builder.mutation({
+      query: (body: { userEmail: string, userPassword: string}) => ({
+        url:`/register`,
+        method: "POST",
+        body,
+      })
+    }),
     loginUser: builder.mutation({
       query: (body: { userEmail: string; userPassword: string }) => ({
         url: `/login`,
@@ -34,7 +41,6 @@ export const apiSlice = createApi({
         body,
       }),
     }),
-
     getUserOrders: builder.query({
       query: (token) => ({
         url: "/orders",
@@ -44,4 +50,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetCarouselQuery, useGetProductsQuery, useLoginUserMutation, useGetUserOrdersQuery } = apiSlice;
+export const { useGetCarouselQuery, useGetProductsQuery, useRegisterUserMutation, useLoginUserMutation, useGetUserOrdersQuery } = apiSlice;
