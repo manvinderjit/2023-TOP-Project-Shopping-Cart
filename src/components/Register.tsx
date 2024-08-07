@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegisterUserMutation } from "../features/api/apiSlice";
 
@@ -109,6 +109,20 @@ const Register = (): React.JSX.Element => {
     }
   };
 
+  useEffect(() => {
+    if(isRegistrationSuccess) {
+      setUserEmail('');
+      setIsUserEmailValid(null);
+      setUserEmailErrorMsg('');
+      setUserPassword('');
+      setIsUserPasswordValid(null);
+      setUserPasswordErrorMsg("");
+      setUserConfirmPassword("");
+      setUserConfirmPassErrorMsg("");
+      
+    }
+  }, [isRegistrationSuccess]);
+
   const content: React.JSX.Element = (
     <section id="section-login" className="h-full flex-grow flex">
       <div className="w-full min-h-full flex flex-col justify-center ">
@@ -140,6 +154,7 @@ const Register = (): React.JSX.Element => {
                 name="userEmail"
                 type="email"
                 onChange={onInputValueChange}
+                value={userEmail}
                 required
                 className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
               />
@@ -163,6 +178,7 @@ const Register = (): React.JSX.Element => {
                   type="password"
                   onChange={onInputValueChange}
                   required
+                  value={userPassword}
                   className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                 />
               </div>
@@ -185,6 +201,7 @@ const Register = (): React.JSX.Element => {
                   name="confirmPassword"
                   type="password"
                   onChange={onInputValueChange}
+                  value={userConfirmPassword}
                   required
                   className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                 />
