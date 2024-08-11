@@ -27,7 +27,7 @@ The `Shopping App` makes use of the following technologies and packages:
 - `React Vite`: React is used for the front-end with Vite build tool.
 - `React Redux`: React Redux is used for state management.
 - `Tailwind CSS`: Tailwind CSS is now used for CSS styling. Formerly it used React Bootstrap.
-- `HTML Fetch`: RESTful API calls are made using HTML Fetch.
+- `Redux RTK Queries`: RESTful API calls are made through Redux RTK queries and mutations. Previously HTML fetch was used.
 - `JWT Tokens`: Authentication is established through JWT tokens stored in Redux state.
 
 ### Deployment Stack
@@ -46,9 +46,12 @@ The Shopping Cart is created to demonstrate the following coding abilities:
 
     3. Exhibit capability to work with JWT tokens for authentication.
 
-    4. Demonstrate familiarity with and use of Bootstrap, React Bootstrap, and React Router Dom packages.
+    4. Demonstrate familiarity with and use of Tailwind CSS and React Router Dom packages.
 
-    5. Utilizing a CI/CD pipeline for integration and deployment of new features automatically.
+    5. Demonstrate TDD (Test-Driven Development) by using React Testing Library and ViTest.
+
+    6. Utilizing a CI/CD pipeline for integration and deployment of new features automatically.
+    
     
 ## 2.2 Functional Objectives
 The Shopping Cart webapp has the following functional objectives:
