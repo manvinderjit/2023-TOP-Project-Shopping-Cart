@@ -2,15 +2,37 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import routerConfig from "./routerConfig";
+import Login from "../src/components/Login";
+import { store } from "../src/application/store";
+import router from "../src/components/Router";
 
-describe("Login Page", () => {
-    beforeEach(() => {
+const ReduxProvider = ({ children, reduxStore }) => (
+  <Provider store={reduxStore}>{children}</Provider>
+);
+
+describe("Login Page", async () => {
+    // beforeEach(async () => {
         const _router = createMemoryRouter(routerConfig, {
             initialEntries: ["/login"],
         });
-        render(<RouterProvider router={_router} />);
-    })
+    //     await render(<RouterProvider router={_router} />);
+    //     screen.debug();
+    // })
+  beforeEach(() => {
+    // const store = configureStore();
+    // const store = createTestStore();
+    // const _router = createMemoryRouter(routerConfig, {
+    //     initialEntries: ["/login"],
+    // });
+    render(
+      <Provider store={store}>
+        <RouterProvider router={_router} />
+      </Provider>
+    );
+    
+  });
 
   it("should render Login Page", () => {
     expect(screen.getByText(/Log In To Your Account/i)).toBeInTheDocument();
@@ -18,21 +40,21 @@ describe("Login Page", () => {
 
   it("should render Email Input Textbox", () => {
     expect(screen.getByRole("textbox", { name: /email address/i })).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('id', 'email');
-    expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('name', 'email');
-    expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('required');
+    expect(screen.getByRole("textbox", { name: /email address/i })).toHaveAttribute('id', 'userEmail');
+    expect(screen.getByRole("textbox", { name: /email address/i })).toHaveAttribute('name', 'userEmail');
+    expect(screen.getByRole("textbox", { name: /email address/i })).toHaveAttribute('required');
   });
 
   it("should render Password Input Textbox", () => {
     expect(screen.getByLabelText(/password/i )).toBeInTheDocument();
-    expect(screen.getByLabelText(/password/i )).toHaveAttribute('id', 'password');
-    expect(screen.getByLabelText(/password/i )).toHaveAttribute('name', 'password');
+    expect(screen.getByLabelText(/password/i )).toHaveAttribute('id', 'userPassword');
+    expect(screen.getByLabelText(/password/i )).toHaveAttribute('name', 'userPassword');
     expect(screen.getByLabelText(/password/i )).toHaveAttribute('required');
   });
 
   it("should render the Submit button", () => {
     expect(screen.getByRole("button", { name: /sign in/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /sign in/i })).toHaveAttribute("type", "submit");
+    expect(screen.getByRole("button", { name: /sign in/i })).toHaveAttribute("type", "button");
   });
 
   it("should render the 'Forgot password' link", () => {

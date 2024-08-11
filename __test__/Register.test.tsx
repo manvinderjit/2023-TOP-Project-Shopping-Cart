@@ -3,13 +3,19 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import routerConfig from "./routerConfig";
+import { store } from "../src/application/store";
+import { Provider } from "react-redux";
 
-describe("Login Page", () => {
+describe("Register Page", () => {
     beforeEach(() => {
         const _router = createMemoryRouter(routerConfig, {
             initialEntries: ["/register"],
         });
-        render(<RouterProvider router={_router} />);
+        render(
+          <Provider store={store}>
+            <RouterProvider router={_router} />
+          </Provider>
+      );
     })
 
   it("should render the Register Page", () => {
@@ -18,22 +24,22 @@ describe("Login Page", () => {
 
   it("should render the Email Input Textbox", () => {
     expect(screen.getByRole("textbox", { name: /email address/i })).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('id', 'email');
-    expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('name', 'email');
+    expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('id', 'userEmail');
+    expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('name', 'userEmail');
     expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('required');
   });
 
   it("should render the Password Input Textbox", () => {
     expect(screen.getByLabelText("Password")).toBeInTheDocument();
-    expect(screen.getByLabelText("Password")).toHaveAttribute('id', 'password');
-    expect(screen.getByLabelText("Password")).toHaveAttribute('name', 'password');
+    expect(screen.getByLabelText("Password")).toHaveAttribute('id', 'userPassword');
+    expect(screen.getByLabelText("Password")).toHaveAttribute('name', 'userPassword');
     expect(screen.getByLabelText("Password")).toHaveAttribute('required');
   });
 
-  it("should render the Confir Passoword Input Textbox", () => {
+  it("should render the Confirm Passoword Input Textbox", () => {
     expect(screen.getByLabelText("Confirm Password" )).toBeInTheDocument();
-    expect(screen.getByLabelText("Confirm Password" )).toHaveAttribute('id', 'confirm-password');
-    expect(screen.getByLabelText("Confirm Password" )).toHaveAttribute('name', 'confirm-password');
+    expect(screen.getByLabelText("Confirm Password" )).toHaveAttribute('id', 'confirmPassword');
+    expect(screen.getByLabelText("Confirm Password" )).toHaveAttribute('name', 'confirmPassword');
     expect(screen.getByLabelText("Confirm Password" )).toHaveAttribute('required');
   });
 

@@ -189,7 +189,7 @@ const Register = (): React.JSX.Element => {
             <div>
               <div className="flex justify-between items-center">
                 <label
-                  htmlFor="confirm-password"
+                  htmlFor="confirmPassword"
                   className="block text-sm font-medium leading-6"
                 >
                   Confirm Password
