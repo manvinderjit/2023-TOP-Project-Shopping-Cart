@@ -1,5 +1,7 @@
 # Shopping WebApp by Manvinderjit
 
+`Note`: The live website is the older Bootstrap-based version. The new version is not live yet.
+
 `Live Link`: [Shopping App](https://2023-top-project-shopping-cart.pages.dev/)
 
 A Vite-React Redux Webapp e-commerce portal allows customers to purchase products. It has been updated to use Tailwind CSS, React Redux, React Router Dom, and JWT technologies. For testing it uses React Testing Library and ViTest.
