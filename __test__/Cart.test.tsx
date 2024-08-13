@@ -88,12 +88,12 @@ describe("Cart Page With Items In Cart", () => {
     expect(screen.queryByText(/your shopping cart is empty/i)).not.toBeInTheDocument();
   });
 
-  it("should render the 'cart' svg icon", () => {
+  it("should not render the 'cart' svg icon", () => {
     const buttonBrowseItems = screen.queryByRole("iconCartWhenEmpty");
     expect(buttonBrowseItems).not.toBeInTheDocument();
   });
 
-  it("should render 'Browse Items' link to go to the home page", () => {
+  it("should not render 'Browse Items' link to go to the home page", () => {
     const buttonBrowseItems = screen.queryByRole("link", { name: "Browse Items" });
     expect(buttonBrowseItems).not.toBeInTheDocument();
   });
@@ -106,23 +106,38 @@ describe("Cart Page With Items In Cart", () => {
     expect(screen.getByRole("heading", { name: 'Shopping Cart' })).toBeInTheDocument();
   });
 
-  it("should render the cart item", () => {
+  it("should render the 'Shopping Cart' heading", () => {
     expect(screen.getByRole("heading", { name: 'Shopping Cart' })).toBeInTheDocument();
+  });
+
+  it("should render the product name heading 'ABC 27G2SP Monitor'", () => {
+    expect(screen.getByRole("heading", { name: 'ABC 27G2SP Monitor' })).toBeInTheDocument();
   });
 
   it("should render the Product image with src 'abc-27g2sp-monitor.jpg'", () => {
     const img = screen.getByAltText("abc-27g2sp-monitor.jpg");
     expect(img).toBeInTheDocument();
     expect(img.getAttribute("src")).toContain('abc-27g2sp-monitor.jpg');
-  });  
+  });
+
+  it("should render the Product price", () => {
+    const price = screen.getByText("$150.00");
+    expect(price).toBeInTheDocument();    
+  });
+
+  it("should render the Qty DropDown", () => {
+    const qtyDropDown = screen.getByRole("combobox", { name: "Qty" });
+    expect(qtyDropDown).toBeInTheDocument();
+  });
+
+  it("should render the Remove button", () => {
+    const removeButton = screen.getByRole("button", { name: "removeItem" });
+    expect(removeButton).toBeInTheDocument();
+  });
 
   it("should render the heading 'Order Summary'", () => {
     expect(screen.getByRole("heading", { name: 'Order Summary' })).toBeInTheDocument();
   });
-
-  it("should render the product name heading 'ABC 27G2SP Monitor'", () => {
-    expect(screen.getByRole("heading", { name: 'ABC 27G2SP Monitor' })).toBeInTheDocument();
-  });  
 
   it("should render the Checkout button", () => {
     expect(screen.getByRole("button", { name: 'Checkout' })).toBeInTheDocument();
@@ -135,7 +150,6 @@ describe("Cart Page With Items In Cart", () => {
   it("should render the 'Continue Shopping' link", () => {
     expect(screen.getByRole("link", { name: 'Continue Shopping' })).toBeInTheDocument();
   });
-
 
 })
     

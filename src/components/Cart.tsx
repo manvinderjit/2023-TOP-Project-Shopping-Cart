@@ -159,8 +159,9 @@ const Cart = ():React.JSX.Element => {
                   <p>$75</p>
                 </div> */}
                       <div className=" col-span-1 flex flex-col items-center py-4 gap-4">
-                        <p className="text-lg font-semibold">Remove</p>
-                        <button
+                        <label htmlFor="removeItem" className="text-lg font-semibold">Remove</label>
+                        <button                          
+                          aria-label="removeItem"
                           onClick={() => dispatch(removeItemFromCart(item.id))}
                           className="w-8 h-8 rounded-full  flex items-center justify-center "
                         >
