@@ -125,6 +125,7 @@ const Cart = ():React.JSX.Element => {
                         <select
                           name="item-quantity"
                           id="item-quantity"
+                          aria-label={`Change Quantity ${item.name}`}
                           className="w-16 p-2 text-center rounded-md focus:border-blue-700 focus:border"
                           value={item.itemQuantity}
                           onChange={(e) => {
@@ -147,11 +148,11 @@ const Cart = ():React.JSX.Element => {
                             }, 3000);
                           }}
                         >
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
+                          <option data-testid={`${item.id}`} value="1">1</option>
+                          <option data-testid={`${item.id}`} value="2">2</option>
+                          <option data-testid={`${item.id}`} value="3">3</option>
+                          <option data-testid={`${item.id}`} value="4">4</option>
+                          <option data-testid={`${item.id}`} value="5">5</option>
                         </select>
                       </div>
                       {/* <div className="col-span-1 flex flex-col items-center py-4 gap-4">
@@ -161,7 +162,7 @@ const Cart = ():React.JSX.Element => {
                       <div className=" col-span-1 flex flex-col items-center py-4 gap-4">
                         <label htmlFor="removeItem" className="text-lg font-semibold">Remove</label>
                         <button                          
-                          aria-label="removeItem"
+                          aria-label={`Remove Item ${item.name}`}
                           onClick={() => dispatch(removeItemFromCart(item.id))}
                           className="w-8 h-8 rounded-full  flex items-center justify-center "
                         >
@@ -191,20 +192,20 @@ const Cart = ():React.JSX.Element => {
             </h2>
             <div className="flex flex-col gap-4 px-2">
               <div className="flex flex-row justify-between border-b-[1px] border-dashed">
-                <p>Subtotal</p>
+                <h4>Subtotal</h4>
                 <p>${subTotal}</p>
               </div>
               <div className="flex flex-row justify-between border-b-[1px] border-dashed">
-                <p>Shipping Estimate</p>
+                <h4>Shipping Estimate</h4>
                 <p>$10</p>
               </div>
               <div className="flex flex-row justify-between border-b-[1px] border-dashed">
-                <p>Tax Estimate</p>
-                <p>{taxes}</p>
+                <h4>Tax Estimate</h4>
+                <p>${taxes}</p>
               </div>
               <div className="flex flex-row justify-between font-semibold text-xl">
-                <p>Order Total</p>
-                <p>{totalAmount}</p>
+                <h4>Order Total</h4>
+                <p>${totalAmount}</p>
               </div>
             </div>
             <div className="border-t-[1px] pt-4 flex justify-center items-center">
