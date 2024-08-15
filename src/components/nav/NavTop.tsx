@@ -5,6 +5,7 @@ import NavDropdown from "./NavDropdown";
 import { useAppSelector } from "../../application/reduxHooks";
 import { getCurrentToken, getCurrentUserDetails } from "../../features/auth/authSlice";
 import { Navigate } from "react-router-dom";
+import NavItemsTopMobile from "./NavItemsTopMobile";
 
 const NavTop = (): React.JSX.Element => {
   const token = useAppSelector(getCurrentToken);
@@ -12,12 +13,19 @@ const NavTop = (): React.JSX.Element => {
   // if(username === null) <Navigate to='/login' replace = {true}/>;
 
     const content: React.JSX.Element = (
-      <nav className="flex flex-row w-3/4 mx-auto gap-4">
-        <Logo />
-        <NavItemsTop />
-        {token && token !== null ? <NavDropdown /> : <></>}
-        <CartButton />
-      </nav>
+      <>
+        <nav className="flex lg:hidden flex-row w-3/4 mx-auto gap-4 ">          
+          <NavItemsTopMobile />
+          {token && token !== null ? <NavDropdown /> : <></>}
+          <CartButton />
+        </nav>
+        <nav className="hidden lg:flex flex-row w-3/4 mx-auto gap-4">
+          <Logo />
+          <NavItemsTop />
+          {token && token !== null ? <NavDropdown /> : <></>}
+          <CartButton />
+        </nav>
+      </>
     );
 
     return content;
