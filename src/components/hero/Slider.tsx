@@ -67,10 +67,10 @@ const Slider = ({ carouselImagesData }: CarouselImagesData ):React.JSX.Element =
           ))}
         </div>
         <div className="w-full absolute flex flex-col top-2/3 gap-4 bg-gray-900 bg-opacity-35 p-4">
-          <h2 className="text-center font-semibold text-4xl text-white">
+          <h2 className="text-center font-semibold text-2xl md:text-3xl lg:text-4xl text-white">
             {carouselImagesData[currentImageIndex].caption.heading}
           </h2>
-          <p className="text-center font-medium text-lg text-white">
+          <p className="text-center font-medium text-base md:text-lg text-white">
             {
               carouselImagesData[currentImageIndex].caption.description
             }
