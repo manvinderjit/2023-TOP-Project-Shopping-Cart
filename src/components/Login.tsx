@@ -96,7 +96,7 @@ const Login = ():React.JSX.Element => {
             <></>
           )}
         </div>
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="min-w-72 mx-auto sm:w-full max-w-sm">
           <form className="flex flex-col gap-2" action="">
             <div>
               <label htmlFor="userEmail" className="block text-sm font-medium">
