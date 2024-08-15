@@ -48,8 +48,8 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
 
   const content: React.JSX.Element = (
     <div className="">
-      <div className="">
-        <div className="w-96 max-w-96">
+      <div className="min-w-72">
+        <div className="max-w-96 mx-auto">
           <img
             src={`${apiUrl}/products/image/${productData.imageFilename}`}
             alt={`${productData.name}`}
@@ -68,7 +68,10 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
           <p className="mt-4 py-2 border-t-[1px] text-left text-sm text-white">
             {productData.description}
           </p>
-          <button onClick={_addToCart} className="flex w-48 self-center justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+          <button
+            onClick={_addToCart}
+            className="flex w-48 self-center justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+          >
             Add to Cart
           </button>
         </div>

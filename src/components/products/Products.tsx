@@ -31,7 +31,7 @@ const Products = ():React.JSX.Element => {
   if (isLoading) {
     content = <Spinner/>
   } else if (isSuccess) {
-    content =  <div className="flex justify-between">
+    content =  <div className="flex justify-evenly flex-wrap gap-4">
                 {apiData.productList.map((product: ProductData): React.JSX.Element => {
                   return (
                     <ProductCard key={product.id} productData={product} />
@@ -46,7 +46,7 @@ const Products = ():React.JSX.Element => {
     <section id="section-products">
       <div className="w-full flex flex-col justify-center">
         <h2 className="text-center text-xl py-2 font-semibold">Our Products</h2>
-        <div className="w-3/4 text-center mx-auto flex-wrap">
+        <div className="w-3/4 text-center mx-auto ">
           {content}
         </div>
       </div>
