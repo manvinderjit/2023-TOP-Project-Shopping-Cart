@@ -95,90 +95,110 @@ const Cart = ():React.JSX.Element => {
     <section
       id="section-cart"
       role="sectionCart"
-      className="m-4  w-3/4  flex-grow flex self-center items-center"
+      className="m-4 md:w-5/6 2xl:w-3/4 flex-grow flex self-center items-center"
     >
       {cartItems.length > 0 ? (
-        <div className="border rounded-xl flex w-full min-h-[50vh]">
-          <div className="w-2/3 flex flex-col justify-center items-center">
+        <div className="sm:border rounded-xl flex w-full min-h-[50vh] flex-col justify-center items-center xl:flex-row">
+          <div className="lg:w-4/5 xl:w-2/3 flex flex-col justify-center items-center min-w-80">
             <h2 className="text-4xl font-bold my-10">Shopping Cart</h2>
-            <div>
+            <div className="">
               <ul className="flex flex-col px-10">
                 {cartItems.map((item) => {
                   return (
                     <li
                       key={item.id}
-                      className="grid grid-cols-5 gap-10 border-t-[1px] py-14"
+                      className="grid grid-cols-1 sm:grid-cols-5 xl:gap-4 2xl:gap-4 border-t-[1px] border-b-[1px] xl:border-b-0 py-14 items-center justify-center"
                     >
-                      <div className="col-span-1">
+                      <div className="col-span-1 min-w-28 max-w-72 sm:max-w-60 ">
                         <img
                           src={`${apiUrl}/products/image/${item.imageFilename}`}
                           alt={`${item.imageFilename}`}
                           className="rounded-lg"
                         />
                       </div>
-                      <div className="col-span-2 flex flex-col py-4 gap-4 items-start">
+                      <div className="col-span-1 sm:col-span-2 flex flex-col py-4 gap-2 items-center sm:items-start sm:pl-8">
                         <h4 className="text-lg font-semibold">{item.name}</h4>
                         <p>${item.price}</p>
                       </div>
-                      <div className=" col-span-1 flex flex-col py-4 items-center gap-4">
-                        <label htmlFor="item-quantity" className="text-lg font-semibold">Qty</label>
-                        <select
-                          name="item-quantity"
-                          id="item-quantity"
-                          aria-label={`Change Quantity ${item.name}`}
-                          className="w-16 p-2 text-center rounded-md focus:border-blue-700 focus:border"
-                          value={item.itemQuantity}
-                          onChange={(e) => {
-                            dispatch(
-                              changeItemQuantity({
-                                id: item.id,
-                                newItemQuantity: e.target.value,
-                              })
-                            );
-                            const toastId = nanoid();
-                            dispatch(
-                              addToastAlert({
-                                toastId: toastId,
-                                toastTextContent: `Quantity changed for ${item.name} to ${e.target.value}!`,
-                                toastType: "success",
-                              })
-                            );
-                            setTimeout(() => {
-                              dispatch(removeToastAlert(toastId));
-                            }, 3000);
-                          }}
-                        >
-                          <option data-testid={`${item.id}`} value="1">1</option>
-                          <option data-testid={`${item.id}`} value="2">2</option>
-                          <option data-testid={`${item.id}`} value="3">3</option>
-                          <option data-testid={`${item.id}`} value="4">4</option>
-                          <option data-testid={`${item.id}`} value="5">5</option>
-                        </select>
-                      </div>
-                      {/* <div className="col-span-1 flex flex-col items-center py-4 gap-4">
-                  <p>Total</p>
-                  <p>$75</p>
-                </div> */}
-                      <div className=" col-span-1 flex flex-col items-center py-4 gap-4">
-                        <label htmlFor="removeItem" className="text-lg font-semibold">Remove</label>
-                        <button                          
-                          aria-label={`Remove Item ${item.name}`}
-                          onClick={() => dispatch(removeItemFromCart(item.id))}
-                          className="w-8 h-8 rounded-full  flex items-center justify-center "
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            className="size-6 hover:size-8"
+                      <div className="sm:col-span-2 flex items-center justify-evenly">
+                        <div className=" col-span-1 min-w-32 flex flex-col py-4 items-center gap-4">
+                          <label
+                            htmlFor="item-quantity"
+                            className="text-lg font-semibold"
                           >
-                            <path
-                              fillRule="evenodd"
-                              d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </button>
+                            Qty
+                          </label>
+                          <select
+                            name="item-quantity"
+                            id="item-quantity"
+                            aria-label={`Change Quantity ${item.name}`}
+                            className="w-16 p-2 text-center rounded-md focus:border-blue-700 focus:border"
+                            value={item.itemQuantity}
+                            onChange={(e) => {
+                              dispatch(
+                                changeItemQuantity({
+                                  id: item.id,
+                                  newItemQuantity: e.target.value,
+                                })
+                              );
+                              const toastId = nanoid();
+                              dispatch(
+                                addToastAlert({
+                                  toastId: toastId,
+                                  toastTextContent: `Quantity changed for ${item.name} to ${e.target.value}!`,
+                                  toastType: "success",
+                                })
+                              );
+                              setTimeout(() => {
+                                dispatch(removeToastAlert(toastId));
+                              }, 3000);
+                            }}
+                          >
+                            <option data-testid={`${item.id}`} value="1">
+                              1
+                            </option>
+                            <option data-testid={`${item.id}`} value="2">
+                              2
+                            </option>
+                            <option data-testid={`${item.id}`} value="3">
+                              3
+                            </option>
+                            <option data-testid={`${item.id}`} value="4">
+                              4
+                            </option>
+                            <option data-testid={`${item.id}`} value="5">
+                              5
+                            </option>
+                          </select>
+                        </div>
+                        <div className=" col-span-1 min-w-32 flex flex-col items-center py-4 gap-4">
+                          <label
+                            htmlFor="removeItem"
+                            className="text-lg font-semibold"
+                          >
+                            Remove
+                          </label>
+                          <button
+                            aria-label={`Remove Item ${item.name}`}
+                            onClick={() =>
+                              dispatch(removeItemFromCart(item.id))
+                            }
+                            className="w-8 h-8 rounded-full  flex items-center justify-center "
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              className="size-6 hover:size-8"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </div>
                       </div>
                     </li>
                   );
@@ -186,7 +206,7 @@ const Cart = ():React.JSX.Element => {
               </ul>
             </div>
           </div>
-          <div className="w-1/3 flex flex-col gap-4 border rounded-lg px-8 py-6 mx-10 my-auto self-start">
+          <div className="self-center w-3/4 md:w-2/3 my-10 xl:w-1/3 flex flex-col gap-4 border rounded-lg px-8 py-6 mx-10 min-w-80">
             <h2 className="text-2xl font-semibold border-b-[1px]">
               Order Summary
             </h2>
@@ -216,18 +236,18 @@ const Cart = ():React.JSX.Element => {
                 Checkout
               </button>
             </div>
-            <div className="border-t-[1px] pt-4 flex justify-center items-center gap-4">
+            <div className="border-t-[1px] pt-4 flex justify-center items-center gap-4 flex-col 2xl:flex-row">
               <button
                 onClick={_emptyCart}
-                className="w-48 h-12 rounded-xl border border-violet-500 hover:bg-violet-400 "
+                className="w-48 h-12 rounded-xl border border-violet-500 hover:bg-violet-400 font-normal"
               >
                 Empty Cart
               </button>
               <Link
-                to={'/'}
-                className="w-48 h-12 rounded-xl border border-violet-500 hover:bg-violet-400 flex justify-center items-center font-normal"
+                to={"/"}
+                className="w-48 h-12 rounded-xl border border-violet-500 hover:bg-violet-400 font-normal flex justify-center items-center text-center"
               >
-                Continue Shopping
+                Keep Shopping
               </Link>
             </div>
           </div>

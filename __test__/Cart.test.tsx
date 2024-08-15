@@ -181,10 +181,10 @@ describe("render Cart Page With Items In Cart", () => {
     expect(screen.getByRole("button", { name: 'Empty Cart' })).toBeInTheDocument();
   });
 
-  it("should render the 'Continue Shopping' link", () => {
-    const continueShoppingButton = screen.getByRole("link", { name: 'Continue Shopping' })
-    expect(continueShoppingButton).toBeInTheDocument();
-    expect(continueShoppingButton.getAttribute('href')).toEqual('/');
+  it("should render the 'Keep Shopping' link", () => {
+    const KeepShoppingButton = screen.getByRole("link", { name: 'Keep Shopping' })
+    expect(KeepShoppingButton).toBeInTheDocument();
+    expect(KeepShoppingButton.getAttribute('href')).toEqual('/');
   });
 
   it("should be able to change item quantity", async() => {
@@ -445,8 +445,8 @@ describe("should be able to empty cart", async() => {
     expect(screen.queryByRole("button", { name: 'Empty Cart' })).not.toBeInTheDocument();
   });
 
-  it("should not render the 'Continue Shopping' link", () => {
-    expect(screen.queryByRole("link", { name: 'Continue Shopping' })).not.toBeInTheDocument();
+  it("should not render the 'Keep Shopping' link", () => {
+    expect(screen.queryByRole("link", { name: 'Keep Shopping' })).not.toBeInTheDocument();
   });
   
 });
