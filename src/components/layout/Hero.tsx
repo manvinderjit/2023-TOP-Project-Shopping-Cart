@@ -32,19 +32,19 @@ const Hero = ():React.JSX.Element => {
     error,
   } = useGetCarouselQuery(undefined);
 
-    let content: React.JSX.Element = <></>;
-    if (isLoading) {
-      content = <Spinner/>
-    } else if (isSuccess) {
-      content =  <Slider carouselImagesData={carouselPromos.carouselPromos} />;
-    } else if (isError) {
-      content = <div>{error as string}</div>;
-    }
-    return (
-      <div className="max-w-screen-2xl w-full h-[500px] mx-auto">
-        {content}
-      </div>
-    );
+  let content: React.JSX.Element = <></>;
+  if (isLoading) {
+    content = <Spinner/>
+  } else if (isSuccess) {
+    content =  <Slider carouselImagesData={carouselPromos.carouselPromos} />;
+  } else if (isError) {
+    content = <div>{error as string}</div>;
+  }
+  return (
+    <div className="max-w-screen-2xl w-full h-[500px] mx-auto">
+      {content}
+    </div>
+  );
     
 }
 

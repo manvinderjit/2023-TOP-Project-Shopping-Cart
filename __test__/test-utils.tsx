@@ -7,19 +7,27 @@ import { Provider } from "react-redux";
 import cartReducer from "../src/features/cart/cartSlice";
 import authReducer from "../src/features/auth/authSlice";
 import toastReducer from "../src/features/toast/toastSlice";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { apiSlice } from "../src/features/api/apiSlice";
 
 // Create the root reducer separately so we can extract the RootState type
 const rootReducer = combineReducers({
   cart: cartReducer,
   toast: toastReducer,
   auth: authReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {
   return configureStore({
     reducer: rootReducer,
-    preloadedState
-  })
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        immutableCheck: false,
+        serializableCheck: false,
+      }).concat(apiSlice.middleware),
+  });
 }
 
 type RootState = ReturnType<typeof rootReducer>;
@@ -42,6 +50,7 @@ export function renderWithProviders(
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {
+  setupListeners(store.dispatch);
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return <Provider store={store}>{children}</Provider>;
   }
