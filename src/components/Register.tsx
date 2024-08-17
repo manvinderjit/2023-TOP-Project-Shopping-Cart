@@ -151,12 +151,12 @@ const Register = (): React.JSX.Element => {
         </div>
         <div className="flex justify-center mb-4">
           {isRegistrationError === true ? (
-            <p className=" text-red-400">{`Error! ${registrationError?.data?.error}`}</p>
+            <p aria-label="Registration Status" className=" text-red-400">{`Error! ${registrationError?.data?.error}`}</p>
           ) : (
             <></>
           )}
           {isRegistrationSuccess === true ? (
-            <p className=" text-emerald-600">{`Success! ${registrationData?.message}`}</p>
+            <p aria-label="Registration Status" className=" text-emerald-600">{`Success! ${registrationData?.message}`}</p>
           ) : (
             <></>
           )}
@@ -176,7 +176,10 @@ const Register = (): React.JSX.Element => {
                 required
                 className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
               />
-              <span className={`flex justify-center pt-1 h-6 text-red-400`}>
+              <span
+                aria-label="Error for User Email"
+                className={`flex justify-center pt-1 h-6 text-red-400`}
+              >
                 {!isUserEmailValid ? userEmailErrorMsg : ""}
               </span>
             </div>
@@ -200,7 +203,10 @@ const Register = (): React.JSX.Element => {
                   className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                 />
               </div>
-              <span className={`flex justify-center pt-1 h-6 text-red-400`}>
+              <span
+                aria-label="Error for User Password"
+                className={`flex justify-center pt-1 h-6 text-red-400`}
+              >
                 {!isUserPasswordValid ? userPasswordErrorMsg : ""}
               </span>
             </div>
@@ -224,7 +230,7 @@ const Register = (): React.JSX.Element => {
                   className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                 />
               </div>
-              <span className={`flex justify-center pt-1 h-6 text-red-400`}>
+              <span aria-label="Error for User Confirm Password" className={`flex justify-center pt-1 h-6 text-red-400`}>
                 {!isUserConfirmPasswordValid ? userConfirmPassErrorMsg : ""}
               </span>
             </div>

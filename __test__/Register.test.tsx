@@ -105,6 +105,10 @@ describe("Register Page", () => {
     expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('name', 'userEmail');
     expect(screen.getByRole("textbox", { name: /email/i })).toHaveAttribute('required');
   });
+  
+  it("should render the Email Error span Element", () => {
+    expect(screen.getByLabelText("Error for User Email")).toBeInTheDocument();
+  });
 
   it("should render the Password Input Textbox", () => {
     expect(screen.getByLabelText("Password")).toBeInTheDocument();
@@ -113,11 +117,19 @@ describe("Register Page", () => {
     expect(screen.getByLabelText("Password")).toHaveAttribute('required');
   });
 
+  it("should render the userPassword Error span Element", () => {
+    expect(screen.getByLabelText("Error for User Password")).toBeInTheDocument();
+  });
+
   it("should render the Confirm Passoword Input Textbox", () => {
     expect(screen.getByLabelText("Confirm Password" )).toBeInTheDocument();
     expect(screen.getByLabelText("Confirm Password" )).toHaveAttribute('id', 'confirmPassword');
     expect(screen.getByLabelText("Confirm Password" )).toHaveAttribute('name', 'confirmPassword');
     expect(screen.getByLabelText("Confirm Password" )).toHaveAttribute('required');
+  });
+
+  it("should render the confirmPassword Error span Element", () => {
+    expect(screen.getByLabelText("Error for User Confirm Password")).toBeInTheDocument();
   });
 
   it("should render the submit Sign Up button", () => {
@@ -191,6 +203,7 @@ describe("should render validation errors", () => {
     const inputUserEmail = screen.getByRole("textbox", { name: /email address/i });
     expect(inputUserEmail).toBeInTheDocument();
     expect(inputUserEmail.value).toBe("");
+    expect(screen.getByLabelText("Error for User Email").innerHTML).toEqual("");
     expect(screen.queryByText("Email can not be empty!")).not.toBeInTheDocument();
 
     const buttonSignUp = screen.getByRole("button", { name: /sign up/i });
@@ -202,7 +215,8 @@ describe("should render validation errors", () => {
 
     // Post Expectations
     expect(inputUserEmail.value).toBe("");
-    expect(screen.getByText('Email can not be empty!')).toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Email")).toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Email").innerHTML).toEqual("Email can not be empty!");
   });
 
   it("should render 'Email can not be empty' error if userEmail is deleted after entering", () => {
@@ -210,17 +224,18 @@ describe("should render validation errors", () => {
     const inputUserEmail = screen.getByRole("textbox", { name: /email address/i });
     expect(inputUserEmail).toBeInTheDocument();
     expect(inputUserEmail.value).toBe("");
-    expect(screen.queryByText("Email can not be empty!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Email").innerHTML).toEqual("");
 
     // Action: Enter email address and remove it
     fireEvent.change(inputUserEmail, { target: { value: "email@abc.com" } });
     expect(inputUserEmail.value).toBe("email@abc.com");
-    expect(screen.queryByText("Email can not be empty!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Email").innerHTML).toEqual("");
     fireEvent.change(inputUserEmail, { target: { value: "" } });
 
     // Post Expectations
     expect(inputUserEmail.value).toBe("");
-    expect(screen.getByText('Email can not be empty!')).toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Email").innerHTML).toEqual("Email can not be empty!");
+    
   });
   
   it("should validate userEmail and render error messages" , () => {
@@ -228,8 +243,10 @@ describe("should render validation errors", () => {
     const inputUserEmail = screen.getByRole("textbox", { name: /email address/i });
     expect(inputUserEmail).toBeInTheDocument();
     expect(inputUserEmail.value).toBe("");
+    expect(screen.getByLabelText("Error for User Email").innerHTML).toEqual("");
     expect(screen.queryByText(/Email must be in a valid format/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/Email can not be empty/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Password must be atleast five characters!/i)).not.toBeInTheDocument();
 
     // Case 1: Incorrect email format
     // Action: Enter email in incorrect format
@@ -238,8 +255,7 @@ describe("should render validation errors", () => {
     // Post Expectations
     // It should render email error
     expect(inputUserEmail.value).toBe("e");
-    expect(screen.getByText(/Email must be in a valid format/i)).toBeInTheDocument();
-    expect(screen.queryByText(/Email can not be empty/i)).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Email").innerHTML).toEqual("Email must be in a valid format!");
 
     // Case 2: Incorrect email format
     // Action: Secondary incorrect email format
@@ -248,8 +264,7 @@ describe("should render validation errors", () => {
     // Post Expectations
     // It should render email error
     expect(inputUserEmail.value).toBe("email@");
-    expect(screen.getByText(/Email must be in a valid format/i)).toBeInTheDocument();
-    expect(screen.queryByText(/Email can not be empty/i)).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Email").innerHTML).toEqual("Email must be in a valid format!");
 
     // Case 3: Incorrect email format
     // Action: Tertiary incorrect email format
@@ -258,8 +273,8 @@ describe("should render validation errors", () => {
     // Post Expectations
     // It should render email error
     expect(inputUserEmail.value).toBe("email@abc.");
-    expect(screen.getByText(/Email must be in a valid format/i)).toBeInTheDocument();
-    expect(screen.queryByText(/Email can not be empty/i)).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Email").innerHTML).toEqual("Email must be in a valid format!");
+
   });
 
   it("should render 'Password can not be empty' error if userPassword is empty", () => {
@@ -267,6 +282,7 @@ describe("should render validation errors", () => {
     const inputUserPassword = screen.getByLabelText("Password");
     expect(inputUserPassword).toBeInTheDocument();
     expect(inputUserPassword.value).toBe("");
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
     expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
 
     const buttonSignUp = screen.getByRole("button", { name: /sign up/i });
@@ -278,7 +294,8 @@ describe("should render validation errors", () => {
 
     // Post Expectations
     expect(inputUserPassword.value).toBe("");
-    expect(screen.getByText("Password can't be empty!")).toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("Password can't be empty!");
+    
   });
 
   it("should render 'Confirm Password can not be empty' error if confirmPassword is empty", () => {
@@ -286,7 +303,9 @@ describe("should render validation errors", () => {
     const inputUserConfirmPassword = screen.getByLabelText("Confirm Password");
     expect(inputUserConfirmPassword).toBeInTheDocument();
     expect(inputUserConfirmPassword.value).toBe("");
+    expect(screen.getByLabelText("Error for User Confirm Password").innerHTML).toEqual("");
     expect(screen.queryByText("Confirm Password can't be empty!")).not.toBeInTheDocument();
+    expect(screen.queryByText("Passwords must match!")).not.toBeInTheDocument();
 
     const buttonSignUp = screen.getByRole("button", { name: /sign up/i });
     expect(buttonSignUp).toBeInTheDocument();
@@ -297,7 +316,7 @@ describe("should render validation errors", () => {
 
     // Post Expectations
     expect(inputUserConfirmPassword.value).toBe("");
-    expect(screen.getByText("Confirm Password can't be empty!")).toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Confirm Password").innerHTML).toEqual("Confirm Password can't be empty!");
   });
 
 });
@@ -322,16 +341,19 @@ describe("should validate userPassword", () => {
     const inputUserPassword = screen.getByLabelText("Password");
     expect(inputUserPassword).toBeInTheDocument();
     expect(inputUserPassword.value).toEqual("");
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
     expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
+    expect(screen.queryByText("Password must have atleast 1 uppercase char!")).not.toBeInTheDocument();
     expect(screen.queryByText("Password must be atleast five characters!")).not.toBeInTheDocument();
-
+    
     // Action: Enter Password
     fireEvent.change(inputUserPassword, { target: { value: "a" } });
 
     // Post Expectations
     expect(inputUserPassword.value).toEqual("a");
-    expect(screen.getByText("Password must be atleast 5 characters!")).toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("Password must be atleast 5 characters!");
     expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
+    expect(screen.queryByText("Password must have atleast 1 uppercase char!")).not.toBeInTheDocument();
   });
 
   it("should render 'Password must be atleast 5 characters' error if password length is lower than five (= 4)", () => {
@@ -339,16 +361,15 @@ describe("should validate userPassword", () => {
     const inputUserPassword = screen.getByLabelText("Password");
     expect(inputUserPassword).toBeInTheDocument();
     expect(inputUserPassword.value).toEqual("");
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password must be atleast five characters!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
 
     // Action: Enter Password
     fireEvent.change(inputUserPassword, { target: { value: "admi" } });
 
     // Post Expectations
     expect(inputUserPassword.value).toEqual("admi");
-    expect(screen.getByText("Password must be atleast 5 characters!")).toBeInTheDocument();
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("Password must be atleast 5 characters!");
+    
   });
 
   it("should not render 'Password must be atleast 5 characters' error if password length reaches five", () => {
@@ -356,16 +377,19 @@ describe("should validate userPassword", () => {
     const inputUserPassword = screen.getByLabelText("Password");
     expect(inputUserPassword).toBeInTheDocument();    
     expect(inputUserPassword.value).toEqual("");
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password must be atleast five characters!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
+    
+    const inputUserConfirmPassword = screen.getByLabelText("Confirm Password");
+    expect(inputUserConfirmPassword).toBeInTheDocument();
 
     // Action: Enter Password
-    fireEvent.change(inputUserPassword, { target: { value: "admin" } });
+    fireEvent.change(inputUserPassword, { target: { value: "Admin" } });
+    fireEvent.change(inputUserConfirmPassword, { target: { value: "Admin" } });
 
     // Post Expectations
-    expect(inputUserPassword.value).toEqual("admin");
-    expect(screen.queryByText("Password must be atleast 5 characters!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
+    expect(inputUserPassword.value).toEqual("Admin");
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
+    
   });
 
   it("should render 'Password must be atleast 5 characters' error if password length drops lower than five again", () => {
@@ -373,20 +397,23 @@ describe("should validate userPassword", () => {
     const inputUserPassword = screen.getByLabelText("Password");
     expect(inputUserPassword).toBeInTheDocument();
     expect(inputUserPassword.value).toEqual("");
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password must be atleast five characters!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
+
+    const inputUserConfirmPassword = screen.getByLabelText("Confirm Password");
+    expect(inputUserConfirmPassword).toBeInTheDocument();
 
     // Action: Enter Password greater than five and reduce its length to lower than five
     fireEvent.change(inputUserPassword, { target: { value: "Admin" } });
+    fireEvent.change(inputUserConfirmPassword, { target: { value: "Admin" } });
     expect(inputUserPassword.value).toEqual("Admin");
-    expect(screen.queryByText("Password must be atleast 5 characters!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
     fireEvent.change(inputUserPassword, { target: { value: "Admi" } });
+    fireEvent.change(inputUserConfirmPassword, { target: { value: "Admi" } });
 
     // Post Expectations
     expect(inputUserPassword.value).toEqual("Admi");
-    expect(screen.getByText("Password must be atleast 5 characters!")).toBeInTheDocument();
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("Password must be atleast 5 characters!");
+    
   });
 
   it("should render 'Password must have atleast 1 uppercase char!' error if password has no uppercase char and password length is >= 5 ", () => {
@@ -394,20 +421,16 @@ describe("should validate userPassword", () => {
     const inputUserPassword = screen.getByLabelText("Password");
     expect(inputUserPassword).toBeInTheDocument();
     expect(inputUserPassword.value).toEqual("");
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password must be atleast five characters!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password must have atleast 1 uppercase char!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
 
     // Action: Enter a Password greater than five but with no uppercase
     fireEvent.change(inputUserPassword, { target: { value: "admina" } });
     // Post Expectations
-    expect(inputUserPassword.value).toEqual("admina");    
+    expect(inputUserPassword.value).toEqual("admina");
 
     // Post Expectations
     expect(inputUserPassword.value).toEqual("admina");
-    expect(screen.getByText("Password must have atleast 1 uppercase char!")).toBeInTheDocument();
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password must be atleast five characters!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("Password must have atleast 1 uppercase char!");
   });
 
   it("should not render 'Password must have atleast 1 uppercase char!' error if password has an uppercase char", () => {
@@ -415,24 +438,27 @@ describe("should validate userPassword", () => {
     const inputUserPassword = screen.getByLabelText("Password");
     expect(inputUserPassword).toBeInTheDocument();
     expect(inputUserPassword.value).toEqual("");
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
     expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
     expect(screen.queryByText("Password must be atleast five characters!")).not.toBeInTheDocument();
     expect(screen.queryByText("Password must have atleast 1 uppercase char!")).not.toBeInTheDocument();
 
-    // Action: Enter a Password greater than five but with no uppercase and then add an uppercase
+    const inputUserConfirmPassword = screen.getByLabelText("Confirm Password");
+    expect(inputUserConfirmPassword).toBeInTheDocument();
+    expect(inputUserConfirmPassword.value).toEqual("");
+
+    // Action: Enter a Password greater than five but with no uppercase and then add an uppercase character
     fireEvent.change(inputUserPassword, { target: { value: "admin1" } });
+    fireEvent.change(inputUserConfirmPassword, { target: { value: "admin1" } });
     expect(inputUserPassword.value).toEqual("admin1");
-    expect(screen.getByText("Password must have atleast 1 uppercase char!")).toBeInTheDocument();
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password must be atleast five characters!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("Password must have atleast 1 uppercase char!");
     fireEvent.change(inputUserPassword, { target: { value: "Admin1" } });
+    fireEvent.change(inputUserConfirmPassword, { target: { value: "Admin1" } });
     expect(inputUserPassword.value).toEqual("Admin1");
 
     // Post Expectations
     expect(inputUserPassword.value).toEqual("Admin1");
-    expect(screen.queryByText("Password must have atleast 1 uppercase char!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password can't be empty!")).not.toBeInTheDocument();
-    expect(screen.queryByText("Password must be atleast five characters!")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
     
   });
 
@@ -469,6 +495,8 @@ describe("should match userPassword and confirmPassword", () => {
     // Post Expectations
     expect(inputUserPassword.value).toEqual("Admin");
     expect(inputUserConfirmPassword.value).toEqual("Adimn");
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("Passwords must match!");
+    expect(screen.getByLabelText("Error for User Confirm Password").innerHTML).toEqual("Passwords must match!");
     expect(screen.getAllByText('Passwords must match!')).toHaveLength(2);
 
   });
@@ -490,6 +518,8 @@ describe("should match userPassword and confirmPassword", () => {
     // Post Expectations
     expect(inputUserPassword.value).toEqual("Admin");
     expect(inputUserConfirmPassword.value).toEqual("Admin");
+    expect(screen.getByLabelText("Error for User Password").innerHTML).toEqual("");
+    expect(screen.getByLabelText("Error for User Confirm Password").innerHTML).toEqual("");
     expect(screen.queryAllByText("Passwords must match!")).toHaveLength(0);
   });
 });
@@ -550,7 +580,7 @@ describe("should register user", () => {
 
     // Post Expectations
     await waitFor (async() => { 
-      expect(await screen.getByText("Success! New user created with email@abc.com")).toBeInTheDocument();
+      expect(await screen.getByLabelText("Registration Status").innerHTML).toEqual("Success! New user created with email@abc.com");
     });
   });
 
@@ -679,7 +709,7 @@ describe("should not register user and render errors", () => {
 
     // Post Expectations
     await waitFor (async() => { 
-      expect(await screen.getByText(/Error! User with the email already exists/i)).toBeInTheDocument();
+      expect(await screen.getByLabelText("Registration Status").innerHTML).toEqual("Error! User with the email already exists.");
       expect(await screen.queryByText(/Server: Invalid request/i)).not.toBeInTheDocument();
     });
   });
