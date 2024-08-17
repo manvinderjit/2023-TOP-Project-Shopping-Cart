@@ -28,7 +28,7 @@ export const handlers = [
       requestData.userPassword.trim() === ""
     ) {
       return HttpResponse.json(
-        { error: "Email or password can't be empty." },
+        { error: "Server: Email or password can't be empty." },
         { status: 400 }
       );
     }
@@ -38,7 +38,7 @@ export const handlers = [
       !validatePassword(requestData.userPassword.trim())
     ) {
       return HttpResponse.json(
-        { error: "Invalid email or password." },
+        { error: "Server: Invalid email or password." },
         { status: 400 }
       );
     }
@@ -68,7 +68,7 @@ export const handlers = [
     }
     // Case Default Register: Otherwise Return Error
     else {
-      return HttpResponse.json({ error: "Invalid request." }, { status: 400 });
+      return HttpResponse.json({ error: "Server: Invalid request." }, { status: 400 });
     }
     
   })
@@ -472,6 +472,26 @@ describe("should match userPassword and confirmPassword", () => {
     expect(screen.getAllByText('Passwords must match!')).toHaveLength(2);
 
   });
+
+  it("should not render 'Passwords must match!' error if userPassword and confirmPassword match", () => {
+    // Pre Expectations
+    const inputUserPassword = screen.getByLabelText("Password");
+    expect(inputUserPassword).toBeInTheDocument();
+    expect(inputUserPassword.value).toEqual("");
+
+    const inputUserConfirmPassword = screen.getByLabelText("Confirm Password");
+    expect(inputUserConfirmPassword).toBeInTheDocument();
+    expect(inputUserConfirmPassword.value).toEqual("");
+
+    // Actions: Enter userPassword
+    fireEvent.input(inputUserPassword, { target: { value: "Admin" } });
+    fireEvent.input(inputUserConfirmPassword, { target: { value: "Admin" } });
+
+    // Post Expectations
+    expect(inputUserPassword.value).toEqual("Admin");
+    expect(inputUserConfirmPassword.value).toEqual("Admin");
+    expect(screen.queryAllByText("Passwords must match!")).toHaveLength(0);
+  });
 });
 
 describe("should register user", () => {
@@ -531,9 +551,74 @@ describe("should register user", () => {
     // Post Expectations
     await waitFor (async() => { 
       expect(await screen.getByText("Success! New user created with email@abc.com")).toBeInTheDocument();
+    });
+  });
+
+  it("should register user and reset input fields", async() => {
+    // Pre Expectations
+    const inputUserEmail = screen.getByRole("textbox", { name: /email address/i });
+    expect(inputUserEmail).toBeInTheDocument();
+    expect(inputUserEmail.value).toBe("");
+
+    const inputUserPassword = screen.getByLabelText("Password");
+    expect(inputUserPassword).toBeInTheDocument();
+    expect(inputUserPassword.value).toEqual("");
+
+    const inputUserConfirmPassword = screen.getByLabelText("Confirm Password");
+    expect(inputUserConfirmPassword).toBeInTheDocument();
+    expect(inputUserConfirmPassword.value).toEqual("");
+    
+    const buttonSignUp = screen.getByRole("button", { name: /sign up/i });
+    expect(buttonSignUp).toBeInTheDocument();
+
+    // Actions: Enter userEmail, userPassword, and confirmPassword
+    fireEvent.input(inputUserEmail, { target: { value: "email@abc.com" } });
+    fireEvent.input(inputUserPassword, { target: { value: 'Admin'}});
+    fireEvent.input(inputUserConfirmPassword, { target: { value: "Admin" } });
+    expect(inputUserEmail.value).toBe("email@abc.com");
+    expect(inputUserPassword.value).toEqual("Admin");
+    expect(inputUserConfirmPassword.value).toEqual("Admin");
+    fireEvent.click(buttonSignUp);
+
+    // Post Expectations
+    await waitFor (async() => { 
       expect(inputUserEmail.value).toBe("");
       expect(inputUserPassword.value).toEqual("");
       expect(inputUserConfirmPassword.value).toEqual("");
+    });
+  });
+
+  it("should retain input data if registration error occurs", async() => {
+    // Pre Expectations
+    const inputUserEmail = screen.getByRole("textbox", { name: /email address/i });
+    expect(inputUserEmail).toBeInTheDocument();
+    expect(inputUserEmail.value).toBe("");
+
+    const inputUserPassword = screen.getByLabelText("Password");
+    expect(inputUserPassword).toBeInTheDocument();
+    expect(inputUserPassword.value).toEqual("");
+
+    const inputUserConfirmPassword = screen.getByLabelText("Confirm Password");
+    expect(inputUserConfirmPassword).toBeInTheDocument();
+    expect(inputUserConfirmPassword.value).toEqual("");
+    
+    const buttonSignUp = screen.getByRole("button", { name: /sign up/i });
+    expect(buttonSignUp).toBeInTheDocument();
+
+    // Actions: Enter userEmail, userPassword, and confirmPassword
+    fireEvent.input(inputUserEmail, { target: { value: "emailExists@abc.com" } });
+    fireEvent.input(inputUserPassword, { target: { value: 'Admin'}});
+    fireEvent.input(inputUserConfirmPassword, { target: { value: "Admin" } });
+    expect(inputUserEmail.value).toBe("emailExists@abc.com");
+    expect(inputUserPassword.value).toEqual("Admin");
+    expect(inputUserConfirmPassword.value).toEqual("Admin");
+    fireEvent.click(buttonSignUp);
+
+    // Post Expectations
+    await waitFor (async() => { 
+      expect(inputUserEmail.value).toBe("emailExists@abc.com");
+      expect(inputUserPassword.value).toEqual("Admin");
+      expect(inputUserConfirmPassword.value).toEqual("Admin");
     });
   });
 });
@@ -566,7 +651,7 @@ describe("should not register user and render errors", () => {
   // Disable API mocking after the tests are done.
   afterAll(() => server.close());
 
-  it("should not register user and render error message", async() => {
+  it("should not register duplicate user and render error message", async() => {
     // Pre Expectations
     const inputUserEmail = screen.getByRole("textbox", { name: /email address/i });
     expect(inputUserEmail).toBeInTheDocument();
@@ -595,9 +680,40 @@ describe("should not register user and render errors", () => {
     // Post Expectations
     await waitFor (async() => { 
       expect(await screen.getByText(/Error! User with the email already exists/i)).toBeInTheDocument();
-      expect(inputUserEmail.value).toBe("emailExists@abc.com");
-      expect(inputUserPassword.value).toEqual("Admin");
-      expect(inputUserConfirmPassword.value).toEqual("Admin");
+      expect(await screen.queryByText(/Server: Invalid request/i)).not.toBeInTheDocument();
+    });
+  });
+
+  it("should catch invalid inputs at frontend and render errors without calling backend", async() => {
+    // Pre Expectations
+    const inputUserEmail = screen.getByRole("textbox", { name: /email address/i });
+    expect(inputUserEmail).toBeInTheDocument();
+    expect(inputUserEmail.value).toBe("");
+
+    const inputUserPassword = screen.getByLabelText("Password");
+    expect(inputUserPassword).toBeInTheDocument();
+    expect(inputUserPassword.value).toEqual("");
+
+    const inputUserConfirmPassword = screen.getByLabelText("Confirm Password");
+    expect(inputUserConfirmPassword).toBeInTheDocument();
+    expect(inputUserConfirmPassword.value).toEqual("");
+    
+    const buttonSignUp = screen.getByRole("button", { name: /sign up/i });
+    expect(buttonSignUp).toBeInTheDocument();
+
+    // Actions: Enter userEmail, userPassword, and confirmPassword
+    fireEvent.input(inputUserEmail, { target: { value: "emailInvalid" } });
+    fireEvent.input(inputUserPassword, { target: { value: 'admin1'}});
+    fireEvent.input(inputUserConfirmPassword, { target: { value: "admin2" } });
+    expect(inputUserEmail.value).toBe("emailInvalid");
+    expect(inputUserPassword.value).toEqual("admin1");
+    expect(inputUserConfirmPassword.value).toEqual("admin2");
+    fireEvent.click(buttonSignUp);
+
+    // Post Expectations
+    await waitFor (async() => {
+      expect(await screen.queryByText(/Server: Invalid email or password/i)).not.toBeInTheDocument();
+      expect(await screen.queryByText(/Server: Invalid request/i)).not.toBeInTheDocument();
     });
   });
 
