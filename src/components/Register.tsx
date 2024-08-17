@@ -22,6 +22,7 @@ const Register = (): React.JSX.Element => {
   const [userPasswordErrorMsg, setUserPasswordErrorMsg] = useState<string>("");
   
   const [userConfirmPassword, setUserConfirmPassword] = useState<string>("");
+  const [isUserConfirmPasswordValid, setIsUserConfirmPasswordValid] = useState<boolean | null>(null);
   const [userConfirmPassErrorMsg, setUserConfirmPassErrorMsg] = useState<string>("");
 
   const [
@@ -50,6 +51,10 @@ const Register = (): React.JSX.Element => {
   };
 
   const validatePassword = (passwordValue: string, confirmPasswordValue:string): void => {
+    // Reset Error    
+    setIsUserPasswordValid(null);
+    setUserPasswordErrorMsg("");
+
     // Check if password is empty
     if(passwordValue.trim() === '') {
       setIsUserPasswordValid(false);
@@ -69,6 +74,7 @@ const Register = (): React.JSX.Element => {
     // Check if passwords don't match
     else if (passwordValue.match(PASSWORD_REGEX) && passwordValue !== confirmPasswordValue) {
       setIsUserPasswordValid(false);
+      setIsUserConfirmPasswordValid(false);
       setUserPasswordErrorMsg('Passwords must match!');
       setUserConfirmPassErrorMsg("Passwords must match!");
     } 
@@ -78,12 +84,21 @@ const Register = (): React.JSX.Element => {
       setUserPasswordErrorMsg('');
       setUserConfirmPassErrorMsg("");
     }
+  }
+
+  const validateConfirmPassword = (passwordValue: string, confirmPasswordValue:string): void => {
+    // Reset Errors
+    setIsUserConfirmPasswordValid(null);
+    setUserConfirmPassErrorMsg("");
     // Check if confirm password is empty
     if (confirmPasswordValue.trim() === "") {
-      setIsUserPasswordValid(false);
+      setIsUserConfirmPasswordValid(false);
       setUserConfirmPassErrorMsg("Confirm Password can't be empty!");
+    } else if (passwordValue !== confirmPasswordValue) {
+      setIsUserPasswordValid(false);
+      setUserConfirmPassErrorMsg("Passwords must match!");
     } 
-  }
+  };
 
   const onInputValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.name === "userEmail") {
@@ -93,10 +108,12 @@ const Register = (): React.JSX.Element => {
     if (e.currentTarget.name === "userPassword") {
       setUserPassword(e.currentTarget.value.trim());
       validatePassword(e.currentTarget.value.trim(), userConfirmPassword);
+      validateConfirmPassword(e.currentTarget.value.trim(), userConfirmPassword);
     }
     if (e.currentTarget.name === "confirmPassword") {
       setUserConfirmPassword(e.currentTarget.value.trim());
-      validatePassword(userPassword, e.currentTarget.value);
+      validatePassword(userPassword, e.currentTarget.value.trim());
+      validateConfirmPassword(userPassword, e.currentTarget.value);
     }
   };
 
@@ -104,6 +121,7 @@ const Register = (): React.JSX.Element => {
     e.preventDefault();
     validateEmail(userEmail);
     validatePassword(userPassword, userConfirmPassword);
+    validateConfirmPassword(userPassword, userConfirmPassword);
     if (isUserEmailValid && isUserPasswordValid) {      
       await registerUser({ userEmail, userPassword });
     }
@@ -207,7 +225,7 @@ const Register = (): React.JSX.Element => {
                 />
               </div>
               <span className={`flex justify-center pt-1 h-6 text-red-400`}>
-                {!isUserPasswordValid ? userConfirmPassErrorMsg : ""}
+                {!isUserConfirmPasswordValid ? userConfirmPassErrorMsg : ""}
               </span>
             </div>
             <div>

@@ -536,7 +536,6 @@ describe("should register user", () => {
       expect(inputUserConfirmPassword.value).toEqual("");
     });
   });
-
 });
 
 describe("should not register user and render errors", () => {
