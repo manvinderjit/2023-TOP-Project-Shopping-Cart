@@ -63,14 +63,14 @@ const Register = (): React.JSX.Element => {
       } 
       // Check if password has an Uppercase character
       else if (!checkContainsUpperCase(passwordValue)) {
-        setUserPasswordErrorMsg("Password must have atleast 1 uppercase!");
+        setUserPasswordErrorMsg("Password must have atleast 1 uppercase char!");
       }
     } 
     // Check if passwords don't match
     else if (passwordValue.match(PASSWORD_REGEX) && passwordValue !== confirmPasswordValue) {
       setIsUserPasswordValid(false);
-      setUserPasswordErrorMsg('Passwords must match');
-      setUserConfirmPassErrorMsg("Passwords must match");
+      setUserPasswordErrorMsg('Passwords must match!');
+      setUserConfirmPassErrorMsg("Passwords must match!");
     } 
     // Check if passwords are valid and match
     else if (passwordValue.match(PASSWORD_REGEX) && passwordValue === confirmPasswordValue) {

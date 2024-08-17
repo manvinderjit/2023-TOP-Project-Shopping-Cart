@@ -271,7 +271,7 @@ describe("should remove userEmail and userPassword error messages when input is 
     );
   });
 
-  it("should remove 'Email can't be empty/' error when email is entered" , () => {
+  it("should remove 'Email can't be empty' error when email is entered" , () => {
     // Pre Expectations
     const inputUserEmail = screen.getByRole("textbox", { name: /email address/i });
     expect(inputUserEmail).toBeInTheDocument();
@@ -397,8 +397,8 @@ describe("should handle log in", () => {
   afterEach(() => {
     server.resetHandlers();
     store.dispatch(apiSlice.util.resetApiState());
-  }
-);
+    }
+  );
 
   // Disable API mocking after the tests are done.
   afterAll(() => server.close());
