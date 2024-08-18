@@ -32,8 +32,24 @@ export interface ProductDataAndCategoryDataLists {
   productList: ProductDetails[];
 }
 
-
 export interface AuthSliceState {
   username: string | null;
   token: string | null;
+}
+
+export interface ProductData {
+  productData: {
+    id: string;
+    name: string;
+    description: string;
+    imageUrl: string;
+    imageFilename: string;
+    category: {
+      _id: string;
+      name: string;
+    };
+    price: string;
+    stock: number;
+    url: string;
+  };
 }

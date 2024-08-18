@@ -2,23 +2,7 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../features/cart/cartSlice";
 import { addToastAlert, removeToastAlert } from "../../features/toast/toastSlice";
 import { nanoid } from "@reduxjs/toolkit";
-
-interface ProductData {
-  productData: {
-    id: string;
-    name: string;
-    description: string;
-    imageUrl: string;
-    imageFilename: string;
-    category: {
-      _id: string;
-      name: string;
-    };
-    price: string;
-    stock: number;
-    url: string;
-  };
-}
+import type { ProductData } from "../../types/types";
 
 const apiUrl = `https://ia.manvinderjit.com/api`;
 
@@ -61,14 +45,15 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
             <h3 className="text-lg text-white">
               <a href="#">{productData.name}</a>
             </h3>
-            <p className="text-lg font-medium text-white">
+            <p aria-label={`Price for ${productData.name}`} className="text-lg font-medium text-white">
               ${productData.price}
             </p>
           </div>
-          <p className="mt-4 py-2 border-t-[1px] text-left text-sm text-white">
+          <p aria-label={`Description for ${productData.name}`} className="mt-4 py-2 border-t-[1px] text-left text-sm text-white">
             {productData.description}
           </p>
           <button
+            aria-label={`Add ${productData.name} to cart`}
             onClick={_addToCart}
             className="flex w-48 self-center justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
           >
