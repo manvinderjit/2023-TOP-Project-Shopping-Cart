@@ -23,6 +23,7 @@ const NavUserAccountTools = ():React.JSX.Element => {
                 onMouseEnter={() => setShowOptionsMenu(true)}
                 className="inline-flex flex-col w-full items-center justify-center gap-x-1.5 rounded-md px-3 py-2 text-white shadow-sm ring-0 ring-inset ring-white hover:text-[#646cff]"
                 id="menu-button"
+                aria-label="User Account Tools"
                 aria-expanded={showOptionsMenu}
                 aria-haspopup={showOptionsMenu}
               >
@@ -49,9 +50,9 @@ const NavUserAccountTools = ():React.JSX.Element => {
                     aria-hidden="true"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
                 ) : (
@@ -87,16 +88,7 @@ const NavUserAccountTools = ():React.JSX.Element => {
                     tabIndex={-1}
                     id="menu-item-2"
                   >
-                    Archive
-                  </Link>
-                  <Link
-                    to="#"
-                    className="block px-4 py-2 text-sm text-white"
-                    role="menuitem"
-                    tabIndex={-1}
-                    id="menu-item-3"
-                  >
-                    Move
+                    My Orders
                   </Link>
                 </div>
                 <div className="py-1" role="none">
