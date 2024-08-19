@@ -2,10 +2,8 @@ import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import NavItemsTopMobile from "../src/components/nav/NavItemsTopMobile";
 import { describe, it, expect } from "vitest";
-import { MemoryRouter, RouterProvider, createMemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-// import routerConfig from "./routerConfig";
-// import { Provider } from "react-redux";
 import { store } from "../src/application/store";
 
 describe("should render the Mobile Navigation Menu", () => {
@@ -130,6 +128,39 @@ describe("should render the Mobile Navigation Menu", () => {
       expect(linkToCartNavTopMobile).not.toBeInTheDocument();
       
     });
+  });
+
+  it("should close the Mobile Navigation Menu when a link is clicked" , async() => {
+
+    // Pre Expectations
+    const buttonExpandNavigationMenu = screen.getByRole("button", { name: /Navigation Menu/i });
+    expect(buttonExpandNavigationMenu).toBeInTheDocument();
+    expect(buttonExpandNavigationMenu.getAttribute("aria-expanded")).toEqual("false");
+
+    
+    // Pre Actions: 1. Click on the Navigation Menu button to Expand the Mobile Navigation Menu
+    fireEvent.click(buttonExpandNavigationMenu);
+    expect(buttonExpandNavigationMenu.getAttribute("aria-expanded")).toEqual("true");
+    
+    await waitFor(async() => {
+      // Pre Actions: 2. Click on the Login link
+      fireEvent.click(buttonExpandNavigationMenu);
+      const linkToCartNavTopMobileBefore = screen.getByRole("link", { name: "Cart" });
+      expect(linkToCartNavTopMobileBefore).toBeInTheDocument();
+
+      // Actions
+      fireEvent.click(buttonExpandNavigationMenu);
+      
+      // Post Expectations
+      expect(buttonExpandNavigationMenu.getAttribute("aria-expanded")).toEqual("false");
+      const linkToCartNavTopMobileAfter = screen.queryByRole("link", { name: "Cart" });
+      expect(linkToCartNavTopMobileAfter).not.toBeInTheDocument();
+
+      const linksNavTopMobile = screen.queryAllByRole("link");
+      expect(linksNavTopMobile).toHaveLength(0);
+
+    });
+
   });
 
 });
