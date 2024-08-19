@@ -1,7 +1,7 @@
 import Logo from "./Logo";
 import CartButton from "./CartButton";
 import NavItemsTop from "./NavItemsTop";
-import NavDropdown from "./NavDropdown";
+import NavDropdown from "./NavMenuUser";
 import { useAppSelector } from "../../application/reduxHooks";
 import { getCurrentToken, getCurrentUserDetails } from "../../features/auth/authSlice";
 import { Navigate } from "react-router-dom";
