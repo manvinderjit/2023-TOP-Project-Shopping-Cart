@@ -19,7 +19,6 @@ describe("Navigation Top", () => {
     );
     
     expect(screen.getByText(/Shopping App/)).toBeInTheDocument();
-    screen.debug();
     
     expect(screen.getByRole('link', { name: 'Home' }).textContent).toMatch(/Home/i);
     expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');

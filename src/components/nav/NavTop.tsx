@@ -1,7 +1,7 @@
 import Logo from "./Logo";
 import CartButton from "./CartButton";
 import NavItemsTop from "./NavItemsTop";
-import NavDropdown from "./NavMenuUser";
+import NavUserAccountTools from "./NavUserAccountTools";
 import { useAppSelector } from "../../application/reduxHooks";
 import { getCurrentToken, getCurrentUserDetails } from "../../features/auth/authSlice";
 import { Navigate } from "react-router-dom";
@@ -16,13 +16,13 @@ const NavTop = (): React.JSX.Element => {
       <>
         <nav className="flex lg:hidden flex-row w-3/4 mx-auto gap-4 ">          
           <NavItemsTopMobile />
-          {token && token !== null ? <NavDropdown /> : <></>}
+          {token && token !== null ? <NavUserAccountTools /> : <></>}
           <CartButton />
         </nav>
         <nav className="hidden lg:flex flex-row w-3/4 mx-auto gap-4">
           <Logo />
           <NavItemsTop />
-          {token && token !== null ? <NavDropdown /> : <></>}
+          {token && token !== null ? <NavUserAccountTools /> : <></>}
           <CartButton />
         </nav>
       </>

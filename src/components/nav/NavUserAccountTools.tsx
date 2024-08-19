@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../../features/auth/authSlice";
 
-const NavDropdown = ():React.JSX.Element => {
+const NavUserAccountTools = ():React.JSX.Element => {
 
   const [showOptionsMenu, setShowOptionsMenu] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -122,4 +122,4 @@ const NavDropdown = ():React.JSX.Element => {
     return content;
 }
 
-export default NavDropdown;
+export default NavUserAccountTools;
