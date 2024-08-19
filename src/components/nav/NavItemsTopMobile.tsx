@@ -16,6 +16,8 @@ const NavItemsTopMobile = (): React.JSX.Element => {
     <ul className="flex flex-row mr-auto">
       <li className="flex flex-col justify-center text-center w-24 text-l">
         <button
+          aria-label="Navigation Menu"
+          aria-expanded={isMobileNavOpen}
           onClick={toggleMobileNavMenu}
           className="border w-8 h-8 rounded flex justify-center items-center z-20"
         >
