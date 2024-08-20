@@ -44,15 +44,13 @@ const Products = ():React.JSX.Element => {
                   </div>
               </>
   } else if (isError) {
-    content = <div>{error as string}</div>
+    content = <div>{error.data}</div>
   }
 
   return (
     <section id="section-products">
       <div className="w-full flex flex-col justify-center">
-        
           {content}
-        
       </div>
     </section>
   );
