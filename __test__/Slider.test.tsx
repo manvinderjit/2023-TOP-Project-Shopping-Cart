@@ -2,55 +2,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import userEvent from "@testing-library/user-event";
-
 import Slider from "../src/components/hero/Slider";
-
-const carouselImagesData = [
-  {
-    caption: {
-      heading: "Cyber Monday Promo",
-      description: "Cyber Monday Promo",
-    },
-    name: "Cyber Monday Promo",
-    category: "Carousel",
-    imageUrl: "promos/carousel/cyber-monday-promo.jpg",
-    url: "/promos/undefined",
-    id: null,
-  },
-  {
-    caption: {
-      heading: "Laptops Available",
-      description: "Laptops Available",
-    },
-    name: "Laptops Available",
-    category: "Carousel",
-    imageUrl: "promos/carousel/laptops-available.jpg",
-    url: "/promos/undefined",
-    id: null,
-  },
-  {
-    caption: {
-      heading: "Lunar New Year Sale",
-      description: "Lunar New Year Sale with significant discounts.",
-    },
-    name: "Lunar New Year Sale",
-    category: "Carousel",
-    imageUrl: "promos/carousel/lunar-new-year-sale.jpg",
-    url: "/promos/undefined",
-    id: null,
-  },
-  {
-    caption: {
-      heading: "Storage Devices",
-      description: "Storage Devices for All Use Cases",
-    },
-    name: "Storage Devices",
-    category: "Carousel",
-    imageUrl: "promos/carousel/storage-devices.png",
-    url: "/promos/undefined",
-    id: null,
-  },
-];
+import { carouselImagesData } from "./mockdata";
 
 describe("Hero Slider", () => {
   beforeEach(() => {

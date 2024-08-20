@@ -57,8 +57,6 @@ describe("should render home page when user clicks the 'Go back home' link", () 
         await waitFor(async() => {
             // Check router page to equal home '/'
             expect(router.state.location.pathname).toEqual("/");
-            // Check the heading 'Our Products' is rendered
-            expect(screen.getByRole("heading", { name: /Our Products/i })).toBeInTheDocument();
             // Check the 'Home' link is highlighted in the correct color
             expect(screen.getByRole("link", { name: "Home" }).parentElement?.classList.contains("text-[#646cff]")).toBe(true);
         });

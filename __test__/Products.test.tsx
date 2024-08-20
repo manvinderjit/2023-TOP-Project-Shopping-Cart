@@ -7,74 +7,7 @@ import Products from "../src/components/products/Products";
 import { setupServer } from "msw/node";
 import { apiSlice } from "../src/features/api/apiSlice";
 import { http, HttpResponse } from "msw";
-
-// Mock Data
-const categoryList = [
-  {
-    _id: "65bdbd33510f8ff65f52e1c4",
-    name: "Computer Keyboards",
-    description:
-      "A wide selection of keyboards ranging from entry-level to top-of-the-line mechanical ones.",
-    __v: 0,
-  },
-  {
-    _id: "65d267a1ee7fe43422036973",
-    name: "Computer Monitor",
-    description: "All types of computer monitors are available for sale.",
-    __v: 0,
-  },
-];
-
-const productList = [
-    {
-        _id: "65d26877ee7fe43422036983",
-        name: "ABC 27G2SP Monitor",
-        description: "The new ABC 27G2SP Monitor for offices.",
-        imageUrl: "api/images/products/abc-27g2sp-monitor.jpg",
-        imageFilename: "abc-27g2sp-monitor.jpg",
-        category: {
-            _id: "65d267a1ee7fe43422036973",
-            name: "Computer Monitor",
-        },
-        price: "150.00",
-        stock: 25,
-        __v: 0,
-        url: "/allproducts/65d26877ee7fe43422036983",
-        id: "65d26877ee7fe43422036983",
-    },
-    {
-        _id: "65c2d11b9b446c7905bcaad2",
-        name: "Cool Keyboards",
-        description: "An entry level ergonomic keyboard from Cool Keyboards",
-        imageUrl: "api/images/products/cool-keyboards.jpg",
-        imageFilename: "cool-keyboards.jpg",
-        category: {
-            _id: "65bdbd33510f8ff65f52e1c4",
-            name: "Computer Keyboards",
-        },
-        price: "10.00",
-        stock: 15,
-        __v: 0,
-        url: "/allproducts/65c2d11b9b446c7905bcaad2",
-        id: "65c2d11b9b446c7905bcaad2",
-    },
-    {
-        _id: "65c945183e1a54b49df1d49b",
-        name: "Cool Keys RGB Keyboard",
-        description: "This is an RGB keyboard from cool keys",
-        imageUrl: "api/images/products/cool-keys-rgb-keyboard.jpg",
-        imageFilename: "cool-keys-rgb-keyboard.jpg",
-        category: {
-            _id: "65bdbd33510f8ff65f52e1c4",
-            name: "Computer Keyboards",
-        },
-        price: "36.00",
-        stock: 10,
-        __v: 0,
-        url: "/allproducts/65c945183e1a54b49df1d49b",
-        id: "65c945183e1a54b49df1d49b",
-    },
-];
+import { categoryList, productList } from "./mockdata";
 
 // Use msw to intercept the network request during the test,
 export const handlers = [

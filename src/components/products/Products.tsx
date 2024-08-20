@@ -31,13 +31,18 @@ const Products = ():React.JSX.Element => {
   if (isLoading) {
     content = <Spinner/>
   } else if (isSuccess) {
-    content =  <div className="flex justify-evenly flex-wrap gap-10">
-                {apiData.productList.map((product: ProductData): React.JSX.Element => {
-                  return (
-                    <ProductCard key={product.id} productData={product} />
-                  )
-                })}
-              </div>
+    content =  <>
+                <h2 className="text-center text-xl py-2 font-semibold">Our Products</h2>
+                  <div className="w-11/12 lg:w-5/6 xl:w-4/5 text-center mx-auto ">
+                    <div className="flex justify-evenly flex-wrap gap-10">
+                          {apiData.productList.map((product: ProductData): React.JSX.Element => {
+                            return (
+                              <ProductCard key={product.id} productData={product} />
+                            )
+                          })}
+                    </div>
+                  </div>
+              </>
   } else if (isError) {
     content = <div>{error as string}</div>
   }
@@ -45,10 +50,9 @@ const Products = ():React.JSX.Element => {
   return (
     <section id="section-products">
       <div className="w-full flex flex-col justify-center">
-        <h2 className="text-center text-xl py-2 font-semibold">Our Products</h2>
-        <div className="w-11/12 lg:w-5/6 xl:w-4/5 text-center mx-auto ">
+        
           {content}
-        </div>
+        
       </div>
     </section>
   );
