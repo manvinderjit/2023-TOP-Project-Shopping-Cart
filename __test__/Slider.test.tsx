@@ -30,7 +30,7 @@ describe("Hero Slider Buttons", () => {
     render(<Slider carouselImagesData={carouselImagesData} />);
   })
 
-  it("Should show the last image when previousSlideButton is clicked when on the first image", async () => {
+  it("Should render the last image when previousSlideButton is clicked when on the first image", async () => {
     // Setup
     const user = userEvent.setup();
 
@@ -48,7 +48,7 @@ describe("Hero Slider Buttons", () => {
     
   });
 
-  it("Should show the previous image when previousSlideButton is clicked", async () => {
+  it("Should render the previous image when previousSlideButton is clicked", async () => {
     // Setup
     const user = userEvent.setup();
     const previousSlideButton = screen.getByRole("button", { name: /previousSliderImage/i });
@@ -72,7 +72,7 @@ describe("Hero Slider Buttons", () => {
   });
 
 
-  it("Should show the next image when nextSlideButton is clicked", async () => {
+  it("Should render the next image when nextSlideButton is clicked", async () => {
     // Setup
     const user = userEvent.setup();
     const nextSlideButton = screen.getByRole("button", { name: /nextSliderImage/i, });
@@ -92,7 +92,22 @@ describe("Hero Slider Buttons", () => {
     expect(screen.getByRole("img", { name: /Storage Devices/i })).toBeInTheDocument();
   });
 
-  it("Should show the first image when nextSlideButton is clicked from last image", async () => {
+  it("Should render the next image after 3 seconds ", async () => {
+    
+    // Pre Expectations
+    expect(screen.getByRole("img", { name: /Cyber Monday Promo/i })).toBeInTheDocument();
+    expect(screen.queryByRole("img", { name: /Laptops Available/i })).not.toBeInTheDocument();
+
+    //Post Expectations
+    
+    setTimeout(() => {
+      expect(screen.queryByRole("img", { name: /Cyber Monday Promo/i })).not.toBeInTheDocument();
+      expect(screen.getByRole("img", { name: /Laptops Available/i })).toBeInTheDocument();
+    }, 3500);
+    
+  });
+
+  it("Should render the first image when nextSlideButton is clicked from last image", async () => {
     // Setup
     const user = userEvent.setup();
     const nextSlideButton = screen.getByRole("button", { name: /nextSliderImage/i, });
@@ -113,7 +128,7 @@ describe("Hero Slider Buttons", () => {
 
 describe("Hero Image Buttons", () => {
 
-  it('should show the respective image when a button is clicked', async () => {
+  it('should render the respective image when a button is clicked', async () => {
     render(<Slider carouselImagesData={carouselImagesData} />);
     
     // Setup
