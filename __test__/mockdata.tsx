@@ -112,3 +112,34 @@ export const productList = [
     id: "65c945183e1a54b49df1d49b",
   },
 ];
+
+
+export const initialToasts = {
+  toastAlerts: [
+    {
+      toastId: "HTHBGpl2xC53FEolQGjsf",
+      toastTextContent: "Cool Keyboards added to cart!",
+      toastType: "success",
+    },
+    {
+      toastId: "Oq9BhJ86-XyQWY1IZ0j8M",
+      toastTextContent: "ABC 27G2SP Monitor added to cart!",
+      toastType: "success",
+    },
+    {
+      toastId: "W-SCs_W8gg2hKFKcrCBoV",
+      toastTextContent: "ABC 27G2SP Monitor added to cart!",
+      toastType: "success",
+    },
+    {
+      toastId: "RlctRuI_zPqXOQRigWW0U",
+      toastTextContent: "Cool Keyboards added to cart!",
+      toastType: "success",
+    },
+    {
+      toastId: "gxbvFpp7OaEJgw9nAO5l6",
+      toastTextContent: "Cool Keys RGB Keyboard added to cart!",
+      toastType: "success",
+    },
+  ],
+};

@@ -40,6 +40,7 @@ const Toast = () => {
             >
               <span>{toast.toastTextContent}</span>
               <button
+                aria-label={`Close Alert ${toast.toastTextContent}`}
                 onClick={() => {
                   dispatch(removeToastAlert(toast.toastId));
                 }}

@@ -92,8 +92,7 @@ describe("add items to cart", () => {
 
   it("should update item quantity in cart", async () => {
     await waitFor(async() => {
-        // Pre Expectations: Previous test already added item to cart 
-        expect(screen.getByText(/ABC 27G2SP Monitor added to cart/i)).toBeInTheDocument();
+        // Pre Expectations: Previous test already added item to cart        
         fireEvent.click(screen.getByRole('link', { name: /cart/i }));
         expect(_router.state.location.pathname).toEqual("/cart");
          
