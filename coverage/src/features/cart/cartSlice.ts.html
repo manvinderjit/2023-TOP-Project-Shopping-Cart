@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.25% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>43/63</span>
+                <span class='fraction'>56/63</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.77% </span>
+                <span class="strong">78.57% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/9</span>
+                <span class='fraction'>11/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.25% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>43/63</span>
+                <span class='fraction'>56/63</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -185,25 +185,25 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -225,13 +225,13 @@
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">191x</span>
-<span class="cline-any cline-yes">191x</span>
-<span class="cline-any cline-yes">191x</span>
-<span class="cline-any cline-yes">90x</span>
-<span class="cline-any cline-yes">90x</span>
-<span class="cline-any cline-yes">191x</span>
-<span class="cline-any cline-yes">191x</span>
+<span class="cline-any cline-yes">200x</span>
+<span class="cline-any cline-yes">200x</span>
+<span class="cline-any cline-yes">200x</span>
+<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">98x</span>
+<span class="cline-any cline-yes">200x</span>
+<span class="cline-any cline-yes">200x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -271,27 +271,27 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,        
     reducers: {
-        addItemToCart: <span class="fstat-no" title="function not covered" >(state, action) =&gt; {</span>
+        addItemToCart: (state, action) =&gt; {
             // Check if the item already exists in the cart, returns index of item if exists
-<span class="cstat-no" title="statement not covered" >            const itemIndex = state.cartItems.findIndex(</span>
-<span class="cstat-no" title="statement not covered" >              (item) =&gt; item.id === action.payload.id</span>
-<span class="cstat-no" title="statement not covered" >            );</span>
-<span class="cstat-no" title="statement not covered" >            if(itemIndex &gt;= 0) {</span>
+            const itemIndex = state.cartItems.findIndex(
+              (item) =&gt; item.id === action.payload.id
+            );
+            if(itemIndex &gt;= 0) {
                 // Check if the item quantity is less than five, imposes maximum item purchase limit
-<span class="cstat-no" title="statement not covered" >                if (state.cartItems[itemIndex].itemQuantity &lt; 5){</span>
-<span class="cstat-no" title="statement not covered" >                    state.cartItems[itemIndex].itemQuantity += 1;</span>
-<span class="cstat-no" title="statement not covered" >                } else if ((state.cartItems[itemIndex].itemQuantity &lt; 1)) {</span>
+                if (state.cartItems[itemIndex].itemQuantity &lt; 5){
+                    state.cartItems[itemIndex].itemQuantity += 1;
+<span class="branch-0 cbranch-no" title="branch not covered" >                } else if ((state.cartItems[itemIndex].itemQuantity &lt; 1)) {</span>
 <span class="cstat-no" title="statement not covered" >                    state.error = `Error! Item quantity can't be zero!`;</span>
 <span class="cstat-no" title="statement not covered" >                } else {</span>
 <span class="cstat-no" title="statement not covered" >                    state.error = `Error! Item quantity invalid!`;</span>
 <span class="cstat-no" title="statement not covered" >                }</span>
                   
-<span class="cstat-no" title="statement not covered" >            } else {</span>
-<span class="cstat-no" title="statement not covered" >                state.cartItems.push({...action.payload, itemQuantity:1 });</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));</span>
-<span class="cstat-no" title="statement not covered" >            cartSlice.caseReducers.calculateCartTotal(state);</span>
-<span class="cstat-no" title="statement not covered" >        },</span>
+            } else {
+                state.cartItems.push({...action.payload, itemQuantity:1 });
+            }
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+            cartSlice.caseReducers.calculateCartTotal(state);
+        },
         removeItemFromCart: (state, action) =&gt; {
             state.cartItems = state.cartItems.filter (item =&gt; item.id !== action.payload);
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
@@ -334,7 +334,7 @@ export default cartSlice.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-21T19:12:25.558Z
+                at 2024-08-21T20:32:50.494Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

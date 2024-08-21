@@ -4,7 +4,6 @@ import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import routerConfig from "./routerConfig";
 import { renderWithProviders, setupStore } from "./test-utils";
-import { addItemToCart } from "../src/features/cart/cartSlice";
 
 describe("Cart Page When Empty Cart", () => {
   beforeEach(() => {
@@ -111,10 +110,6 @@ describe("render Cart Page With Items In Cart", () => {
   });
 
   it("should render the heading 'Shopping Cart'", () => {
-    expect(screen.getByRole("heading", { name: 'Shopping Cart' })).toBeInTheDocument();
-  });
-
-  it("should render the 'Shopping Cart' heading", () => {
     expect(screen.getByRole("heading", { name: 'Shopping Cart' })).toBeInTheDocument();
   });
 
