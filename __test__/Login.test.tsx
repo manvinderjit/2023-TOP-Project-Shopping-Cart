@@ -503,8 +503,94 @@ describe("should handle log in", () => {
       expect(await screen.findByText(/Dashboard/i)).toBeInTheDocument();
       expect(await screen.findByText(/Login Successful/i)).toBeInTheDocument();
       expect(await screen.findByText(/Welcome email@abc.com/i)).toBeInTheDocument();
+      expect(_router.state.location.pathname).toEqual("/dashboard");
       setTimeout(async() => expect(await screen.findByText(/Login Successful/i)).not.toBeInTheDocument(), 4000);
     });
+
+  });
+});
+
+describe("should handle log out", () => {
+  // Setup
+  const _router = createMemoryRouter(routerConfig, {
+    initialEntries: ["/login"],
+  });
+
+  beforeEach(() => {
+    render(
+      <Provider store={store}>
+        <RouterProvider router={_router} />
+      </Provider>
+    );
+  });
+
+  const server = setupServer(...handlers);
+
+  // Enable API mocking before tests.
+  beforeAll(() => server.listen());
+
+  // Reset any runtime request handlers we may add during the tests.
+  afterEach(() => {
+    server.resetHandlers();
+    store.dispatch(apiSlice.util.resetApiState());
+    }
+  );
+
+  // Disable API mocking after the tests are done.
+  afterAll(() => server.close());
+
+  it("should log out user and redirect to 'Login'", async() => {
+
+    // Pre Expectations
+    expect(_router.state.location.pathname).toEqual("/login");
+    expect(screen.getByText(/Log In To Your Account/i)).toBeInTheDocument();
+
+    const inputUserEmail = screen.getByRole("textbox", { name: /email address/i });
+    expect(inputUserEmail).toBeInTheDocument();
+
+    const inputUserPassword =  screen.getByLabelText(/password/i);
+    expect(inputUserPassword).toBeInTheDocument();
+    
+    const buttonSignIn = screen.getByRole("button", { name: /sign in/i });
+    expect(buttonSignIn).toBeInTheDocument();
+    
+    // Pre Actions: Log in user
+    await waitFor(async () => {
+      fireEvent.change(screen.getByRole("textbox", { name: /email address/i }), { target: { value: "email@abc.com" } });
+      fireEvent.change(screen.getByLabelText(/password/i), { target: { value: "Admin1" } });
+      fireEvent.click(screen.getByRole("button", { name: /sign in/i }));
+    });
+
+    // Post Pre Action Expectations
+    await waitFor(async() => {
+      expect(await screen.findByText(/Dashboard/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Login Successful/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Welcome email@abc.com/i)).toBeInTheDocument();
+      expect(_router.state.location.pathname).toEqual("/dashboard");
+      setTimeout(async() => expect(await screen.findByText(/Login Successful/i)).not.toBeInTheDocument(), 4000);      
+    });
+
+    setTimeout(async() => {
+      expect(_router.state.location.pathname).toEqual("/dashboard");
+      expect(_router.state.location.pathname).not.toEqual("/login");
+      // Action 1: Expand User Account Tools Menu
+      const buttonUserAccountTools = screen.getByRole("button", { name: "User Account Tools" });
+      expect(buttonUserAccountTools).toBeInTheDocument();
+      fireEvent.click(buttonUserAccountTools);
+      
+      // Action 2: Click 'Logout' button to log out user
+      const buttonLogout = screen.getByRole("menu-item", { name: "Logout" });
+      expect(buttonLogout).toBeInTheDocument();
+      fireEvent.click(buttonLogout);
+      
+      // Post Expectations
+      await waitFor(() => {
+        expect(_router.state.location.pathname).toEqual("/login");
+        expect(screen.getByText(/Log In To Your Account/i)).toBeInTheDocument();
+        expect(_router.state.location.pathname).not.toEqual("/dashboard");
+        expect(screen.queryByText(/Dashboard/i)).not.toBeInTheDocument();
+      });
+    }, 4000);
 
   });
 });
