@@ -231,7 +231,7 @@ const Cart = ():React.JSX.Element => {
             <div className="border-t-[1px] pt-4 flex justify-center items-center">
               <button
                 onClick={handleCheckout}
-                className="w-48 h-12 rounded-xl bg-violet-500 hover:bg-violet-400"
+                className="w-48 h-10 rounded-xl bg-indigo-600 hover:bg-violet-400"
               >
                 Checkout
               </button>
@@ -239,13 +239,13 @@ const Cart = ():React.JSX.Element => {
             <div className="border-t-[1px] pt-4 flex justify-center items-center gap-4 flex-col 2xl:flex-row">
               <button
                 onClick={_emptyCart}
-                className="w-48 h-12 rounded-xl border border-violet-500 hover:bg-violet-400 font-normal"
+                className="w-48 h-10 rounded-xl border border-indigo-600 hover:bg-indigo-600 font-normal"
               >
                 Empty Cart
               </button>
               <Link
                 to={"/"}
-                className="w-48 h-12 rounded-xl border border-violet-500 hover:bg-violet-400 font-normal flex justify-center items-center text-center"
+                className="w-48 h-10 rounded-xl border border-indigo-600 hover:bg-indigo-600 font-normal flex justify-center items-center text-center"
               >
                 Keep Shopping
               </Link>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1724279929300" clover="3.2.0">
-  <project timestamp="1724279929300" name="All files">
-    <metrics statements="1557" coveredstatements="1461" conditionals="197" coveredconditionals="180" methods="71" coveredmethods="61" elements="1825" coveredelements="1702" complexity="0" loc="1557" ncloc="1557" packages="12" files="29" classes="29"/>
+<coverage generated="1724356196356" clover="3.2.0">
+  <project timestamp="1724356196356" name="All files">
+    <metrics statements="1575" coveredstatements="1479" conditionals="197" coveredconditionals="181" methods="73" coveredmethods="63" elements="1845" coveredelements="1723" complexity="0" loc="1575" ncloc="1575" packages="14" files="31" classes="31"/>
     <package name="src">
       <metrics statements="19" coveredstatements="19" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="App.tsx" path="/home/manvinderjit/repos/2023-TOP-Project-Shopping-Cart/src/App.tsx">
@@ -55,7 +55,7 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="809" coveredstatements="744" conditionals="88" coveredconditionals="82" methods="23" coveredmethods="21"/>
+      <metrics statements="805" coveredstatements="740" conditionals="86" coveredconditionals="81" methods="23" coveredmethods="21"/>
       <file name="Cart.tsx" path="/home/manvinderjit/repos/2023-TOP-Project-Shopping-Cart/src/components/Cart.tsx">
         <metrics statements="231" coveredstatements="201" conditionals="9" coveredconditionals="9" methods="5" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
@@ -859,7 +859,7 @@
         <line num="73" count="1" type="stmt"/>
       </file>
       <file name="UserDashboard.tsx" path="/home/manvinderjit/repos/2023-TOP-Project-Shopping-Cart/src/components/UserDashboard.tsx">
-        <metrics statements="31" coveredstatements="31" conditionals="5" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <metrics statements="27" coveredstatements="27" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -869,28 +869,53 @@
         <line num="8" count="9" type="stmt"/>
         <line num="9" count="9" type="stmt"/>
         <line num="10" count="9" type="stmt"/>
-        <line num="11" count="9" type="stmt"/>
+        <line num="12" count="9" type="stmt"/>
         <line num="13" count="9" type="stmt"/>
         <line num="14" count="9" type="stmt"/>
         <line num="15" count="9" type="stmt"/>
         <line num="16" count="9" type="stmt"/>
         <line num="17" count="9" type="stmt"/>
         <line num="18" count="9" type="stmt"/>
-        <line num="19" count="9" type="stmt"/>
-        <line num="23" count="9" type="cond" truecount="1" falsecount="0"/>
-        <line num="24" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="25" count="9" type="stmt"/>
-        <line num="27" count="9" type="cond" truecount="1" falsecount="0"/>
-        <line num="28" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="20" count="9" type="cond" truecount="1" falsecount="0"/>
+        <line num="21" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="22" count="9" type="stmt"/>
         <line num="29" count="9" type="stmt"/>
+        <line num="30" count="9" type="stmt"/>
         <line num="31" count="9" type="stmt"/>
         <line num="32" count="9" type="stmt"/>
         <line num="33" count="9" type="stmt"/>
-        <line num="34" count="9" type="stmt"/>
-        <line num="35" count="9" type="stmt"/>
-        <line num="38" count="9" type="stmt"/>
-        <line num="39" count="9" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
+        <line num="36" count="9" type="stmt"/>
+        <line num="37" count="9" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.button">
+      <metrics statements="12" coveredstatements="12" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="Button.tsx" path="/home/manvinderjit/repos/2023-TOP-Project-Shopping-Cart/src/components/button/Button.tsx">
+        <metrics statements="12" coveredstatements="12" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="26" type="stmt"/>
+        <line num="6" count="26" type="stmt"/>
+        <line num="7" count="26" type="stmt"/>
+        <line num="8" count="26" type="stmt"/>
+        <line num="9" count="26" type="stmt"/>
+        <line num="11" count="26" type="stmt"/>
+        <line num="12" count="26" type="stmt"/>
+        <line num="14" count="26" type="stmt"/>
+        <line num="15" count="26" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.cartDrawer">
+      <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="CartDrawer.tsx" path="/home/manvinderjit/repos/2023-TOP-Project-Shopping-Cart/src/components/cartDrawer/CartDrawer.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.components.hero">
@@ -1365,24 +1390,24 @@
       </file>
     </package>
     <package name="src.components.products">
-      <metrics statements="96" coveredstatements="94" conditionals="8" coveredconditionals="7" methods="3" coveredmethods="3"/>
+      <metrics statements="101" coveredstatements="99" conditionals="8" coveredconditionals="7" methods="3" coveredmethods="3"/>
       <file name="ProductCard.tsx" path="/home/manvinderjit/repos/2023-TOP-Project-Shopping-Cart/src/components/products/ProductCard.tsx">
-        <metrics statements="59" coveredstatements="59" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <metrics statements="64" coveredstatements="64" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="11" count="23" type="stmt"/>
-        <line num="13" count="23" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="23" type="stmt"/>
         <line num="14" count="23" type="stmt"/>
         <line num="15" count="23" type="stmt"/>
         <line num="16" count="23" type="stmt"/>
         <line num="17" count="23" type="stmt"/>
         <line num="18" count="23" type="stmt"/>
-        <line num="20" count="23" type="cond" truecount="1" falsecount="0"/>
-        <line num="21" count="3" type="stmt"/>
+        <line num="19" count="23" type="stmt"/>
+        <line num="21" count="23" type="cond" truecount="1" falsecount="0"/>
         <line num="22" count="3" type="stmt"/>
         <line num="23" count="3" type="stmt"/>
         <line num="24" count="3" type="stmt"/>
@@ -1393,7 +1418,7 @@
         <line num="29" count="3" type="stmt"/>
         <line num="30" count="3" type="stmt"/>
         <line num="31" count="3" type="stmt"/>
-        <line num="33" count="23" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
         <line num="34" count="23" type="stmt"/>
         <line num="35" count="23" type="stmt"/>
         <line num="36" count="23" type="stmt"/>
@@ -1419,14 +1444,19 @@
         <line num="56" count="23" type="stmt"/>
         <line num="57" count="23" type="stmt"/>
         <line num="58" count="23" type="stmt"/>
-        <line num="59" count="23" type="stmt"/>
+        <line num="60" count="23" type="stmt"/>
         <line num="61" count="23" type="stmt"/>
         <line num="62" count="23" type="stmt"/>
         <line num="63" count="23" type="stmt"/>
         <line num="64" count="23" type="stmt"/>
+        <line num="65" count="23" type="stmt"/>
+        <line num="66" count="23" type="stmt"/>
         <line num="67" count="23" type="stmt"/>
         <line num="68" count="23" type="stmt"/>
-        <line num="70" count="1" type="stmt"/>
+        <line num="69" count="23" type="stmt"/>
+        <line num="72" count="23" type="stmt"/>
+        <line num="73" count="23" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
       </file>
       <file name="Products.tsx" path="/home/manvinderjit/repos/2023-TOP-Project-Shopping-Cart/src/components/products/Products.tsx">
         <metrics statements="37" coveredstatements="35" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>

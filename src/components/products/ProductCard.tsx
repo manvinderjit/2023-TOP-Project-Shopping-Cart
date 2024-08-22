@@ -3,6 +3,7 @@ import { addItemToCart } from "../../features/cart/cartSlice";
 import { addToastAlert, removeToastAlert } from "../../features/toast/toastSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import type { ProductData } from "../../types/types";
+import Button from "../button/Button";
 
 const apiUrl = `https://ia.manvinderjit.com/api`;
 
@@ -45,20 +46,24 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
             <h3 className="text-lg text-white">
               <a href="#">{productData.name}</a>
             </h3>
-            <p aria-label={`Price for ${productData.name}`} className="text-lg font-medium text-white">
+            <p
+              aria-label={`Price for ${productData.name}`}
+              className="text-lg font-medium text-white"
+            >
               ${productData.price}
             </p>
           </div>
-          <p aria-label={`Description for ${productData.name}`} className="mt-4 py-2 border-t-[1px] text-left text-sm text-white">
+          <p
+            aria-label={`Description for ${productData.name}`}
+            className="mt-4 py-2 border-t-[1px] text-left text-sm text-white"
+          >
             {productData.description}
           </p>
-          <button
-            aria-label={`Add ${productData.name} to cart`}
+          <Button
+            ariaLabel={`Add ${productData.name} to cart`}
             onClick={_addToCart}
-            className="flex w-48 self-center justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
-          >
-            Add to Cart
-          </button>
+            buttonLabel="Add to Cart"
+          />
         </div>
       </div>
     </div>

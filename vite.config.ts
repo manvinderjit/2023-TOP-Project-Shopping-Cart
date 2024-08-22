@@ -10,7 +10,7 @@ export default defineConfig({
     setupFiles: "./tests/setup.js",
     coverage: {
       include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/main.{ts,tsx}"],
+      exclude: ["src/main.{ts,tsx}", "src/**/*.test.*"],
     },
   },
 });
