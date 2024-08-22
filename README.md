@@ -2,6 +2,20 @@
 
 `Note`: The live website is the older Bootstrap-based version. The new version is not live yet.
 
+## New Design Previews
+A new version of this website is in development. Here are a few design previews.
+
+#### New Color Scheme
+![](designPreviews/login.png)
+
+#### Resonsive Home Page Design
+![](designPreviews/home.gif)
+
+#### Resonsive Cart Design
+![](designPreviews/cart.gif)
+
+## Existing Live Version
+
 `Live Link`: [Shopping App](https://2023-top-project-shopping-cart.pages.dev/)
 
 A Vite-React Redux Webapp e-commerce portal allows customers to purchase products. It has been updated to use Tailwind CSS, React Redux, React Router Dom, and JWT technologies. For testing it uses React Testing Library and ViTest.
@@ -65,3 +79,15 @@ The Shopping Cart webapp has the following functional objectives:
 Inventory App GitHub Repo [Click Here for Inventory App GitHub Repo Page](https://github.com/manvinderjit/2023-TOP-Project-Inventory-Application).
 
 Inventory App Live Link [Click Here for Inventory App Live Link](https://ia.manvinderjit.com/).
+
+# 3. Test Coverage
+
+### Live Test Coverage Report:
+[Click here for Live Coverage report through html-preview.github.io](https://html-preview.github.io/?url=https://raw.githubusercontent.com/manvinderjit/2023-TOP-Project-Shopping-Cart/main/coverage/index.html)
+
+### Current Test Coverage Report(main branch):
+The following is the current test coverage report screenshot for the main branch.
+
+![alt text](TestCoverage.png)
+
+
