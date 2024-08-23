@@ -1,13 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Home from "./Home";
-import Login from "./Login";
-import Cart from "./Cart";
-import Register from "./Register";
-import ErrorPage from "./ErrorPage";
-import UserDashboard from "./UserDashboard";
-import { useAppDispatch } from "../application/reduxHooks";
-import Checkout from "./Checkout";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Cart from "../pages/Cart";
+import Register from "../pages/Register";
+import ErrorPage from "../pages/ErrorPage";
+import UserDashboard from "../pages/UserDashboard";
+import Checkout from "../pages/Checkout";
 
 export const routerConfig = [
   {
