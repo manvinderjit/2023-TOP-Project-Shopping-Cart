@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">86.95% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>39/45</span>
+                <span class='fraction'>40/46</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">86.95% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>39/45</span>
+                <span class='fraction'>40/46</span>
             </div>
         
             
@@ -116,9 +116,11 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -138,43 +140,44 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials, logOut } from "../auth/authSlice.js";
 import { CategoriesListData, ProductsListData, ProductDataAndCategoryDataLists } from "../../types/types.js";
+export const apiURL = import.meta.env.VITE_API_BASE_URL;
 &nbsp;
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://ia.manvinderjit.com',
+    baseUrl: apiURL,
     credentials: 'include',
     prepareHeaders: <span class="fstat-no" title="function not covered" >(headers, { getState }) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        const token = getState().auth.token;</span>
@@ -188,7 +191,7 @@ const baseQuery = fetchBaseQuery({
 // Define our single API slice object
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://ia.manvinderjit.com/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${apiURL}/api` }),
   endpoints: (builder) =&gt; ({
     // The `getCarousel` endpoint is a "query" operation that returns carousel data
     getCarousel: builder.query({
@@ -199,11 +202,11 @@ export const apiSlice = createApi({
       query: () =&gt; "/products",
     }),
     registerUser: builder.mutation({
-      query: (body: { userEmail: string, userPassword: string}) =&gt; ({
-        url:`/register`,
+      query: (body: { userEmail: string; userPassword: string }) =&gt; ({
+        url: `/register`,
         method: "POST",
         body,
-      })
+      }),
     }),
     loginUser: builder.mutation({
       query: (body: { userEmail: string; userPassword: string }) =&gt; ({
@@ -229,7 +232,7 @@ export const { useGetCarouselQuery, useGetProductsQuery, useRegisterUserMutation
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-23T19:59:43.085Z
+                at 2024-08-24T19:45:07.214Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -4,8 +4,7 @@ import { addToastAlert, removeToastAlert } from "../../features/toast/toastSlice
 import { nanoid } from "@reduxjs/toolkit";
 import type { ProductData } from "../../types/types";
 import Button from "../button/Button";
-
-const apiUrl = `https://ia.manvinderjit.com/api`;
+import { apiURL } from "../../features/api/apiSlice";
 
 const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
 
@@ -36,7 +35,7 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
       <div className="min-w-72">
         <div className="max-w-96 mx-auto">
           <img
-            src={`${apiUrl}/products/image/${productData.imageFilename}`}
+            src={`${apiURL}/api/products/image/${productData.imageFilename}`}
             alt={`${productData.name}`}
             className="h-full rounded-md w-full object-contain lg:h-full lg:w-full"
           />

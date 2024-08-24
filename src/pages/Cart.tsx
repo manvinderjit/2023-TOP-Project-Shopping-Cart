@@ -6,6 +6,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { useAppSelector } from "../application/reduxHooks";
 import { getCurrentToken } from "../features/auth/authSlice";
 import { useEffect } from "react";
+import { apiURL } from "../features/api/apiSlice";
 
 interface CartItemDetails {
   id: string,
@@ -20,8 +21,6 @@ interface CartItems {
     cartItems: CartItemDetails[]
   };
 }
-
-const apiUrl = `https://ia.manvinderjit.com/api`;
 
 const Cart = ():React.JSX.Element => {
   const cartItems = useSelector((state: CartItems) => state.cart.cartItems);
@@ -111,7 +110,7 @@ const Cart = ():React.JSX.Element => {
                     >
                       <div className="col-span-1 min-w-28 max-w-72 sm:max-w-60 ">
                         <img
-                          src={`${apiUrl}/products/image/${item.imageFilename}`}
+                          src={`${apiURL}/api/products/image/${item.imageFilename}`}
                           alt={`${item.imageFilename}`}
                           className="rounded-lg"
                         />

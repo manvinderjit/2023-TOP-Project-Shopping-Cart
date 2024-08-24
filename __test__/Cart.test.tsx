@@ -1,9 +1,9 @@
 import React from "react";
-import { fireEvent, getAllByTestId, getByRole, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import routerConfig from "./routerConfig";
-import { renderWithProviders, setupStore } from "./test-utils";
+import { renderWithProviders } from "./test-utils";
 
 describe("Cart Page When Empty Cart", () => {
   beforeEach(() => {
@@ -47,16 +47,6 @@ describe("Cart Page When Empty Cart", () => {
 
 
 describe("render Cart Page With Items In Cart", () => {
-//  const store = setupStore();
-//  store.dispatch(
-//    addItemToCart({
-//      id: "65c2d11b9b446c7905bcaad2",
-//      name: "Cool Keyboards",
-//      imageFilename: "cool-keyboards.jpg",
-//      price: "10.00",
-//      itemQuantity: 1,
-//    })
-//  );
 
   beforeEach(() => {
     // Create Router

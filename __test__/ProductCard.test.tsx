@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "../src/application/store";
 import ProductCard from "../src/components/products/ProductCard";
 import type { ProductData } from "../src/types/types";
+import { apiURL } from "../src/features/api/apiSlice";
 
 describe("should render Product Card", () => {
 
@@ -37,7 +38,7 @@ describe("should render Product Card", () => {
     it("should render Product Image", () => {
         const imageProduct = screen.getByRole("img", {  name: "ABC 27G2SP Monitor"});
         expect(imageProduct).toBeInTheDocument();
-        expect(imageProduct).toHaveAttribute("src", "https://ia.manvinderjit.com/api/products/image/abc-27g2sp-monitor.jpg");
+        expect(imageProduct).toHaveAttribute("src", `${apiURL}/api/products/image/abc-27g2sp-monitor.jpg`);
         expect(imageProduct).toHaveAttribute("alt", "ABC 27G2SP Monitor");
     });
 

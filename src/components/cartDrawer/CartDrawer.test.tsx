@@ -203,7 +203,7 @@ describe("should render the CartDrawer Component", () => {
     });
   });
 
-  it("should change remove cart item from the CartDrawer component", async() => {
+  it("should remove cart item from the CartDrawer component", async() => {
     // Setup: Expand the cart drawer
     const buttonShowCartDrawer = screen.getByRole('button', { name: "Show Items in Cart" });
     expect(buttonShowCartDrawer).toBeInTheDocument();
@@ -248,6 +248,29 @@ describe("should render the CartDrawer Component", () => {
       expect(removeButtonItem).not.toBeInTheDocument();
 
     });
+  });
+
+  it("should render 'Your shopping cart is empty!' when the cart is emptied", async () => {
+    // Setup
+    userEvent.click(screen.getByRole('button', { name: "Show Items in Cart" }));
+    
+    // Pre Expectations
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Remove Item ABC 27G2SP Monitor" })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Remove Item Cool Keys RGB Keyboard" })).toBeInTheDocument();
+      expect(screen.queryByText('Your shopping cart is empty!')).not.toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByRole("button", { name: "Remove Item ABC 27G2SP Monitor" }));
+    userEvent.click(screen.getByRole("button", { name: "Remove Item Cool Keys RGB Keyboard" }));
+
+    // Post Expectations
+    await waitFor(() => {
+      expect(screen.queryByRole("button", { name: "Remove Item ABC 27G2SP Monitor" })).not.toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: "Remove Item Cool Keys RGB Keyboard" })).not.toBeInTheDocument();
+      expect(screen.getByText('Your shopping cart is empty!')).toBeInTheDocument();
+    });
+    
   });
   
 });

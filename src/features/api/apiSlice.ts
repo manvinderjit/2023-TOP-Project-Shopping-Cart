@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials, logOut } from "../auth/authSlice.js";
 import { CategoriesListData, ProductsListData, ProductDataAndCategoryDataLists } from "../../types/types.js";
+export const apiURL = import.meta.env.VITE_API_BASE_URL;
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://ia.manvinderjit.com',
+    baseUrl: apiURL,
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.token;
@@ -17,7 +18,7 @@ const baseQuery = fetchBaseQuery({
 // Define our single API slice object
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://ia.manvinderjit.com/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${apiURL}/api` }),
   endpoints: (builder) => ({
     // The `getCarousel` endpoint is a "query" operation that returns carousel data
     getCarousel: builder.query({
@@ -28,11 +29,11 @@ export const apiSlice = createApi({
       query: () => "/products",
     }),
     registerUser: builder.mutation({
-      query: (body: { userEmail: string, userPassword: string}) => ({
-        url:`/register`,
+      query: (body: { userEmail: string; userPassword: string }) => ({
+        url: `/register`,
         method: "POST",
         body,
-      })
+      }),
     }),
     loginUser: builder.mutation({
       query: (body: { userEmail: string; userPassword: string }) => ({

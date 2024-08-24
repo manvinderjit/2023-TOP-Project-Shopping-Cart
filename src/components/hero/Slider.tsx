@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { apiURL } from "../../features/api/apiSlice";
 
 interface CarouselImageData {    
     caption: {
@@ -58,7 +59,7 @@ const Slider = ({ carouselImagesData }: CarouselImagesData ):React.JSX.Element =
           {Object.values(carouselImagesData).map((img, index) => (
             <img
               key={index}                  
-              src={`https://ia.manvinderjit.com/api/${img.imageUrl}`}
+              src={`${apiURL}/api/${img.imageUrl}`}
               alt={img.name}
               aria-hidden={currentImageIndex !== index}
               className="w-full h-full object-cover block flex-shrink-0 flex-grow-0 translate-x-0 translate-y-0 duration-[900ms] ease-in-out"

@@ -7,13 +7,13 @@ import { store } from "../src/application/store";
 import { delay, http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import { carouselImagesData } from "./mockdata.tsx";
-import { apiSlice } from "../src/features/api/apiSlice.ts";
+import { apiSlice, apiURL } from "../src/features/api/apiSlice.ts";
 
 describe("should render Hero", () => {
 
   const handlers = [
     // Register request handler
-    http.get("https://ia.manvinderjit.com/api/promos/carousel",() => {
+    http.get(`${apiURL}/api/promos/carousel`,() => {
         return HttpResponse.json({
           carouselPromos: carouselImagesData,
         });
@@ -38,7 +38,7 @@ describe("should render Hero", () => {
 
   it("should render 'loading' when the component is loading", async () => {
     // Register request handler with infinite delay
-    server.use(http.get("https://ia.manvinderjit.com/api/promos/carousel", async () => {
+    server.use(http.get(`${apiURL}/api/promos/carousel`, async () => {
       await delay("infinite");
     }));
 
@@ -55,7 +55,7 @@ describe("should render Hero", () => {
 
   it("should not render Hero Image Slider when the component is loading", async () => {
     // Register request handler with infinite delay
-    server.use(http.get("https://ia.manvinderjit.com/api/promos/carousel", async () => {
+    server.use(http.get(`${apiURL}/api/promos/carousel`, async () => {
       await delay("infinite");
     }));
 
@@ -76,7 +76,7 @@ describe("should render Hero", () => {
   it("should render the error when the backend returns error", async () => {
 
     // Register request handler that returns error
-    server.use(http.get("https://ia.manvinderjit.com/api/promos/carousel", async () => {
+    server.use(http.get(`${apiURL}/api/promos/carousel`, async () => {
         return HttpResponse.json('Something went wrong!', { status: 401 });
     }));
 

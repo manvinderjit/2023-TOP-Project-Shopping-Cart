@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import { validateEmail, validatePassword } from "./test-helpers";
-import { apiSlice } from "../src/features/api/apiSlice";
+import { apiSlice, apiURL } from "../src/features/api/apiSlice";
 
 interface registerFormDatable {
   userEmail: string | null;
@@ -18,7 +18,7 @@ interface registerFormDatable {
 // Use msw to intercept the network request during the test,
 export const handlers = [
   // Register request handler
-  http.post('https://ia.manvinderjit.com/api/register', async ({ request }) => {
+  http.post(`${apiURL}/api/register`, async ({ request }) => {
     const requestData: registerFormDatable = await request.json();
     // Case 1 Register: If no email or password is provided
     if (

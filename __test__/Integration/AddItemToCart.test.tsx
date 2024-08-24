@@ -9,6 +9,7 @@ import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import { apiSlice } from "../../src/features/api/apiSlice.ts";
 import { categoryList, productList, carouselImagesData } from "../mockdata";
+import { apiURL } from "../../src/features/api/apiSlice.ts";
 
 describe("add items to cart", () => {
   // Setup
@@ -18,13 +19,13 @@ describe("add items to cart", () => {
 
   const handlers = [
     // Register request handler
-    http.get("https://ia.manvinderjit.com/api/products", async () => {
+    http.get(`${apiURL}/api/products`, async () => {
       return HttpResponse.json({
         categoryList: categoryList,
         productList: productList,
       });
     }),
-    http.get("https://ia.manvinderjit.com/api/promos/carousel", async () => {
+    http.get(`${apiURL}/api/promos/carousel`, async () => {
       return HttpResponse.json({
         carouselPromos: carouselImagesData,
       });

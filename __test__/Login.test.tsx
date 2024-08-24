@@ -1,5 +1,5 @@
 import React from "react";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -7,7 +7,7 @@ import routerConfig from "./routerConfig";
 import { store } from "../src/application/store";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
-import { apiSlice } from "../src/features/api/apiSlice";
+import { apiSlice, apiURL } from "../src/features/api/apiSlice";
 
 interface loginFormDatable {
   userEmail: string | null,
@@ -17,7 +17,7 @@ interface loginFormDatable {
 // Use msw to intercept the network request during the test,
 export const handlers = [
   // Log in request handler
-  http.post('https://ia.manvinderjit.com/api/login', async ({ request }) => {
+  http.post(`${apiURL}/api/login`, async ({ request }) => {
     const requestData: loginFormDatable = await request.json();
     // Case 1 Log In: If no email or password is provided
     if (
