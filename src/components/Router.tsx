@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import ErrorPage from "../pages/ErrorPage";
 import UserDashboard from "../pages/UserDashboard";
 import Checkout from "../pages/Checkout";
+import UserOrders from "./userOrders/UserOrders";
 
 export const routerConfig = [
   {
@@ -39,17 +40,17 @@ export const routerConfig = [
         path: "checkout",
         element: <Checkout />,
       },
-      // {
-      //     path: "orders",
-      //     element: <Orders />,
-      //     loader: () => orders.userOrders,
-      //     children: [
-      //     {
-      //         path: "orders/:orderId",
-      //         element: <OrderDetails />,
-      //     },
-      //     ],
-      // },
+      {
+          path: "orders",
+          element: <UserOrders />,
+          // loader: () => orders.userOrders,
+          // children: [
+          // {
+          //     path: "orders/:orderId",
+          //     element: <OrderDetails />,
+          // },
+          // ],
+      },
       // {
       //     path: "order/:orderId",
       //     element: <OrderDetails />,
@@ -57,11 +58,7 @@ export const routerConfig = [
       // {
       //     path: "profile",
       //     element: <Profile />,
-      // },
-      // {
-      //     path: "logout",
-      //     element: <Logout />,
-      // },
+      // },      
     ],
   },
 ];

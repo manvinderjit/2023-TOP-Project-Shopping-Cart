@@ -82,7 +82,7 @@ const NavUserAccountTools = ():React.JSX.Element => {
                 </div>
                 <div className="py-1" role="none">
                   <Link
-                    to="#"
+                    to="orders"
                     className="block px-4 py-2 text-sm text-white"
                     role="menuitem"
                     tabIndex={-1}

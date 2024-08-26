@@ -63,7 +63,7 @@ describe("add items to cart", () => {
         expect(screen.queryAllByText(/loading/i)).toHaveLength(0);
 
         // Actions
-        const buttonAddToCartABC27G2SPMonitor = screen.getByRole('button', { name : /ABC 27G2SP Monitor/i})
+        const buttonAddToCartABC27G2SPMonitor = screen.getByRole('button', { name : /Add ABC 27G2SP Monitor to Cart/i});
         expect(buttonAddToCartABC27G2SPMonitor).toBeInTheDocument();
         fireEvent.click(buttonAddToCartABC27G2SPMonitor);
 
