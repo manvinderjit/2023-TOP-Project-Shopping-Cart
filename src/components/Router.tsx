@@ -7,7 +7,7 @@ import Register from "../pages/Register";
 import ErrorPage from "../pages/ErrorPage";
 import UserDashboard from "../pages/UserDashboard";
 import Checkout from "../pages/Checkout";
-import UserOrders from "./userOrders/UserOrders";
+import UserOrders from "../pages/UserOrders";
 
 export const routerConfig = [
   {

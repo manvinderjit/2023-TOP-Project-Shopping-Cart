@@ -18,11 +18,11 @@ const UserOrderItem = ({item}: OrderItemable): React.JSX.Element => {
             </div>
             <div className="col-span-1 flex flex-col justify-center items-center gap-1">
                 <h4 className="text-lg font-medium ">Item Quantity</h4>
-                <p>{item.itemQuantity}</p>
+                <p aria-label={`Quantity of ${item.itemDetails.name}`}>{item.itemQuantity}</p>
             </div>
             <div className="col-span-1 flex flex-col justify-center items-center gap-1">
                 <h4 className="text-lg font-medium ">Item Price</h4>
-                <p>{item.itemPrice}</p>
+                <p aria-label={`Price of ${item.itemDetails.name}`}>{item.itemPrice}</p>
             </div>
         </div>
     );

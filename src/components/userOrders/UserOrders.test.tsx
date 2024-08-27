@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import UserOrders from "./UserOrders";
+import { render, screen, waitFor } from "@testing-library/react";
+import UserOrders from "../../pages/UserOrders";
 import { expect } from "vitest";
 import { http, HttpResponse } from "msw";
 import { apiURL, apiSlice } from "../../features/api/apiSlice";
@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "../../application/store";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import routerConfig from "../../../__test__/routerConfig";
+import { renderWithProviders } from "../../../__test__/test-utils";
 
 // Mock Orders List Data
 const ordersList = [
@@ -15,92 +16,6 @@ const ordersList = [
     _id: "65c919bb015b6fe503fa7869",
     customerId: "65c919a5015b6fe503fa7852",
     items: [
-      {
-        itemId: "65c2d11b9b446c7905bcaad2",
-        itemQuantity: 2,
-        itemPrice: 10,
-        _id: "65c2d11b9b446c7905bcaad2",
-        id: "65c2d11b9b446c7905bcaad2",
-        itemDetails: {
-          _id: "65c2d11b9b446c7905bcaad2",
-          name: "Cool Keyboards",
-          description: "An entry level ergonomic keyboard from Cool Keyboards",
-          imageFilename: "cool-keyboards.jpg",
-          url: "/allproducts/65c2d11b9b446c7905bcaad2",
-          id: "65c2d11b9b446c7905bcaad2",
-        },
-      },
-    ],
-    totalAmount: "20.00",
-    status: "Cancelled",
-    createdAt: "2/11/2024",
-    updatedAt: "2/11/2024",
-    __v: 0,
-    url: "/orders/65c919bb015b6fe503fa7869",
-    id: "65c919bb015b6fe503fa7869",
-  },
-  {
-    _id: "65cc485eee7fe43422036925",
-    customerId: "65c919a5015b6fe503fa7852",
-    items: [
-      {
-        itemId: "65c2d11b9b446c7905bcaad2",
-        itemQuantity: 2,
-        itemPrice: 10,
-        _id: "65c2d11b9b446c7905bcaad2",
-        id: "65c2d11b9b446c7905bcaad2",
-        itemDetails: {
-          _id: "65c2d11b9b446c7905bcaad2",
-          name: "Cool Keyboards",
-          description: "An entry level ergonomic keyboard from Cool Keyboards",
-          imageFilename: "cool-keyboards.jpg",
-          url: "/allproducts/65c2d11b9b446c7905bcaad2",
-          id: "65c2d11b9b446c7905bcaad2",
-        },
-      },
-    ],
-    totalAmount: "20.00",
-    status: "Ordered",
-    createdAt: "2/14/2024",
-    updatedAt: "2/14/2024",
-    __v: 0,
-    url: "/orders/65cc485eee7fe43422036925",
-    id: "65cc485eee7fe43422036925",
-  },
-  {
-    _id: "65d53071b8061ffec1194f78",
-    customerId: "65c919a5015b6fe503fa7852",
-    items: [
-      {
-        itemId: "65d26877ee7fe43422036983",
-        itemQuantity: 1,
-        itemPrice: 150,
-        _id: "65d26877ee7fe43422036983",
-        id: "65d26877ee7fe43422036983",
-        itemDetails: {
-          _id: "65d26877ee7fe43422036983",
-          name: "ABC 27G2SP Monitor",
-          description: "The new ABC 27G2SP Monitor for offices.",
-          imageFilename: "abc-27g2sp-monitor.jpg",
-          url: "/allproducts/65d26877ee7fe43422036983",
-          id: "65d26877ee7fe43422036983",
-        },
-      },
-      {
-        itemId: "65c2d11b9b446c7905bcaad2",
-        itemQuantity: 1,
-        itemPrice: 10,
-        _id: "65c2d11b9b446c7905bcaad2",
-        id: "65c2d11b9b446c7905bcaad2",
-        itemDetails: {
-          _id: "65c2d11b9b446c7905bcaad2",
-          name: "Cool Keyboards",
-          description: "An entry level ergonomic keyboard from Cool Keyboards",
-          imageFilename: "cool-keyboards.jpg",
-          url: "/allproducts/65c2d11b9b446c7905bcaad2",
-          id: "65c2d11b9b446c7905bcaad2",
-        },
-      },
       {
         itemId: "65c945183e1a54b49df1d49b",
         itemQuantity: 1,
@@ -117,41 +32,13 @@ const ordersList = [
         },
       },
     ],
-    totalAmount: "196.00",
-    status: "Ordered",
-    createdAt: "2/20/2024",
-    updatedAt: "2/20/2024",
+    totalAmount: "36.00",
+    status: "Cancelled",
+    createdAt: "2/11/2024",
+    updatedAt: "2/11/2024",
     __v: 0,
-    url: "/orders/65d53071b8061ffec1194f78",
-    id: "65d53071b8061ffec1194f78",
-  },
-  {
-    _id: "65e4dfd07bdd9ba321902863",
-    customerId: "65c919a5015b6fe503fa7852",
-    items: [
-      {
-        itemId: "65d26877ee7fe43422036983",
-        itemQuantity: 1,
-        itemPrice: 150,
-        _id: "65d26877ee7fe43422036983",
-        id: "65d26877ee7fe43422036983",
-        itemDetails: {
-          _id: "65d26877ee7fe43422036983",
-          name: "ABC 27G2SP Monitor",
-          description: "The new ABC 27G2SP Monitor for offices.",
-          imageFilename: "abc-27g2sp-monitor.jpg",
-          url: "/allproducts/65d26877ee7fe43422036983",
-          id: "65d26877ee7fe43422036983",
-        },
-      },
-    ],
-    totalAmount: "150.00",
-    status: "Delivered",
-    createdAt: "3/3/2024",
-    updatedAt: "3/14/2024",
-    __v: 0,
-    url: "/orders/65e4dfd07bdd9ba321902863",
-    id: "65e4dfd07bdd9ba321902863",
+    url: "/orders/65c919bb015b6fe503fa7869",
+    id: "65c919bb015b6fe503fa7869",
   },
   {
     _id: "65fb1414e5f5ad0bd9601b7e",
@@ -195,121 +82,7 @@ const ordersList = [
     __v: 0,
     url: "/orders/65fb1414e5f5ad0bd9601b7e",
     id: "65fb1414e5f5ad0bd9601b7e",
-  },
-  {
-    _id: "66a41de0e5f5ad0bd960302b",
-    customerId: "65c919a5015b6fe503fa7852",
-    items: [
-      {
-        itemId: "65d26877ee7fe43422036983",
-        itemQuantity: 1,
-        itemPrice: 150,
-        _id: "65d26877ee7fe43422036983",
-        id: "65d26877ee7fe43422036983",
-        itemDetails: {
-          _id: "65d26877ee7fe43422036983",
-          name: "ABC 27G2SP Monitor",
-          description: "The new ABC 27G2SP Monitor for offices.",
-          imageFilename: "abc-27g2sp-monitor.jpg",
-          url: "/allproducts/65d26877ee7fe43422036983",
-          id: "65d26877ee7fe43422036983",
-        },
-      },
-      {
-        itemId: "65c2d11b9b446c7905bcaad2",
-        itemQuantity: 1,
-        itemPrice: 10,
-        _id: "65c2d11b9b446c7905bcaad2",
-        id: "65c2d11b9b446c7905bcaad2",
-        itemDetails: {
-          _id: "65c2d11b9b446c7905bcaad2",
-          name: "Cool Keyboards",
-          description: "An entry level ergonomic keyboard from Cool Keyboards",
-          imageFilename: "cool-keyboards.jpg",
-          url: "/allproducts/65c2d11b9b446c7905bcaad2",
-          id: "65c2d11b9b446c7905bcaad2",
-        },
-      },
-      {
-        itemId: "65c945183e1a54b49df1d49b",
-        itemQuantity: 1,
-        itemPrice: 36,
-        _id: "65c945183e1a54b49df1d49b",
-        id: "65c945183e1a54b49df1d49b",
-        itemDetails: {
-          _id: "65c945183e1a54b49df1d49b",
-          name: "Cool Keys RGB Keyboard",
-          description: "This is an RGB keyboard from cool keys",
-          imageFilename: "cool-keys-rgb-keyboard.jpg",
-          url: "/allproducts/65c945183e1a54b49df1d49b",
-          id: "65c945183e1a54b49df1d49b",
-        },
-      },
-    ],
-    totalAmount: "196.00",
-    status: "Ordered",
-    createdAt: "7/26/2024",
-    updatedAt: "7/26/2024",
-    __v: 0,
-    url: "/orders/66a41de0e5f5ad0bd960302b",
-    id: "66a41de0e5f5ad0bd960302b",
-  },
-  {
-    _id: "66b179c6e5f5ad0bd960321c",
-    customerId: "65c919a5015b6fe503fa7852",
-    items: [
-      {
-        itemId: "65d26877ee7fe43422036983",
-        itemQuantity: 1,
-        itemPrice: 150,
-        _id: "65d26877ee7fe43422036983",
-        id: "65d26877ee7fe43422036983",
-        itemDetails: {
-          _id: "65d26877ee7fe43422036983",
-          name: "ABC 27G2SP Monitor",
-          description: "The new ABC 27G2SP Monitor for offices.",
-          imageFilename: "abc-27g2sp-monitor.jpg",
-          url: "/allproducts/65d26877ee7fe43422036983",
-          id: "65d26877ee7fe43422036983",
-        },
-      },
-    ],
-    totalAmount: "150.00",
-    status: "Ordered",
-    createdAt: "8/6/2024",
-    updatedAt: "8/6/2024",
-    __v: 0,
-    url: "/orders/66b179c6e5f5ad0bd960321c",
-    id: "66b179c6e5f5ad0bd960321c",
-  },
-  {
-    _id: "66b179dfe5f5ad0bd9603232",
-    customerId: "65c919a5015b6fe503fa7852",
-    items: [
-      {
-        itemId: "65c945183e1a54b49df1d49b",
-        itemQuantity: 1,
-        itemPrice: 36,
-        _id: "65c945183e1a54b49df1d49b",
-        id: "65c945183e1a54b49df1d49b",
-        itemDetails: {
-          _id: "65c945183e1a54b49df1d49b",
-          name: "Cool Keys RGB Keyboard",
-          description: "This is an RGB keyboard from cool keys",
-          imageFilename: "cool-keys-rgb-keyboard.jpg",
-          url: "/allproducts/65c945183e1a54b49df1d49b",
-          id: "65c945183e1a54b49df1d49b",
-        },
-      },
-    ],
-    totalAmount: "36.00",
-    status: "Ordered",
-    createdAt: "8/6/2024",
-    updatedAt: "8/6/2024",
-    __v: 0,
-    url: "/orders/66b179dfe5f5ad0bd9603232",
-    id: "66b179dfe5f5ad0bd9603232",
-  },
+  }
 ];
 
 // Use msw to intercept the network request during the test,
@@ -327,13 +100,19 @@ const router = createMemoryRouter(routerConfig, {
     initialEntries: ["/orders"],
 });
 
+// Mock Auth State
+const mockedAuth =  {
+    username: 'email@abc.com',
+    token: 'mock.token'
+  };
+
 describe("should render UserOrders component", () => {
     beforeEach(() => {
-        render(
-          <Provider store={store}>
-            <RouterProvider router={router}/>
-          </Provider>
-        );
+        renderWithProviders(<RouterProvider router={router} />, {
+          preloadedState: {
+            auth: mockedAuth,
+          },
+        });
     });
 
     const server = setupServer(...handlers);
@@ -349,13 +128,105 @@ describe("should render UserOrders component", () => {
 
     // Disable API mocking after the tests are done.
     afterAll(() => server.close());
-
     
     it("should render the UserOrders component", () => {
-        expect(screen.getByRole("region", { name: "User Orders"})).toBeInTheDocument();
+      expect(screen.getByRole("region", { name: "User Orders"})).toBeInTheDocument();
     });
 
     it("should render the heading 'Your Orders'", () => {
-        expect(screen.getByRole("heading", { name: "Your Orders"})).toBeInTheDocument();
-    });  
+      expect(screen.getByRole("heading", { name: "Your Orders"})).toBeInTheDocument();
+    });
+
+    it("should render 'loading' text when the component is loading", async () => {
+      const compontentLoading = screen.getByText(/loading/i);
+      expect(compontentLoading).toBeInTheDocument();
+    });
+
+    it("should render all orders", async() => {
+      await waitFor(() => {
+        expect(screen.getAllByText('Order Total')).toHaveLength(2);
+
+        const imgItem1 = screen.getByRole("img", { name: "ABC 27G2SP Monitor" })
+        expect(imgItem1).toBeInTheDocument();
+        expect(imgItem1).toHaveAttribute("alt", "ABC 27G2SP Monitor");
+        expect(imgItem1).toHaveAttribute("src", `${apiURL}/api/products/image/abc-27g2sp-monitor.jpg`);
+
+        const headingItem1Name = screen.getByRole("heading", { name: "ABC 27G2SP Monitor" });
+        expect(headingItem1Name).toBeInTheDocument();
+
+        const textItem1Description = screen.getByText(/The new ABC 27G2SP Monitor for offices./i);
+        expect(textItem1Description).toBeInTheDocument();
+
+        const textItem1Price = screen.getByText(150);
+        expect(textItem1Price).toBeInTheDocument();
+        
+        const imgItem2 = screen.getByRole("img", { name: "Cool Keyboards" })
+        expect(imgItem2).toBeInTheDocument();
+        expect(imgItem2).toHaveAttribute("alt", "Cool Keyboards");
+        expect(imgItem2).toHaveAttribute("src", `${apiURL}/api/products/image/cool-keyboards.jpg`);
+        
+        const headingItem2Name = screen.getByRole("heading", { name: "Cool Keyboards" });
+        expect(headingItem2Name).toBeInTheDocument();
+    
+        const textItem2Description = screen.getByText(/An entry level ergonomic keyboard from Cool Keyboards/i);
+        expect(textItem2Description).toBeInTheDocument();
+    
+        const textItem2Price = screen.getByText(10);
+        expect(textItem2Price).toBeInTheDocument();
+
+        const imgItem3 = screen.getByRole("img", { name: "Cool Keys RGB Keyboard" })
+        expect(imgItem3).toBeInTheDocument();
+        expect(imgItem3).toHaveAttribute("alt", "Cool Keys RGB Keyboard");
+        expect(imgItem3).toHaveAttribute("src", `${apiURL}/api/products/image/cool-keys-rgb-keyboard.jpg`);
+        
+        const headingItem3Name = screen.getByRole("heading", { name: "Cool Keys RGB Keyboard" });
+        expect(headingItem3Name).toBeInTheDocument();
+    
+        const textItem3Description = screen.getByText(/This is an RGB keyboard from cool keys/i);
+        expect(textItem3Description).toBeInTheDocument();
+    
+        const textItem3Price = screen.getByText(36);
+        expect(textItem3Price).toBeInTheDocument();
+      
+    });
+  });
+    
+});
+
+describe("should render UserOrders error", () => {
+    beforeEach(() => {
+      // Register request handler that returns error
+      server.use(
+        http.get(`${apiURL}/api/orders`, async () => {
+          return HttpResponse.json("Something went wrong!", { status: 401 });
+        })
+      );
+      renderWithProviders(<RouterProvider router={router} />, {
+        preloadedState: {
+          auth: mockedAuth,
+        },
+      });
+    });
+
+    const server = setupServer(...handlers);
+
+    // Enable API mocking before tests.
+    beforeAll(() => server.listen());
+
+    // Reset any runtime request handlers we may add during the tests.
+    afterEach(() => {
+      server.resetHandlers();
+    //   store.dispatch(apiSlice.util.resetApiState());
+    });
+
+    // Disable API mocking after the tests are done.
+    afterAll(() => server.close());
+    
+    it("should render the error returned by backend", async () => {
+      await waitFor(() => {
+      const compontentLoading = screen.getByText(/Something went wrong!/i);
+      expect(compontentLoading).toBeInTheDocument();
+      });
+    });
+    
 });

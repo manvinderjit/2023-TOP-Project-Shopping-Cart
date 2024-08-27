@@ -29,7 +29,6 @@ describe("should render UserOrderItem component", () => {
         expect(imgItem).toBeInTheDocument();
         expect(imgItem).toHaveAttribute("alt", "Cool Keys RGB Keyboard");
         expect(imgItem).toHaveAttribute("src", `${apiURL}/api/products/image/cool-keys-rgb-keyboard.jpg`);
-        screen.debug();
     });
 
     it("should render the item's name", () => {
