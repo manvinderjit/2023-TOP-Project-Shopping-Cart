@@ -4,8 +4,8 @@ import { getCurrentToken, getCurrentUserDetails } from "../../features/auth/auth
 import { useNavigate } from "react-router-dom";
 import { useGetUserOrdersQuery } from "../../features/api/apiSlice";
 import Spinner from "../utility/Spinner";
-
 import UserOrder from "./userOrder/UserOrder";
+import type { OrderDetails } from "../UserOrders.types";
 
 const UserOrders = (): React.JSX.Element => {
     const username = useAppSelector(getCurrentUserDetails);
@@ -29,15 +29,14 @@ const UserOrders = (): React.JSX.Element => {
         // If Loading User Orders
         content = <Spinner />;
     } else if (isSuccessUserOrders) {
-        console.log(userOrders.ordersList);
+        console.log(userOrders);
         // If User Orders
         content = (
           <div className="w-11/12 lg:w-5/6 xl:w-4/5 text-center mx-auto ">
             <div className="flex flex-col justify-evenly">
-              { 
-                userOrders.ordersList.map((order) => 
-                    <UserOrder order={ order }/>
-              )}
+              {userOrders.ordersList.map((order:OrderDetails) => (
+                <UserOrder key={order._id} order={order} />
+              ))}
             </div>
           </div>
         );
