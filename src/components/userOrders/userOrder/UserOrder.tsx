@@ -1,7 +1,7 @@
-import Button from "../../button/Button";
 import UserOrderItem from "./userOrderItem/UserOrderItem";
 import type { OrderItemDetails } from "../UserOrders.types";
 import type { Orderable } from "../UserOrders.types";
+import { Link } from "react-router-dom";
 
 const UserOrder = ({ order }: Orderable): React.JSX.Element => {
 
@@ -36,11 +36,12 @@ const UserOrder = ({ order }: Orderable): React.JSX.Element => {
           </div>
 
           <div className="flex justify-center items-center mb-4">
-            <Button
-              ariaLabel="Manage Order"
-              onClick={() => {}}
-              buttonLabel="Manage Order"
-            />
+            <Link
+              to={`/order/${order.id}`}
+              className="flex w-48 h-10 self-center justify-center items-center rounded-xl bg-indigo-600 font-semibold text-white shadow-sm hover:bg-indigo-500 hover:text-white"
+            >
+              Manage Order
+            </Link>
           </div>
         </div>
       </>
