@@ -8,6 +8,7 @@ import ErrorPage from "../pages/ErrorPage";
 import UserDashboard from "../pages/UserDashboard";
 import Checkout from "../pages/Checkout";
 import UserOrders from "../pages/UserOrders";
+import ManageOrder from "./manageOrder/ManageOrder";
 
 export const routerConfig = [
   {
@@ -51,10 +52,10 @@ export const routerConfig = [
           // },
           // ],
       },
-      // {
-      //     path: "order/:orderId",
-      //     element: <OrderDetails />,
-      // },
+      {
+          path: "order/:orderId",
+          element: <ManageOrder />,
+      },
       // {
       //     path: "profile",
       //     element: <Profile />,
