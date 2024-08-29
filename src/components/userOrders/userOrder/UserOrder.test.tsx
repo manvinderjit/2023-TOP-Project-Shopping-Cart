@@ -2,6 +2,7 @@ import UserOrder from "./UserOrder";
 import { render, screen } from "@testing-library/react";
 import { expect } from "vitest";
 import { apiURL } from "../../../features/api/apiSlice";
+import { BrowserRouter } from "react-router-dom";
 
 const mockOrder = {
     _id: "65fb1414e5f5ad0bd9601b7e",
@@ -45,14 +46,20 @@ const mockOrder = {
     __v: 0,
     url: "/orders/65fb1414e5f5ad0bd9601b7e",
     id: "65fb1414e5f5ad0bd9601b7e",
-  };
+};
 
 describe("should render the UserOrder component", () => {
 
-    beforeEach(() => render(<UserOrder order={ mockOrder } />));
+    beforeEach(() =>
+      render(
+        <BrowserRouter>
+          <UserOrder order={mockOrder} />
+        </BrowserRouter>
+      )
+    );
 
-    it("should render the heading 'Ordered On'", () => {
-        const headingOrderDate = screen.getByRole('heading', { name: "Ordered On" });
+    it("should render the heading 'Ordered On'", async() => {
+        const headingOrderDate = screen.getByRole("heading", { name: "Ordered On" });
         expect(headingOrderDate).toBeInTheDocument();
     });
 
@@ -95,16 +102,23 @@ describe("should render the UserOrder component", () => {
         expect(valueOrderUpdatedOn.textContent).toEqual('3/22/2024');
     });
 
-    it("should render the Manage Order button", () => {
-        const buttonManageOrder = screen.getByRole('button', { name: 'Manage Order'});
+    it("should render the Manage Order link", () => {
+        const buttonManageOrder = screen.getByRole('link', { name: 'Manage Order'});
         expect(buttonManageOrder).toBeInTheDocument();
+        expect(buttonManageOrder).toHaveAttribute('href', '/order/65fb1414e5f5ad0bd9601b7e');
     });
 
 });
 
 describe("should render the items in the UserOrder component", () => {
 
-    beforeEach(() => render(<UserOrder order={ mockOrder } />));
+    beforeEach(() =>
+      render(
+        <BrowserRouter>
+          <UserOrder order={mockOrder} />
+        </BrowserRouter>
+      )
+    );
 
     it("should render the item's image", () => {
         const imgItem = screen.getByRole("img", { name: "ABC 27G2SP Monitor" })
