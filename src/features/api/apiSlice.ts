@@ -19,6 +19,7 @@ const baseQuery = fetchBaseQuery({
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: `${apiURL}/api` }),
+  tagTypes: ["Order"],
   endpoints: (builder) => ({
     // The `getCarousel` endpoint is a "query" operation that returns carousel data
     getCarousel: builder.query({
@@ -47,8 +48,25 @@ export const apiSlice = createApi({
         url: "/orders",
         headers: { Authorization: `Bearer ${token}` },
       }),
+      providesTags: ["Order"],
+    }),
+    cancelAnOrder: builder.mutation({
+      query: ({ token, orderId }) => ({
+        url: `/orders/cancel`,
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: { orderId },
+      }),
+      invalidatesTags: ["Order"],
     }),
   }),
 });
 
-export const { useGetCarouselQuery, useGetProductsQuery, useRegisterUserMutation, useLoginUserMutation, useGetUserOrdersQuery } = apiSlice;
+export const {
+  useGetCarouselQuery,
+  useGetProductsQuery,
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useGetUserOrdersQuery,
+  useCancelAnOrderMutation,
+} = apiSlice;

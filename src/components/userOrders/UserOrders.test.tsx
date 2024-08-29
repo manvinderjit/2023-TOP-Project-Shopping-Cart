@@ -97,14 +97,14 @@ export const handlers = [
 
 // Create Router
 const router = createMemoryRouter(routerConfig, {
-    initialEntries: ["/orders"],
+  initialEntries: ["/orders"],
 });
 
 // Mock Auth State
 const mockedAuth =  {
-    username: 'email@abc.com',
-    token: 'mock.token'
-  };
+  username: 'email@abc.com',
+  token: 'mock.token'
+};
 
 describe("should render UserOrders component", () => {
     beforeEach(() => {

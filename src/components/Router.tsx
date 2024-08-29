@@ -8,7 +8,7 @@ import ErrorPage from "../pages/ErrorPage";
 import UserDashboard from "../pages/UserDashboard";
 import Checkout from "../pages/Checkout";
 import UserOrders from "../pages/UserOrders";
-import ManageOrder from "./manageOrder/ManageOrder";
+import ManageOrder from "../pages/ManageOrder";
 
 export const routerConfig = [
   {
