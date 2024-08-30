@@ -1,0 +1,1 @@
+import Checkout from '../src/pages/Checkout';
