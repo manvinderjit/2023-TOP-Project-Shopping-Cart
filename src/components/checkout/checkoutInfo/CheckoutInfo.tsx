@@ -33,7 +33,7 @@ const CheckoutInfo = (): React.JSX.Element => {
           </div>
         </div>
         <div className="flex flex-col gap-4">
-          <h3 className="mt-4 font-semibold text-xl">Payments Details</h3>
+          <h3 className="mt-4 font-semibold text-xl">Payment Details</h3>
           <div>
             <label htmlFor="ccName" className="block text-sm font-medium">
               Name on Card
@@ -44,6 +44,7 @@ const CheckoutInfo = (): React.JSX.Element => {
               type="text"
               placeholder="John Doe"
               disabled
+              required
               autoCapitalize="none"
               autoCorrect="off"
               autoComplete="off"
@@ -69,6 +70,7 @@ const CheckoutInfo = (): React.JSX.Element => {
               inputMode="numeric"
               pattern="[0-9\s]{13,19}"
               maxLength={23}
+              required
               placeholder="xxxx xxxx xxxx xxxx"
               disabled
               autoCapitalize="none"
@@ -91,6 +93,8 @@ const CheckoutInfo = (): React.JSX.Element => {
                 Expiry Date
               </label>
               <input
+                id="ccExpiry"
+                name="ccExpiry"
                 placeholder="MM/YY"
                 maxLength={5}
                 autoCorrect="off"
@@ -99,6 +103,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                 spellCheck="false"
                 disabled
                 inputMode="numeric"
+                required
                 aria-label="Credit Card Expiry Date"
                 className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
               />
@@ -108,6 +113,8 @@ const CheckoutInfo = (): React.JSX.Element => {
                 CVV
               </label>
               <input
+                id="ccCVV"
+                name="ccCVV"
                 placeholder="CVV"
                 autoCapitalize="none"
                 maxLength={3}
@@ -116,7 +123,8 @@ const CheckoutInfo = (): React.JSX.Element => {
                 dir="auto"
                 spellCheck="false"
                 inputMode="numeric"
-                aria-label="Required"
+                required
+                aria-label="Credit Card CVV"
                 disabled
                 className="w-full block rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
               />
@@ -126,13 +134,17 @@ const CheckoutInfo = (): React.JSX.Element => {
         <div className="flex flex-col gap-2">
           <h3 className="mt-4 font-semibold text-xl">Shipping Address</h3>
           <div>
-            <label htmlFor="address" className="block text-sm font-medium">
-              Address
+            <label
+              htmlFor="shippingAddress"
+              className="block text-sm font-medium"
+            >
+              Shipping Address
             </label>
             <input
-              id="address"
-              name="address"
+              id="shippingAddress"
+              name="shippingAddress"
               type="text"
+              required
               placeholder="#, Street Name, Landmark etc."
               autoCapitalize="none"
               autoCorrect="off"
@@ -153,7 +165,10 @@ const CheckoutInfo = (): React.JSX.Element => {
                 City
               </label>
               <input
+                id="city"
+                name="city"
                 type="text"
+                required
                 className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
               />
             </div>
@@ -162,7 +177,10 @@ const CheckoutInfo = (): React.JSX.Element => {
                 State / Province
               </label>
               <input
+                id="state"
+                name="state"
                 type="text"
+                required
                 className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
               />
             </div>
@@ -171,7 +189,10 @@ const CheckoutInfo = (): React.JSX.Element => {
                 Postal Code
               </label>
               <input
+                id="postalCode"
+                name="postalCode"
                 type="text"
+                required
                 className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
               />
             </div>
@@ -187,7 +208,7 @@ const CheckoutInfo = (): React.JSX.Element => {
               onChange={toggleSameBillingInfo}
               checked={isSameBillingInfo}
             />
-            <label htmlFor="">Same as shipping information.</label>
+            <label htmlFor="isBillingSame">Same as shipping information.</label>
           </div>
           {!isSameBillingInfo ? (
             <>
@@ -217,12 +238,15 @@ const CheckoutInfo = (): React.JSX.Element => {
                     </span> */}
               </div>
               <div>
-                <label htmlFor="address" className="block text-sm font-medium">
-                  Address
+                <label
+                  htmlFor="billingAddress"
+                  className="block text-sm font-medium"
+                >
+                  Bill Address
                 </label>
                 <input
-                  id="address"
-                  name="address"
+                  id="billingAddress"
+                  name="billingAddress"
                   type="text"
                   placeholder="#, Street Name, Landmark etc."
                   autoCapitalize="none"
@@ -240,31 +264,43 @@ const CheckoutInfo = (): React.JSX.Element => {
               </div>
               <div className="flex gap-4">
                 <div>
-                  <label htmlFor="city" className="block text-sm font-medium">
-                    City
+                  <label
+                    htmlFor="billingCity"
+                    className="block text-sm font-medium"
+                  >
+                    Bill City
                   </label>
                   <input
-                    type="text"
-                    className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="state" className="block text-sm font-medium">
-                    State / Province
-                  </label>
-                  <input
+                    id="billingCity"
+                    name="billingCity"
                     type="text"
                     className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                   />
                 </div>
                 <div>
                   <label
-                    htmlFor="postalCode"
+                    htmlFor="billingState"
                     className="block text-sm font-medium"
                   >
-                    Postal Code
+                    Bill State / Province
                   </label>
                   <input
+                    name="billingState"
+                    id="billingState"
+                    type="text"
+                    className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="billingPostalCode"
+                    className="block text-sm font-medium"
+                  >
+                    Bill Postal Code
+                  </label>
+                  <input
+                    id="billingPostalCode"
+                    name="billingPostalCode"
                     type="text"
                     className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                   />

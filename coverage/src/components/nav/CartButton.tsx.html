@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>31/31</span>
+                <span class='fraction'>32/32</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>31/31</span>
+                <span class='fraction'>32/32</span>
             </div>
         
             
@@ -102,50 +102,53 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">334x</span>
+<span class="cline-any cline-yes">300x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">334x</span>
+<span class="cline-any cline-yes">300x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">334x</span>
+<span class="cline-any cline-yes">300x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">334x</span>
-<span class="cline-any cline-yes">334x</span>
+<span class="cline-any cline-yes">300x</span>
+<span class="cline-any cline-yes">300x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Link } from "react-router-dom";
+import { useAppSelector } from "../../application/reduxHooks";
+import { totalQuantity } from "../../features/cart/cartSlice";
 &nbsp;
 const CartButton = (): React.JSX.Element =&gt; {
-  const totalCartQuantity = useSelector(state =&gt; state.cart.totalCartQuantity);
+  const totalCartQuantity = useAppSelector(totalQuantity);
 &nbsp;
   const content:React.JSX.Element = 
    (
@@ -187,7 +190,7 @@ export default CartButton;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-29T23:55:14.855Z
+                at 2024-09-01T03:53:39.201Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

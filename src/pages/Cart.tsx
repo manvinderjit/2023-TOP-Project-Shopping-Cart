@@ -1,11 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { emptyCart, removeItemFromCart, changeItemQuantity, calculateCartTotal } from '../features/cart/cartSlice';
+import { emptyCart, removeItemFromCart, changeItemQuantity, calculatePriceDetails } from '../features/cart/cartSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { addToastAlert, removeToastAlert } from "../features/toast/toastSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import { useAppSelector } from "../application/reduxHooks";
 import { getCurrentToken } from "../features/auth/authSlice";
-import { useEffect } from "react";
 import { apiURL } from "../features/api/apiSlice";
 
 interface CartItemDetails {
@@ -24,11 +23,10 @@ interface CartItems {
 
 const Cart = ():React.JSX.Element => {
   const cartItems = useSelector((state: CartItems) => state.cart.cartItems);
-  const subTotal = useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
-  const token = useAppSelector(getCurrentToken);
+  const token = useAppSelector(getCurrentToken);  
+  const priceDetails = useAppSelector(calculatePriceDetails);
   const navigate = useNavigate();
-  dispatch(calculateCartTotal());  
 
   const _emptyCart = () => {
     dispatch(emptyCart());
@@ -69,26 +67,6 @@ const Cart = ():React.JSX.Element => {
       navigate('/checkout');
     }
   }
-  
-  const subtotalWithShipping = parseFloat(
-    new Intl.NumberFormat("en", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(subTotal + 10)
-  );
-  const taxes = parseFloat(
-    new Intl.NumberFormat("en", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format((subtotalWithShipping * 13)/100)
-  ); 
-
-  const totalAmount = parseFloat(
-    new Intl.NumberFormat("en", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(subtotalWithShipping + taxes)
-  ); 
 
   const content: React.JSX.Element = (
     <section
@@ -212,7 +190,7 @@ const Cart = ():React.JSX.Element => {
             <div className="flex flex-col gap-4 px-2">
               <div className="flex flex-row justify-between border-b-[1px] border-dashed">
                 <h4>Subtotal</h4>
-                <p>${subTotal}</p>
+                <p>${priceDetails.subTotal}</p>
               </div>
               <div className="flex flex-row justify-between border-b-[1px] border-dashed">
                 <h4>Shipping Estimate</h4>
@@ -220,11 +198,11 @@ const Cart = ():React.JSX.Element => {
               </div>
               <div className="flex flex-row justify-between border-b-[1px] border-dashed">
                 <h4>Tax Estimate</h4>
-                <p>${taxes}</p>
+                <p>${priceDetails.taxes}</p>
               </div>
               <div className="flex flex-row justify-between font-semibold text-xl">
-                <h4>Order Total</h4>
-                <p>${totalAmount}</p>
+                <h4>Order Total</h4>                
+                <p>${priceDetails.finalAmount}</p>
               </div>
             </div>
             <div className="border-t-[1px] pt-4 flex justify-center items-center">

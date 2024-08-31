@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../application/store";
 
 interface CartItemDetails {
     id: string;
@@ -49,7 +50,7 @@ export const cartSlice = createSlice({
                 state.cartItems.push({...action.payload, itemQuantity:1 });
             }
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-            cartSlice.caseReducers.calculateCartTotal(state);
+            // cartSlice.caseReducers.calculateCartTotal(state);
         },
         removeItemFromCart: (state, action) => {
             state.cartItems = state.cartItems.filter (item => item.id !== action.payload);
@@ -71,18 +72,40 @@ export const cartSlice = createSlice({
             state.totalAmount = 0;
             state.totalCartQuantity = 0;
         },
-        calculateCartTotal: (state) => {
-            state.totalAmount = 0;
-            state.totalCartQuantity = 0;
-            state.cartItems.map(item => {
-                state.totalAmount += Number(item.itemQuantity) * Number(item.price);
-                state.totalCartQuantity += item.itemQuantity;
-            })
-        },
 
     }
 });
 
-export const { addItemToCart, removeItemFromCart, changeItemQuantity, emptyCart, calculateCartTotal } = cartSlice.actions;
+export const { addItemToCart, removeItemFromCart, changeItemQuantity, emptyCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
+
+const cartItems = (state) => state.cart.cartItems;
+
+export const totalQuantity = createSelector([cartItems], (cartItems) =>
+  cartItems.reduce(
+    (total: number, curr: CartItemDetails) => (total += curr.itemQuantity),
+    0
+  )
+);
+
+const roundOffPrices = (value: number) =>
+  parseFloat(
+    new Intl.NumberFormat("en", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(value)
+  );
+
+export const calculatePriceDetails = createSelector([cartItems], (cartItems) => {
+    const subTotal: number = cartItems.reduce(
+      (total: number, curr: CartItemDetails) =>
+        (total += Number(curr.price) * Number(curr.itemQuantity)),
+      0
+    );
+    const subtotalWithShipping: number = roundOffPrices(subTotal + 10);
+    const taxes: number = roundOffPrices(((subtotalWithShipping * 13) / 100));
+    const finalAmount: number = roundOffPrices(subtotalWithShipping + taxes);
+
+    return { subTotal, subtotalWithShipping, taxes, finalAmount };
+});

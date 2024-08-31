@@ -11,11 +11,15 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
   const dispatch = useDispatch();
 
   const _productDetailsAddToCart = {
-    id: productData.id,
-    name:productData.name,
-    imageFilename: productData.imageFilename,
-    price: productData.price,    
-  }
+    _id: productData.id,
+    // _id: productData.id,
+    // name: productData.name,
+    // imageFilename: productData.imageFilename,
+    // price: productData.price,
+    // description: productData.description,
+    // imageUrl: productData.imageUrl,
+    ...productData
+  };
 
   const _addToCart = () => {
     dispatch(addItemToCart(_productDetailsAddToCart));

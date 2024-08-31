@@ -1,32 +1,14 @@
 import { useSelector } from "react-redux";
 import { CartItems } from "../../cartDrawer/CartDrawer.types";
 import { apiURL } from "../../../features/api/apiSlice";
+import { calculatePriceDetails } from "../../../features/cart/cartSlice";
+import { useAppSelector } from "../../../application/reduxHooks";
 
 const CheckoutSummary = (): React.JSX.Element => {
 
     const cartItems = useSelector((state: CartItems) => state.cart.cartItems);
-    const subTotal = useSelector((state) => state.cart.totalAmount);
-
-    const subtotalWithShipping = parseFloat(
-      new Intl.NumberFormat("en", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(subTotal + 10)
-    );
-    const taxes = parseFloat(
-      new Intl.NumberFormat("en", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format((subtotalWithShipping * 13) / 100)
-    );
-
-    const totalAmount = parseFloat(
-      new Intl.NumberFormat("en", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(subtotalWithShipping + taxes)
-    ); 
-
+    const priceDetails = useAppSelector(calculatePriceDetails);
+    
     const calculateItemTotal = (a: number, b: number): number =>
       parseFloat(
         new Intl.NumberFormat("en", {
@@ -42,21 +24,23 @@ const CheckoutSummary = (): React.JSX.Element => {
           <ul className="flex flex-col">
             {cartItems.map((item) => {
               return (
-                <li>
+                <li key={item.name}>
                   <div className="grid grid-cols-4 ">
                     <div className="col-span-1 w-24 mt-1">
                       <img
                         src={`${apiURL}/api/products/image/${item.imageFilename}`}
-                        alt={`${item.imageFilename}`}
+                        alt={`${item.name}`}
                         className="rounded-lg"
                       />
                     </div>
                     <div className="col-span-2 flex flex-col justify-center">
                       <h3>{item.name}</h3>
-                      <p>Qty: {item.itemQuantity}</p>
+                      <p data-testid={`Quantity for ${item.name}`}>
+                        Qty: {item.itemQuantity}
+                      </p>
                     </div>
                     <div className="col-span-1 flex justify-end">
-                      <h3>
+                      <h3 data-testid={`Total Price for ${item.name}`}>
                         $
                         {calculateItemTotal(
                           Number(item.price),
@@ -74,19 +58,19 @@ const CheckoutSummary = (): React.JSX.Element => {
         <div className="flex flex-col gap-4 px-2">
           <div className="flex flex-row justify-between border-b-[1px] border-dashed">
             <h4>Subtotal</h4>
-            <p>${subTotal}</p>
+            <p data-testid="subTotal">${priceDetails.subTotal}</p>
           </div>
           <div className="flex flex-row justify-between border-b-[1px] border-dashed">
             <h4>Shipping Estimate</h4>
-            <p>$10</p>
+            <p data-testid="shippingEstimate">$10</p>
           </div>
           <div className="flex flex-row justify-between border-b-[1px] border-dashed">
             <h4>Tax Estimate</h4>
-            <p>${taxes}</p>
+            <p data-testid="taxEstimate">${priceDetails.taxes}</p>
           </div>
           <div className="flex flex-row justify-between font-semibold text-xl">
             <h4>Order Total</h4>
-            <p>${totalAmount}</p>
+            <p data-testid="orderTotal">${priceDetails.finalAmount}</p>
           </div>
         </div>
       </div>

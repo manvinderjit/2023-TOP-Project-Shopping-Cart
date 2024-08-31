@@ -5,8 +5,17 @@ import { getCurrentToken } from "../features/auth/authSlice";
 import Button from "../components/button/Button";
 import CheckoutInfo from "../components/checkout/checkoutInfo/CheckoutInfo";
 import CheckoutSummary from "../components/checkout/orderSummary/CheckoutSummary";
+import { usePlaceOrderMutation } from "../features/api/apiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { CartItems } from "../components/cartDrawer/CartDrawer.types";
+import { calculatePriceDetails, emptyCart } from "../features/cart/cartSlice";
+import { addToastAlert, removeToastAlert } from "../features/toast/toastSlice";
+import { nanoid } from "@reduxjs/toolkit";
 
 const Checkout = () => {
+    const cartItems = useSelector((state: CartItems) => state.cart.cartItems);
+    const priceDetails = useAppSelector(calculatePriceDetails);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const token = useAppSelector(getCurrentToken);
 
@@ -14,7 +23,36 @@ const Checkout = () => {
       if (!token || token === null) navigate("/login");
     }, [navigate, token]);
 
-    const handleCheckout = () => {};
+    const [
+      placeOrder,
+      {
+        data: placeOrderData,
+        isSuccess: isPlaceOrderSuccess,
+        isError: isPlaceOrderError,
+        error: placeOrderError,
+      },
+    ] = usePlaceOrderMutation();
+
+    const handleCheckout = async() => {
+      const orderDetails = { items: cartItems, totalAmount:priceDetails.finalAmount };
+      await placeOrder({token, orderDetails});
+    };
+
+    useEffect(() => {
+      if (isPlaceOrderSuccess) {        
+        const toastId = nanoid();
+        dispatch(
+          addToastAlert({
+            toastId,
+            toastTextContent: `Order Placed Successfully!`,
+            toastType: "success",
+          })
+        );
+        setTimeout(() => dispatch(removeToastAlert(toastId)), 3000);
+        dispatch(emptyCart());
+        navigate("/orders")
+      }
+    }, [isPlaceOrderSuccess, navigate, dispatch]);
 
     const content = (
       <div className="w-full h-full flex flex-col justify-center items-center gap-4">

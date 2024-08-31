@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../application/reduxHooks";
+import { totalQuantity } from "../../features/cart/cartSlice";
 
 const CartButton = (): React.JSX.Element => {
-  const totalCartQuantity = useSelector(state => state.cart.totalCartQuantity);
+  const totalCartQuantity = useAppSelector(totalQuantity);
 
   const content:React.JSX.Element = 
    (

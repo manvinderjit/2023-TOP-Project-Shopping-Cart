@@ -59,6 +59,15 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Order"],
     }),
+    placeOrder: builder.mutation({
+      query: ({ token, orderDetails }) => ({
+        url: `/checkout`,
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: orderDetails,
+      }),
+      invalidatesTags: ["Order"],
+    }),
   }),
 });
 
@@ -69,4 +78,5 @@ export const {
   useLoginUserMutation,
   useGetUserOrdersQuery,
   useCancelAnOrderMutation,
+  usePlaceOrderMutation,
 } = apiSlice;
