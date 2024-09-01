@@ -1,7 +1,6 @@
 import CheckoutInfo from "./CheckoutInfo";
 import { renderWithProviders } from "../../../../__test__/test-utils";
 import { fireEvent, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 describe("should render Checkout Info", () => {
 
@@ -126,7 +125,6 @@ describe("should render Checkout Info", () => {
     });
 });
 
-
 describe("should not render Billing Details by default", () => {
 
     beforeEach(() => {
@@ -183,7 +181,6 @@ describe("should not render Billing Details by default", () => {
         expect(inputBillPostalCode).not.toBeInTheDocument();
     });
 });
-
 
 describe("should render Billing Details when 'Same as shipping information' checkbox is unchecked", () => {
 
@@ -245,9 +242,7 @@ describe("should render Billing Details when 'Same as shipping information' chec
         const inputBillPostalCode = screen.getByRole('textbox', { name: 'Bill Postal Code'});
         expect(inputBillPostalCode).toBeInTheDocument();
     });
-
 });
-
 
 describe("should hide the Billing Details when 'Same as shipping information' checkbox is checked again", () => {
 
@@ -309,6 +304,4 @@ describe("should hide the Billing Details when 'Same as shipping information' ch
         const inputBillPostalCode = screen.queryByRole('textbox', { name: 'Bill Postal Code'});
         expect(inputBillPostalCode).not.toBeInTheDocument();
     });
-    
-
 });

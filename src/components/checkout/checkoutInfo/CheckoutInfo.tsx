@@ -45,19 +45,10 @@ const CheckoutInfo = (): React.JSX.Element => {
               placeholder="John Doe"
               disabled
               required
-              autoCapitalize="none"
-              autoCorrect="off"
-              autoComplete="off"
-              dir="auto"
-              spellCheck="false"
+              
               // onChange={}
               className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
             />
-            {/* <span className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}>
-                        {inputUserEmailError
-                        ? inputUserEmailErrorMsg
-                        : ""}
-                    </span> */}
           </div>
           <div>
             <label htmlFor="ccNumber" className="block text-sm font-medium">
@@ -73,19 +64,10 @@ const CheckoutInfo = (): React.JSX.Element => {
               required
               placeholder="xxxx xxxx xxxx xxxx"
               disabled
-              autoCapitalize="none"
-              autoCorrect="off"
-              autoComplete="off"
-              dir="auto"
-              spellCheck="false"
+              
               // onChange={}
               className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
             />
-            {/* <span className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}>
-                        {inputUserEmailError
-                        ? inputUserEmailErrorMsg
-                        : ""}
-                    </span> */}
           </div>
           <div className="w-full flex justify-between ">
             <div className="flex flex-col gap-2">
@@ -116,13 +98,9 @@ const CheckoutInfo = (): React.JSX.Element => {
                 id="ccCVV"
                 name="ccCVV"
                 placeholder="CVV"
-                autoCapitalize="none"
+                
                 maxLength={3}
-                autoCorrect="off"
-                autoComplete="off"
-                dir="auto"
-                spellCheck="false"
-                inputMode="numeric"
+                
                 required
                 aria-label="Credit Card CVV"
                 disabled
@@ -146,18 +124,9 @@ const CheckoutInfo = (): React.JSX.Element => {
               type="text"
               required
               placeholder="#, Street Name, Landmark etc."
-              autoCapitalize="none"
-              autoCorrect="off"
-              autoComplete="off"
-              dir="auto"
-              spellCheck="false"
+              
               className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
             />
-            {/* <span className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}>
-                        {inputUserEmailError
-                        ? inputUserEmailErrorMsg
-                        : ""}
-                    </span> */}
           </div>
           <div className="flex gap-4">
             <div>
@@ -224,18 +193,8 @@ const CheckoutInfo = (): React.JSX.Element => {
                   name="payerName"
                   type="text"
                   placeholder="John Doe"
-                  autoCapitalize="none"
-                  autoCorrect="off"
-                  autoComplete="off"
-                  dir="auto"
-                  spellCheck="false"
                   className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                 />
-                {/* <span className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}>
-                        {inputUserEmailError
-                        ? inputUserEmailErrorMsg
-                        : ""}
-                    </span> */}
               </div>
               <div>
                 <label
@@ -249,18 +208,8 @@ const CheckoutInfo = (): React.JSX.Element => {
                   name="billingAddress"
                   type="text"
                   placeholder="#, Street Name, Landmark etc."
-                  autoCapitalize="none"
-                  autoCorrect="off"
-                  autoComplete="off"
-                  dir="auto"
-                  spellCheck="false"
                   className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
                 />
-                {/* <span className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}>
-                        {inputUserEmailError
-                        ? inputUserEmailErrorMsg
-                        : ""}
-                    </span> */}
               </div>
               <div className="flex gap-4">
                 <div>
