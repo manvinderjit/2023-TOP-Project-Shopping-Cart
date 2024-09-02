@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { removeToastAlert } from "../features/toast/toastSlice";
 import { getAllToastAlerts } from "../features/toast/toastSlice";
-import { useEffect } from "react";
 
 let alertBackgroundColor: string = 'bg-blue-400';
 let alertTextColor:string = 'text-blue-800';
@@ -22,11 +21,11 @@ function setToastCss(type: string): void {
   }
 }
 
-const Toast = () => {
+const Toast = (): React.JSX.Element => {
   const toastAlerts = useSelector(getAllToastAlerts);
   const dispatch = useDispatch();
 
-  const content =
+  const content: React.JSX.Element =
     toastAlerts.length > 0 ? (
       <div className="z-10 fixed flex w-full justify-end top-20 right-40 duration-1000 flex-col items-end gap-4">
         {toastAlerts.map((toast) => {

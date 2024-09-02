@@ -1,21 +1,7 @@
 import ProductCard from "./ProductCard";
 import { useGetProductsQuery } from "../../features/api/apiSlice";
 import Spinner from "../utility/Spinner";
-
-interface ProductData {
-  id: string,
-  name: string,
-  description: string,
-  imageUrl: string,
-  imageFilename: string,
-  category: {
-    _id: string,
-    name: string,
-  };
-  price: string,
-  stock: number,  
-  url: string,
-}
+import type { ProductData } from "./Product.types";
 
 const Products = ():React.JSX.Element => {
   const {

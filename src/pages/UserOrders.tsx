@@ -8,7 +8,7 @@ import UserOrder from "../components/userOrders/userOrder/UserOrder";
 import type { OrderDetails } from "../components/userOrders/UserOrders.types";
 
 const UserOrders = (): React.JSX.Element => {
-    const token = useAppSelector(getCurrentToken);
+    const token: string | null = useAppSelector(getCurrentToken);
     const navigate = useNavigate();
 
     const {

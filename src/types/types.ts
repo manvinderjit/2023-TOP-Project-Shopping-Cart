@@ -53,3 +53,8 @@ export interface ProductData {
     url: string;
   };
 }
+
+export interface LoginDetails {
+  userEmail: string,
+  userPassword: string,
+}

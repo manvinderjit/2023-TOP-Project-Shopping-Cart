@@ -1,21 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiURL } from "../../features/api/apiSlice";
-
-interface CarouselImageData {    
-    caption: {
-      heading: string;
-      description: string;
-    };
-    name: string;
-    category: string;
-    imageUrl: string;
-    url: string;
-    id: null;
-} 
-
-interface CarouselImagesData {
-  carouselImagesData: CarouselImageData[]
-}
+import type { CarouselImageData, CarouselImagesData } from "./Slider.types";
 
 const Slider = ({ carouselImagesData }: CarouselImagesData ):React.JSX.Element => {
     
@@ -30,7 +15,7 @@ const Slider = ({ carouselImagesData }: CarouselImagesData ):React.JSX.Element =
       };
     });
 
-    const showNextImage = () => {
+    const showNextImage = (): void => {
       setCurrentImageIndex( index => {
         if(index === carouselImagesData.length - 1){
             return 0;
@@ -40,7 +25,7 @@ const Slider = ({ carouselImagesData }: CarouselImagesData ):React.JSX.Element =
       });
     };
 
-    const showPreviousImage = () => {
+    const showPreviousImage = (): void => {
       setCurrentImageIndex( index => {
         if(currentImageIndex === 0) {
           return carouselImagesData.length - 1;
@@ -56,7 +41,7 @@ const Slider = ({ carouselImagesData }: CarouselImagesData ):React.JSX.Element =
         className="w-full h-full relative mx-auto my-auto"
       >
         <div className="w-full h-full flex flex-row overflow-hidden">
-          {Object.values(carouselImagesData).map((img, index) => (
+          {Object.values(carouselImagesData).map((img: CarouselImageData, index: number) => (
             <img
               key={index}                  
               src={`${apiURL}/api/${img.imageUrl}`}
@@ -115,7 +100,7 @@ const Slider = ({ carouselImagesData }: CarouselImagesData ):React.JSX.Element =
         </button>
         <div className="w-full absolute bottom-8 flex justify-center">
           <div className="flex gap-2">
-            {carouselImagesData.map((_, index) => (
+            {carouselImagesData.map((_: CarouselImageData, index: number) => (
               <button
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}

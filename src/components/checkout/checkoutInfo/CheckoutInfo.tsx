@@ -4,7 +4,7 @@ const CheckoutInfo = (): React.JSX.Element => {
 
   const [isSameBillingInfo, setIsSameBillingInfo] = useState<boolean>(true);
 
-  const toggleSameBillingInfo = () =>
+  const toggleSameBillingInfo = (): void =>
     isSameBillingInfo
       ? setIsSameBillingInfo(false)
       : setIsSameBillingInfo(true);
@@ -79,12 +79,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                 name="ccExpiry"
                 placeholder="MM/YY"
                 maxLength={5}
-                autoCorrect="off"
-                autoComplete="off"
-                dir="auto"
-                spellCheck="false"
                 disabled
-                inputMode="numeric"
                 required
                 aria-label="Credit Card Expiry Date"
                 className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"

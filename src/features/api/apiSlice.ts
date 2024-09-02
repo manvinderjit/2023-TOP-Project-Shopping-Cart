@@ -1,19 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setCredentials, logOut } from "../auth/authSlice.js";
-import { CategoriesListData, ProductsListData, ProductDataAndCategoryDataLists } from "../../types/types.js";
+import type { ProductDataAndCategoryDataLists } from "../../types/types.js";
+import type { CarouselImagesData } from "../../components/hero/Slider.types.js";
+import type { OrderDetails } from "../../components/userOrders/UserOrders.types.js";
 export const apiURL = import.meta.env.VITE_API_BASE_URL;
-
-const baseQuery = fetchBaseQuery({
-    baseUrl: apiURL,
-    credentials: 'include',
-    prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.token;
-        if(token) {
-            headers.set("authorization", `Bearer${token}`);
-        }
-        return headers;
-    }
-});
 
 // Define our single API slice object
 export const apiSlice = createApi({
@@ -22,13 +11,14 @@ export const apiSlice = createApi({
   tagTypes: ["Order"],
   endpoints: (builder) => ({
     // The `getCarousel` endpoint is a "query" operation that returns carousel data
-    getCarousel: builder.query({
+    getCarousel: builder.query<CarouselImagesData, undefined>({
       query: () => "/promos/carousel",
     }),
     // The `getCarousel` endpoint is a "query" operation that returns product data and product category list
     getProducts: builder.query<ProductDataAndCategoryDataLists, undefined>({
       query: () => "/products",
     }),
+    // The `registerUser` endpoint is a "query" operation that registers a user
     registerUser: builder.mutation({
       query: (body: { userEmail: string; userPassword: string }) => ({
         url: `/register`,
@@ -36,6 +26,7 @@ export const apiSlice = createApi({
         body,
       }),
     }),
+    // The `loginUser` endpoint is a "query" operation that logs in a user
     loginUser: builder.mutation({
       query: (body: { userEmail: string; userPassword: string }) => ({
         url: `/login`,
@@ -43,13 +34,15 @@ export const apiSlice = createApi({
         body,
       }),
     }),
-    getUserOrders: builder.query({
+    // The `getUserOrders` endpoint is a "query" operation that gets all orders for a user
+    getUserOrders: builder.query<OrderDetails, undefined>({
       query: (token) => ({
         url: "/orders",
         headers: { Authorization: `Bearer ${token}` },
       }),
       providesTags: ["Order"],
     }),
+    // The `cancelAnOrder` endpoint is a "query" operation that cancels an order for a user
     cancelAnOrder: builder.mutation({
       query: ({ token, orderId }) => ({
         url: `/orders/cancel`,
@@ -59,6 +52,7 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Order"],
     }),
+    // The `placeOrder` endpoint is a "query" operation that places an order for a user
     placeOrder: builder.mutation({
       query: ({ token, orderDetails }) => ({
         url: `/checkout`,

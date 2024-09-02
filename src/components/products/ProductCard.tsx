@@ -21,9 +21,9 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
     ...productData
   };
 
-  const _addToCart = () => {
+  const _addToCart = (): void => {
     dispatch(addItemToCart(_productDetailsAddToCart));
-    const toastId = nanoid();
+    const toastId: string = nanoid();
     dispatch(
       addToastAlert({
         toastId,

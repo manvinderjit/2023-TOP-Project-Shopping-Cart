@@ -1,10 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../application/reduxHooks";
-import { getCurrentToken, getCurrentUserDetails } from "../../features/auth/authSlice";
-
+import { getCurrentToken } from "../../features/auth/authSlice";
 
 const NavItemsTop = (): React.JSX.Element => {
-  const token = useAppSelector(getCurrentToken);
+  const token: string | null = useAppSelector(getCurrentToken);
   const currentLocation = useLocation();
 
     const content: React.JSX.Element = (

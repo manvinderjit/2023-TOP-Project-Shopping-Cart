@@ -8,7 +8,7 @@ const NavUserAccountTools = ():React.JSX.Element => {
   const [showOptionsMenu, setShowOptionsMenu] = useState<boolean>(false);
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     dispatch(logOut());
   };
 

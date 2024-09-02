@@ -1,13 +1,14 @@
 import { useSelector } from "react-redux";
-import { CartItems } from "../../cartDrawer/CartDrawer.types";
+import { CartItemDetails, CartItems } from "../../cartDrawer/CartDrawer.types";
 import { apiURL } from "../../../features/api/apiSlice";
 import { calculatePriceDetails } from "../../../features/cart/cartSlice";
 import { useAppSelector } from "../../../application/reduxHooks";
+import type { PriceDetails } from "./CheckoutSummary.types";
 
 const CheckoutSummary = (): React.JSX.Element => {
 
-    const cartItems = useSelector((state: CartItems) => state.cart.cartItems);
-    const priceDetails = useAppSelector(calculatePriceDetails);
+    const cartItems: CartItemDetails[] = useSelector((state: CartItems) => state.cart.cartItems);
+    const priceDetails: PriceDetails = useAppSelector(calculatePriceDetails);
     
     const calculateItemTotal = (a: number, b: number): number =>
       parseFloat(

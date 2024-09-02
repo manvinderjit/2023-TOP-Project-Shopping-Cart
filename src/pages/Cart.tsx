@@ -6,6 +6,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { useAppSelector } from "../application/reduxHooks";
 import { getCurrentToken } from "../features/auth/authSlice";
 import { apiURL } from "../features/api/apiSlice";
+import type { PriceDetails } from "../components/checkout/orderSummary/CheckoutSummary.types";
 
 interface CartItemDetails {
   id: string,
@@ -22,17 +23,17 @@ interface CartItems {
 }
 
 const Cart = ():React.JSX.Element => {
-  const cartItems = useSelector((state: CartItems) => state.cart.cartItems);
+  const cartItems: CartItemDetails[] = useSelector((state: CartItems) => state.cart.cartItems);
   const dispatch = useDispatch();
-  const token = useAppSelector(getCurrentToken);  
-  const priceDetails = useAppSelector(calculatePriceDetails);
+  const token: string | null = useAppSelector(getCurrentToken);  
+  const priceDetails: PriceDetails = useAppSelector(calculatePriceDetails);
   const navigate = useNavigate();
 
-  const _emptyCart = () => {
+  const _emptyCart = (): void => {
     dispatch(emptyCart());
   }
 
-  const handleCheckout = () => {
+  const handleCheckout = (): void => {
 
     if(cartItems.length <= 0){
       const toastId = nanoid();
@@ -53,7 +54,7 @@ const Cart = ():React.JSX.Element => {
     }
 
     if(!token || token === null) {
-      const toastId = nanoid();
+      const toastId: string = nanoid();
       dispatch(addToastAlert({ toastId, toastTextContent: 'Please Login before checking out!', toastType: 'warning'}));
       
       setTimeout(() => {

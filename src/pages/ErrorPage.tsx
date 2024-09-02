@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ErrorPage = () => {
+const ErrorPage = (): React.JSX.Element => {
   
   return (
     <main className="grid min-h-full place-items-center bg-gray px-6 py-24 sm:py-32 lg:px-8">

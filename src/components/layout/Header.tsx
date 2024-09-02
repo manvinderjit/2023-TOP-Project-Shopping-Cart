@@ -11,4 +11,3 @@ const Header = (): React.JSX.Element => {
 };
 
 export default Header;
-

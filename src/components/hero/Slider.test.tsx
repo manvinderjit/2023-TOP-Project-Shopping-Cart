@@ -2,8 +2,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import userEvent from "@testing-library/user-event";
-import Slider from "../src/components/hero/Slider";
-import { carouselImagesData } from "./mockdata";
+import Slider from "./Slider";
+import { carouselImagesData } from "../../../__test__/mockdata";
 
 describe("Hero Slider", () => {
   beforeEach(() => {

@@ -6,8 +6,7 @@ import { fireEvent, screen, waitFor } from '@testing-library/react';
 import routerConfig from './routerConfig';
 import { http, HttpResponse } from "msw";
 import { setupServer } from 'msw/node';
-import { apiSlice, apiURL } from '../src/features/api/apiSlice';
-import { store } from '../src/application/store';
+import { apiURL } from '../src/features/api/apiSlice';
 
 // Mock cart
 const initialCart = {
@@ -113,7 +112,6 @@ describe("should checkout order", () => {
   // Reset any runtime request handlers we may add during the tests.
   afterEach(() => {
     server.resetHandlers();
-    // store.dispatch(apiSlice.util.resetApiState());
   });
 
   // Disable API mocking after the tests are done.

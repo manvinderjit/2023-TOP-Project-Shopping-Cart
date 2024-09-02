@@ -3,12 +3,12 @@ import { useAppSelector } from "../../application/reduxHooks";
 import { totalQuantity } from "../../features/cart/cartSlice";
 
 const CartButton = (): React.JSX.Element => {
-  const totalCartQuantity = useAppSelector(totalQuantity);
+  const totalCartQuantity: number = useAppSelector(totalQuantity);
 
   const content:React.JSX.Element = 
    (
-    <div className="justify-end"><Link to='/cart'>
-      
+    <div className="justify-end">
+      <Link to='/cart'>      
         <div className="relative py-2">
           <div className="t-0 absolute left-3">
             <p className="flex h-2 w-2 items-center justify-center rounded-full bg-[#646cff] p-3 text-xs text-white">
@@ -30,7 +30,7 @@ const CartButton = (): React.JSX.Element => {
             />
           </svg>
         </div>
-    </Link>
+      </Link>
     </div>
   );
 

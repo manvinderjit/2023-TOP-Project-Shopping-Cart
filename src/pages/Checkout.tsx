@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../application/reduxHooks";
 import { getCurrentToken } from "../features/auth/authSlice";
@@ -11,13 +11,15 @@ import { CartItems } from "../components/cartDrawer/CartDrawer.types";
 import { calculatePriceDetails, emptyCart } from "../features/cart/cartSlice";
 import { addToastAlert, removeToastAlert } from "../features/toast/toastSlice";
 import { nanoid } from "@reduxjs/toolkit";
+import type { CartItemDetails } from "../components/cartDrawer/CartDrawer.types";
+import type { PriceDetails } from "../components/checkout/orderSummary/CheckoutSummary.types";
 
-const Checkout = () => {
-    const cartItems = useSelector((state: CartItems) => state.cart.cartItems);
-    const priceDetails = useAppSelector(calculatePriceDetails);
+const Checkout = (): React.JSX.Element => {
+    const cartItems: CartItemDetails[] = useSelector((state: CartItems) => state.cart.cartItems);
+    const priceDetails: PriceDetails = useAppSelector(calculatePriceDetails);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const token = useAppSelector(getCurrentToken);
+    const token: string | null = useAppSelector(getCurrentToken);
 
     useEffect(() => {
       if (!token || token === null) navigate("/login");
@@ -33,7 +35,7 @@ const Checkout = () => {
       },
     ] = usePlaceOrderMutation();
 
-    const handleCheckout = async() => {
+    const handleCheckout = async(): Promise<void> => {
       const orderDetails = { items: cartItems, totalAmount:priceDetails.finalAmount };
       await placeOrder({token, orderDetails});
     };
@@ -54,7 +56,7 @@ const Checkout = () => {
       }
     }, [isPlaceOrderSuccess, navigate, dispatch]);
 
-    const content = (
+    const content: React.JSX.Element = (
       <div className="w-full h-full flex flex-col justify-center items-center gap-4">
         <h2 className="text-2xl font-bold">Checkout</h2>
         <div className="w-4/6 gap-10 border rounded-xl">

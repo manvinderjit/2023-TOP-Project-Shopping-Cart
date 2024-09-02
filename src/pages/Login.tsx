@@ -6,7 +6,7 @@ import { setCredentials } from "../features/auth/authSlice";
 import { addToastAlert, removeToastAlert } from "../features/toast/toastSlice";
 import { nanoid } from "@reduxjs/toolkit";
 
-const isEmailValidRegEx =
+const isEmailValidRegEx:RegExp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 const Login = ():React.JSX.Element => {
@@ -27,7 +27,7 @@ const Login = ():React.JSX.Element => {
     error: loginError,
   }] = useLoginUserMutation();
 
-  const checkIsEmailValid = (email:string) => {
+  const checkIsEmailValid = (email:string): void => {
     if (!email.match(isEmailValidRegEx)) {
       setInputUserEmailError(true);
       setInputUserEmailErrorMsg(email.trim() === '' ? '' : 'Email must be in a valid format!');
@@ -36,7 +36,7 @@ const Login = ():React.JSX.Element => {
     }
   }
   
-  const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.currentTarget.name === "userEmail") {
       setInputUserEmailError(false);
       setInputUserEmailErrorMsg("");
@@ -49,7 +49,7 @@ const Login = ():React.JSX.Element => {
     }
   };
 
-  const handleLogin = async (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLButtonElement>): Promise<void> => {
     e.preventDefault();
     if (userEmail.trim() === "") {
       setInputUserEmailError(true);
