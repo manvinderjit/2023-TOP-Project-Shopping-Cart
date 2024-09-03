@@ -8,8 +8,8 @@ const App = ():React.JSX.Element => {
   const content: React.JSX.Element = (
     <>
       <Toast />
-      <Header />      
-      <Outlet />            
+      <Header />
+      <Outlet />
       <Footer />
     </>
   );
