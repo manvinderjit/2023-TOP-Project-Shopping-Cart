@@ -46,7 +46,7 @@ const CartDrawer = (): React.JSX.Element => {
         </div>
       </section>
     ) : (
-      <div className="top-3 right-3 fixed flex justify-center">
+      <div className="hidden top-3 right-3 fixed md:flex justify-center">
         <button
           aria-label="Show Items in Cart"
           onClick={() => setShowCartDrawer(true)}

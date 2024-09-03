@@ -9,7 +9,7 @@ const CartButton = (): React.JSX.Element => {
    (
     <div className="justify-end">
       <Link to='/cart'>      
-        <div className="relative py-2">
+        <div className="relative mx-6 py-2">
           <div className="t-0 absolute left-3">
             <p className="flex h-2 w-2 items-center justify-center rounded-full bg-[#646cff] p-3 text-xs text-white">
               {totalCartQuantity}

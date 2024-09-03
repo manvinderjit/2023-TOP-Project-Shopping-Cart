@@ -6,6 +6,7 @@ import { useAppSelector } from "../../application/reduxHooks";
 import { getCurrentToken, getCurrentUserDetails } from "../../features/auth/authSlice";
 import { Navigate } from "react-router-dom";
 import NavItemsTopMobile from "./NavItemsTopMobile";
+import ButtonToggle from "../buttonToggle/ButtonToggle";
 
 const NavTop = (): React.JSX.Element => {
   const token = useAppSelector(getCurrentToken);
@@ -14,16 +15,13 @@ const NavTop = (): React.JSX.Element => {
 
     const content: React.JSX.Element = (
       <>
-        <nav className="flex lg:hidden flex-row w-3/4 mx-auto gap-4 ">          
-          <NavItemsTopMobile />
-          {token && token !== null ? <NavUserAccountTools /> : <></>}
-          <CartButton />
-        </nav>
-        <nav className="hidden lg:flex flex-row w-3/4 mx-auto gap-4">
+        <nav className="flex flex-row w-11/12 md:w-3/4 mx-auto gap-4 justify-evenly lg:justify-normal">
           <Logo />
+          <NavItemsTopMobile />
           <NavItemsTop />
           {token && token !== null ? <NavUserAccountTools /> : <></>}
           <CartButton />
+          <ButtonToggle />
         </nav>
       </>
     );

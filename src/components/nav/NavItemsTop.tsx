@@ -7,7 +7,7 @@ const NavItemsTop = (): React.JSX.Element => {
   const currentLocation = useLocation();
 
     const content: React.JSX.Element = (
-      <ul className="flex flex-row mr-auto">
+      <ul className="hidden lg:flex flex-row mr-auto">
         <li className={`flex flex-col justify-center text-center w-24 text-l ${currentLocation.pathname === '/' ? 'text-[#646cff]' : ''}`}>
           <Link to="/">Home</Link>
         </li>

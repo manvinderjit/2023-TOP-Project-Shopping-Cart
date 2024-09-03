@@ -13,7 +13,7 @@ const NavItemsTopMobile = (): React.JSX.Element => {
   const toggleMobileNavMenu = () => isMobileNavOpen ? setIsMobileNavOpen(false) : setIsMobileNavOpen(true);
 
   const content: React.JSX.Element = (
-    <ul className="flex flex-row mr-auto">
+    <ul className="flex lg:hidden flex-row sm:mr-auto">
       <li className="flex flex-col justify-center text-center w-24 text-l">
         <button
           aria-label="Navigation Menu"
