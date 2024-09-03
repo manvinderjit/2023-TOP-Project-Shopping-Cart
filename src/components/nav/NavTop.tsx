@@ -4,14 +4,12 @@ import NavItemsTop from "./NavItemsTop";
 import NavUserAccountTools from "./NavUserAccountTools";
 import { useAppSelector } from "../../application/reduxHooks";
 import { getCurrentToken, getCurrentUserDetails } from "../../features/auth/authSlice";
-import { Navigate } from "react-router-dom";
 import NavItemsTopMobile from "./NavItemsTopMobile";
 import ButtonToggle from "../buttonToggle/ButtonToggle";
 
 const NavTop = (): React.JSX.Element => {
   const token = useAppSelector(getCurrentToken);
   const username = useAppSelector(getCurrentUserDetails);
-  // if(username === null) <Navigate to='/login' replace = {true}/>;
 
     const content: React.JSX.Element = (
       <>
