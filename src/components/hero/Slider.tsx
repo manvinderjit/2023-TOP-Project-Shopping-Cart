@@ -38,9 +38,9 @@ const Slider = ({ carouselImagesData }: CarouselImagesData ):React.JSX.Element =
     const content: React.JSX.Element = (
       <section
         aria-label="Hero Image Slider"
-        className="w-full h-full relative mx-auto my-auto"
+        className="w-full h-full relative mx-auto my-auto shadow-2xl"
       >
-        <div className="w-full h-full flex flex-row overflow-hidden">
+        <div className="w-full h-full flex flex-row overflow-hidden rounded-md">
           {Object.values(carouselImagesData).map((img: CarouselImageData, index: number) => (
             <img
               key={index}                  
