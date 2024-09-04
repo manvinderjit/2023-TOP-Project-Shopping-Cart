@@ -63,6 +63,7 @@ const Checkout = (): React.JSX.Element => {
         className={`w-full h-full flex flex-col justify-center items-center gap-4 ${themeClasses.textClass}`}
       >
         <h2 className="text-2xl font-bold">Checkout</h2>
+        <p className="text-red-500">Note: Inputs on this page are placeholders at the moment. You can checkout without entering them.</p>
         <div
           className={`w-4/6 gap-10 border rounded-xl ${themeClasses.secondaryBgClass} shadow-2xl ${themeClasses.secondaryBorderClass}`}
         >
