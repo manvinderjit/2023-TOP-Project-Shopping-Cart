@@ -12,5 +12,6 @@ export interface ThemeContext {
     inputRingClass: string;
     inputBgClass: string;
     secondaryBorderClass: string;
+    primaryColor: string;
   };
 }

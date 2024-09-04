@@ -14,6 +14,7 @@ const ThemeContext = createContext<ThemeContext>({
     primaryBgHoveredClass: "hover:bg-indigo-500",
     inputRingClass: "ring-gray-300 ",
     inputBgClass: "bg-[#2B2A33]",
+    primaryColor: "#4f46e5",
   },
 });
 
@@ -33,6 +34,7 @@ const ThemeContextProvider = (props) => {
           primaryBgHoveredClass: "hover:bg-indigo-500",
           inputRingClass: "ring-gray-300",
           inputBgClass: "bg-[#2B2A33]",
+          primaryColor: "#4f46e5",
         }
       : {
           textClass: "text-violet-800",
@@ -45,6 +47,7 @@ const ThemeContextProvider = (props) => {
           primaryBgHoveredClass: "hover:bg-[#9354ed] cursor-pointer",
           inputRingClass: "border-violet-800",
           inputBgClass: "bg-gray-400",
+          primaryColor: "#5b21b6",
         };
 
     return(
