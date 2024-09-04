@@ -188,7 +188,7 @@ const Register = (): React.JSX.Element => {
                 onChange={onInputValueChange}
                 value={userEmail}
                 required
-                className={`mt-2 block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
+                className={`mt-2 block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
               />
               <span
                 aria-label="Error for User Email"
@@ -214,7 +214,7 @@ const Register = (): React.JSX.Element => {
                   onChange={onInputValueChange}
                   required
                   value={userPassword}
-                  className={`mt-2 block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
+                  className={`mt-2 block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
                 />
               </div>
               <span
@@ -241,7 +241,7 @@ const Register = (): React.JSX.Element => {
                   onChange={onInputValueChange}
                   value={userConfirmPassword}
                   required
-                  className={`mt-2 block w-full rounded-md border-0 p-1.5 ${themeClasses.textClass} shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
+                  className={`mt-2 block w-full rounded-md border-0 p-1.5 ${themeClasses.textClass} shadow-sm ring-1 ring-inset  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
                 />
               </div>
               <span

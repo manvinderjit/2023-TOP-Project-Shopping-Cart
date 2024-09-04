@@ -46,7 +46,7 @@ const ThemeContextProvider = (props) => {
           primaryBorderClass: "border-violet-800",
           secondaryBorderClass: "border-violet-800",
           primaryBgHoveredClass: "hover:bg-[#9354ed] cursor-pointer",
-          inputRingClass: "border-violet-800",
+          inputRingClass: "ring-violet-800",
           inputBgClass: "bg-gray-400",
           primaryColor: "#5b21b6",
         };
