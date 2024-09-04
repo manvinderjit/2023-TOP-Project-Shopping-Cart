@@ -283,7 +283,7 @@ const Cart = ():React.JSX.Element => {
           <p className={`${themeClasses.textClass}`}>Your shopping cart is empty!</p>
           <Link
             to="/"
-            className={`flex w-48 self-center mt-4 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 hover:text-white ${themeClasses.primaryBgClass}`}
+            className={`flex w-48 self-center mt-4 justify-center rounded-md  px-3 py-1.5 text-sm font-semibold text-white shadow-sm  hover:text-white ${themeClasses.primaryBgClass} ${themeClasses.primaryBgHoveredClass}`}
           >
             Browse Items
           </Link>
