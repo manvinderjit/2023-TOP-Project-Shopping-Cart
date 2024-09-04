@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 const ButtonToggle = (): React.JSX.Element => {
-  const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
+  const { isDarkMode, toggleDarkMode, themeClasses } = useContext(ThemeContext);
 
   const content: React.JSX.Element = (
     <div className="flex flex-col justify-evenly">
@@ -16,13 +16,17 @@ const ButtonToggle = (): React.JSX.Element => {
         />
         <label
           htmlFor="themeToggle"
-          className="w-16 h-7 px-1 bg-gray-700 relative rounded-full cursor-pointer flex justify-between items-center peer peer-checked:after:translate-x-9 after:content-[''] after:absolute after:bg-white after:fill-indigo-600 after:rounded-full after:h-5 after:w-5 after:transition-all after:duration-500"
+          className={`w-16 h-7 px-1 ${
+            isDarkMode ? "bg-gray-700 duration-500" : "bg-violet-800 duration-500"
+          }  relative rounded-full cursor-pointer flex justify-between items-center peer peer-checked:after:translate-x-9 after:content-[''] after:absolute after:bg-white after:fill-indigo-600 after:rounded-full after:h-5 after:w-5 after:transition-all after:duration-500`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className={`size-5 z-40 ${isDarkMode? 'fill-gray-400' : 'fill-indigo-600  delay-500'}`}
+            className={`size-5 z-40 ${
+              isDarkMode ? "fill-gray-400" : "fill-violet-800  delay-500"
+            }`}
           >
             <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z" />
           </svg>
@@ -30,7 +34,9 @@ const ButtonToggle = (): React.JSX.Element => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="red"
-            className={`size-4 z-40 mr-[2px] ${isDarkMode? 'fill-indigo-600  delay-500': 'fill-gray-400' } `}
+            className={`size-4 z-40 mr-[2px] ${
+              isDarkMode ? "fill-indigo-600  delay-500" : "fill-gray-400"
+            } `}
           >
             <path
               fillRule="evenodd"

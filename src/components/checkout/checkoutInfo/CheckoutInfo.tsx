@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 
 const CheckoutInfo = (): React.JSX.Element => {
 
+  const { themeClasses } = useContext(ThemeContext);
   const [isSameBillingInfo, setIsSameBillingInfo] = useState<boolean>(true);
 
   const toggleSameBillingInfo = (): void =>
@@ -23,7 +25,7 @@ const CheckoutInfo = (): React.JSX.Element => {
               type="email"
               // onChange={}
               required
-              className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+              className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
             />
             {/* <span className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}>
                         {inputUserEmailError
@@ -45,9 +47,8 @@ const CheckoutInfo = (): React.JSX.Element => {
               placeholder="John Doe"
               disabled
               required
-              
               // onChange={}
-              className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+              className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
             />
           </div>
           <div>
@@ -64,9 +65,8 @@ const CheckoutInfo = (): React.JSX.Element => {
               required
               placeholder="xxxx xxxx xxxx xxxx"
               disabled
-              
               // onChange={}
-              className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+              className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
             />
           </div>
           <div className="w-full flex justify-between ">
@@ -82,7 +82,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                 disabled
                 required
                 aria-label="Credit Card Expiry Date"
-                className="block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                className={`block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
               />
             </div>
             <div className="w-1/4 flex flex-col gap-2">
@@ -93,13 +93,11 @@ const CheckoutInfo = (): React.JSX.Element => {
                 id="ccCVV"
                 name="ccCVV"
                 placeholder="CVV"
-                
                 maxLength={3}
-                
                 required
                 aria-label="Credit Card CVV"
                 disabled
-                className="w-full block rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                className={`w-full block rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
               />
             </div>
           </div>
@@ -119,8 +117,7 @@ const CheckoutInfo = (): React.JSX.Element => {
               type="text"
               required
               placeholder="#, Street Name, Landmark etc."
-              
-              className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+              className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
             />
           </div>
           <div className="flex gap-4">
@@ -133,7 +130,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                 name="city"
                 type="text"
                 required
-                className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
               />
             </div>
             <div>
@@ -145,7 +142,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                 name="state"
                 type="text"
                 required
-                className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
               />
             </div>
             <div>
@@ -157,7 +154,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                 name="postalCode"
                 type="text"
                 required
-                className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
               />
             </div>
           </div>
@@ -188,7 +185,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                   name="payerName"
                   type="text"
                   placeholder="John Doe"
-                  className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                  className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
                 />
               </div>
               <div>
@@ -203,7 +200,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                   name="billingAddress"
                   type="text"
                   placeholder="#, Street Name, Landmark etc."
-                  className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                  className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
                 />
               </div>
               <div className="flex gap-4">
@@ -218,7 +215,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                     id="billingCity"
                     name="billingCity"
                     type="text"
-                    className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                    className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
                   />
                 </div>
                 <div>
@@ -232,7 +229,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                     name="billingState"
                     id="billingState"
                     type="text"
-                    className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                    className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
                   />
                 </div>
                 <div>
@@ -246,7 +243,7 @@ const CheckoutInfo = (): React.JSX.Element => {
                     id="billingPostalCode"
                     name="billingPostalCode"
                     type="text"
-                    className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                    className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.inputBgClass}`}
                   />
                 </div>
               </div>

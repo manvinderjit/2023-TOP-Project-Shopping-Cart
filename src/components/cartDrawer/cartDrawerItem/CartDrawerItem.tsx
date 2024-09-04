@@ -3,6 +3,8 @@ import { apiURL } from "../../../features/api/apiSlice";
 import { useDispatch } from "react-redux";
 import { changeItemQuantity, removeItemFromCart } from "../../../features/cart/cartSlice";
 import ButtonX from "../../buttonX/ButtonX";
+import { useContext } from "react";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 
 const calculateItemTotal = (a: number, b: number): number =>
   parseFloat(
@@ -13,8 +15,9 @@ const calculateItemTotal = (a: number, b: number): number =>
   );
 
 const CartDrawerItem = (props:CartDrawerItemable): React.JSX.Element => {
-
     const dispatch = useDispatch();
+
+    const { themeClasses } = useContext(ThemeContext);
 
     const content: React.JSX.Element = (
       <li key={props.id} className="p-4">
@@ -22,7 +25,7 @@ const CartDrawerItem = (props:CartDrawerItemable): React.JSX.Element => {
           <img
             src={`${apiURL}/api/products/image/${props.imageFilename}`}
             alt={`${props.imageFilename}`}
-            className="rounded-lg border-indigo-600 border-2"
+            className={`rounded-lg ${themeClasses.primaryBorderClass} border-2`}
           />
         </div>
         <div className="text-center pt-2 font-medium">

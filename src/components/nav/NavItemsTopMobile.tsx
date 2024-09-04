@@ -1,12 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../application/reduxHooks";
 import { getCurrentToken, getCurrentUserDetails } from "../../features/auth/authSlice";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 
 const NavItemsTopMobile = (): React.JSX.Element => {
   const token = useAppSelector(getCurrentToken);
   const currentLocation = useLocation();
+  const { themeClasses } = useContext(ThemeContext);
 
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
 
@@ -53,8 +55,8 @@ const NavItemsTopMobile = (): React.JSX.Element => {
       {isMobileNavOpen ? (
         <ul className="fixed top-0 left-0 z-10 flex flex-col justify-center items-center w-full py-2 gap-[1px] pt-12 bg-black bg-opacity-75">
           <li
-            className={`flex flex-col justify-center text-center h-8 w-full rounded  ${
-              currentLocation.pathname === "/" ? "text-[#646cff]" : ""
+            className={`flex flex-col justify-center text-center h-8 w-full rounded ${themeClasses.textHoveredClass}  ${
+              currentLocation.pathname === "/" ? `${themeClasses.textHighlightedClass} underline` : ""
             }`}
           >
             <Link onClick={() => setIsMobileNavOpen(false)} to="/">
@@ -65,7 +67,7 @@ const NavItemsTopMobile = (): React.JSX.Element => {
             <li
               className={`flex flex-col justify-center text-center  h-8 w-full rounded ${
                 currentLocation.pathname === "/dashboard"
-                  ? "text-[#646cff]"
+                  ? `${themeClasses.textHighlightedClass} underline`
                   : ""
               }`}
             >
@@ -76,8 +78,8 @@ const NavItemsTopMobile = (): React.JSX.Element => {
           ) : (
             <>
               <li
-                className={`flex flex-col justify-center text-center  h-8 w-full rounded  ${
-                  currentLocation.pathname === "/login" ? "text-[#646cff]" : ""
+                className={`flex flex-col justify-center text-center  h-8 w-full rounded ${themeClasses.textHoveredClass}  ${
+                  currentLocation.pathname === "/login" ? `${themeClasses.textHighlightedClass} underline` : ""
                 }`}
               >
                 <Link onClick={() => setIsMobileNavOpen(false)} to="/login">
@@ -85,9 +87,9 @@ const NavItemsTopMobile = (): React.JSX.Element => {
                 </Link>
               </li>
               <li
-                className={`flex flex-col justify-center text-center  h-8 w-full rounded  ${
+                className={`flex flex-col justify-center text-center  h-8 w-full rounded ${themeClasses.textHoveredClass}  ${
                   currentLocation.pathname === "/register"
-                    ? "text-[#646cff]"
+                    ? `${themeClasses.textHighlightedClass} underline`
                     : ""
                 }`}
               >
@@ -98,8 +100,8 @@ const NavItemsTopMobile = (): React.JSX.Element => {
             </>
           )}
           <li
-            className={`flex flex-col justify-center text-center  h-8 w-full rounded  ${
-              currentLocation.pathname === "/cart" ? "text-[#646cff]" : ""
+            className={`flex flex-col justify-center text-center  h-8 w-full rounded ${themeClasses.textHoveredClass}  ${
+              currentLocation.pathname === "/cart" ? `${themeClasses.textHighlightedClass} underline` : ""
             }`}
           >
             <Link onClick={() => setIsMobileNavOpen(false)} to="/cart">

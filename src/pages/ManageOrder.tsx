@@ -5,12 +5,14 @@ import { getCurrentToken } from "../features/auth/authSlice";
 import { OrderItemDetails } from "../components/userOrders/UserOrders.types";
 import UserOrderItem from "../components/userOrders/userOrder/userOrderItem/UserOrderItem";
 import Button from "../components/button/Button";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const ManageOrder = (): React.JSX.Element => {
     const { orderId } = useParams<string>();
     const token: string | null = useAppSelector(getCurrentToken);
     const navigate: NavigateFunction = useNavigate();
+    const { themeClasses } = useContext(ThemeContext);
 
     const { data: userOrders, isSuccess: isSuccessUserOrders, } = useGetUserOrdersQuery(token);
     const order = userOrders.ordersList.find((order) => order.id === orderId);
@@ -60,8 +62,13 @@ const ManageOrder = (): React.JSX.Element => {
               <></>
             )}
           </div>
-          <div key={order.id} className="border-violet-600 border rounded-md">
-            <div className="flex flex-row justify-evenly border-violet-600 border-b p-4">
+          <div
+            key={order.id}
+            className={` border rounded-md shadow-2xl ${themeClasses.primaryBorderClass}`}
+          >
+            <div
+              className={`flex flex-row justify-evenly p-4 ${themeClasses.primaryBgClass}`}
+            >
               <div className="flex flex-col">
                 <h3 className="text-lg font-semibold">Ordered On</h3>
                 <p aria-label="Ordered On">{order.createdAt}</p>
@@ -79,13 +86,13 @@ const ManageOrder = (): React.JSX.Element => {
                 <p aria-label="Order Updated On">{order.updatedAt}</p>
               </div>
             </div>
-            <div className="flex flex-col gap-6 py-6">
+            <div className={`flex flex-col gap-6 py-6 ${themeClasses.secondaryBgClass}`}>
               {order.items.map((item: OrderItemDetails) => (
                 <UserOrderItem key={item.itemDetails.id} item={item} />
               ))}
             </div>
 
-            <div className="flex justify-center items-center mb-4">
+            <div className={`flex justify-center items-center pb-4 rounded-md ${themeClasses.secondaryBgClass}`}>
               <Button
                 ariaLabel="Cancel Order"
                 buttonLabel="Cancel Order"
@@ -107,7 +114,7 @@ const ManageOrder = (): React.JSX.Element => {
 
     return (
       <div className="w-4/5 m-auto">
-            <h2 className="my-6 text-center text-2xl font-medium">
+            <h2 className={`my-6 text-center text-2xl font-medium ${themeClasses.textClass}`}>
               Manage Order
             </h2>
             {content}

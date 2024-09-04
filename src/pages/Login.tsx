@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../features/api/apiSlice";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAppDispatch } from "../application/reduxHooks";
 import { setCredentials } from "../features/auth/authSlice";
 import { addToastAlert, removeToastAlert } from "../features/toast/toastSlice";
 import { nanoid } from "@reduxjs/toolkit";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const isEmailValidRegEx:RegExp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -13,6 +14,7 @@ const Login = ():React.JSX.Element => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { themeClasses } = useContext(ThemeContext);
 
   const [userEmail, setUserEmail] = useState<string>('');
   const [userPassword, setUserPassword] = useState<string>('');  
@@ -85,7 +87,9 @@ const Login = ():React.JSX.Element => {
     <section id="section-login" className="h-full flex-grow flex">
       <div className="w-full min-h-full flex flex-col justify-center ">
         <div className="mb-4">
-          <h2 className="text-center text-2xl font-bold">
+          <h2
+            className={`text-center text-2xl font-bold ${themeClasses.textClass}`}
+          >
             Log in To Your Account
           </h2>
         </div>
@@ -99,7 +103,10 @@ const Login = ():React.JSX.Element => {
         <div className="min-w-72 mx-auto sm:w-full max-w-sm">
           <form className="flex flex-col gap-2" action="">
             <div>
-              <label htmlFor="userEmail" className="block text-sm font-medium">
+              <label
+                htmlFor="userEmail"
+                className={`block text-sm font-medium ${themeClasses.textClass}`}
+              >
                 Email Address
               </label>
               <input
@@ -108,26 +115,26 @@ const Login = ():React.JSX.Element => {
                 type="email"
                 onChange={handleOnInputChange}
                 required
-                className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
               />
-              <span className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}>
-                {inputUserEmailError
-                  ? inputUserEmailErrorMsg
-                  : ""}
+              <span
+                className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}
+              >
+                {inputUserEmailError ? inputUserEmailErrorMsg : ""}
               </span>
             </div>
             <div>
               <div className="flex justify-between items-center">
                 <label
                   htmlFor="userPassword"
-                  className="block text-sm font-medium leading-6"
+                  className={`block text-sm font-medium leading-6 ${themeClasses.textClass}`}
                 >
                   Password
                 </label>
                 <div className="text-sm">
                   <a
                     href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                    className={`font-semibold ${themeClasses.textHighlightedClass} ${themeClasses.textHoveredClass}`}
                   >
                     Forgot password?
                   </a>
@@ -140,30 +147,34 @@ const Login = ():React.JSX.Element => {
                   type="password"
                   required
                   onChange={handleOnInputChange}
-                  className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                  className={`mt-2 block w-full rounded-md border-0 p-1.5  shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
                 />
                 <span
                   className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}
                 >
                   {inputUserPasswordError ? "Password can't be empty!" : ""}
-                </span>                
+                </span>
               </div>
             </div>
             <div className="flex flex-col  mt-4">
               <button
                 type="button"
                 onClick={handleLogin}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className={`flex w-full justify-center rounded-md ${themeClasses.primaryBgClass} ${themeClasses.primaryBgHoveredClass} px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
               >
                 Sign in
               </button>
             </div>
           </form>
-          <p className="mt-2 text-center text-sm text-white">
-            <span className="mr-2 h-6">Not a member?</span>
+          <p className="mt-2 text-center text-sm ">
+            <span
+              className={`mr-2 h-6  ${themeClasses.textClass}`}
+            >
+              Not a member?
+            </span>
             <Link
               to="/register"
-              className="font-semibold text-indigo-600 hover:text-indigo-500"
+              className={`font-semibold ${themeClasses.textHighlightedClass} ${themeClasses.textHoveredClass}`}
             >
               Sign Up Now!
             </Link>

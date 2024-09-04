@@ -9,8 +9,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
-  const { isDarkMode } = useContext(ThemeContext);
-
+  const { isDarkMode, themeClasses } = useContext(ThemeContext);
   const dispatch = useDispatch();
 
   const _productDetailsAddToCart = {
@@ -39,7 +38,7 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
 
   const content: React.JSX.Element = (
     <div className="">
-      <div className={`min-w-72 rounded-xl ${isDarkMode ? 'text-white bg-[#2a2a2a] shadow-xl' : 'text-indigo-600 bg-white shadow-2xl'} duration-500`}>
+      <div className={`min-w-72 rounded-xl ${themeClasses.textClass} ${isDarkMode ? ' bg-[#2a2a2a] shadow-xl ' : ' bg-white shadow-2xl'} duration-500`}>
         <div className="max-w-96 mx-auto">
           <img
             src={`${apiURL}/api/products/image/${productData.imageFilename}`}

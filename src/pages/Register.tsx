@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegisterUserMutation } from "../features/api/apiSlice";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -12,6 +13,8 @@ const checkContainsUpperCase = (str: string): boolean => {
 };
 
 const Register = (): React.JSX.Element => {
+
+  const { themeClasses } = useContext(ThemeContext);
 
   const [userEmail, setUserEmail] = useState<string>("");
   const [isUserEmailValid, setIsUserEmailValid] = useState<boolean | null>(null);
@@ -145,18 +148,26 @@ const Register = (): React.JSX.Element => {
     <section id="section-login" className="h-full flex-grow flex">
       <div className="w-full min-h-full flex flex-col justify-center ">
         <div className="mb-4">
-          <h2 className="text-center text-2xl font-bold">
+          <h2
+            className={`text-center text-2xl font-bold ${themeClasses.textClass}`}
+          >
             Sign Up For Our Website
           </h2>
         </div>
         <div className="flex justify-center mb-4">
           {isRegistrationError === true ? (
-            <p aria-label="Registration Status" className=" text-red-400">{`Error! ${registrationError?.data?.error}`}</p>
+            <p
+              aria-label="Registration Status"
+              className=" text-red-400"
+            >{`Error! ${registrationError?.data?.error}`}</p>
           ) : (
             <></>
           )}
           {isRegistrationSuccess === true ? (
-            <p aria-label="Registration Status" className=" text-emerald-600">{`Success! ${registrationData?.message}`}</p>
+            <p
+              aria-label="Registration Status"
+              className=" text-emerald-600"
+            >{`Success! ${registrationData?.message}`}</p>
           ) : (
             <></>
           )}
@@ -164,7 +175,10 @@ const Register = (): React.JSX.Element => {
         <div className="min-w-72 mx-auto sm:w-full max-w-sm">
           <form className="flex flex-col gap-3" action="">
             <div>
-              <label htmlFor="userEmail" className="block text-sm font-medium">
+              <label
+                htmlFor="userEmail"
+                className={`block text-sm font-medium ${themeClasses.textClass}`}
+              >
                 Email Address
               </label>
               <input
@@ -174,7 +188,7 @@ const Register = (): React.JSX.Element => {
                 onChange={onInputValueChange}
                 value={userEmail}
                 required
-                className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                className={`mt-2 block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
               />
               <span
                 aria-label="Error for User Email"
@@ -187,7 +201,7 @@ const Register = (): React.JSX.Element => {
               <div className="flex justify-between items-center">
                 <label
                   htmlFor="userPassword"
-                  className="block text-sm font-medium leading-6"
+                  className={`block text-sm font-medium leading-6 ${themeClasses.textClass}`}
                 >
                   Password
                 </label>
@@ -200,7 +214,7 @@ const Register = (): React.JSX.Element => {
                   onChange={onInputValueChange}
                   required
                   value={userPassword}
-                  className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                  className={`mt-2 block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
                 />
               </div>
               <span
@@ -214,7 +228,7 @@ const Register = (): React.JSX.Element => {
               <div className="flex justify-between items-center">
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-sm font-medium leading-6"
+                  className={`block text-sm font-medium leading-6 ${themeClasses.textClass}`}
                 >
                   Confirm Password
                 </label>
@@ -227,10 +241,13 @@ const Register = (): React.JSX.Element => {
                   onChange={onInputValueChange}
                   value={userConfirmPassword}
                   required
-                  className="mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6"
+                  className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
                 />
               </div>
-              <span aria-label="Error for User Confirm Password" className={`flex justify-center pt-1 h-6 text-red-400`}>
+              <span
+                aria-label="Error for User Confirm Password"
+                className={`flex justify-center pt-1 h-6 text-red-400`}
+              >
                 {!isUserConfirmPasswordValid ? userConfirmPassErrorMsg : ""}
               </span>
             </div>
@@ -238,18 +255,20 @@ const Register = (): React.JSX.Element => {
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className={`flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${themeClasses.primaryBgClass} ${themeClasses.primaryBgHoveredClass}`}
               >
                 Sign Up
               </button>
             </div>
           </form>
 
-          <p className="mt-4 text-center text-sm text-white">
-            <span className="mr-2">Already have an account?</span>
+          <p className="mt-4 text-center text-sm ">
+            <span className={`mr-2 ${themeClasses.textClass}`}>
+              Already have an account?
+            </span>
             <Link
               to="/login"
-              className="font-semibold text-indigo-600 hover:text-indigo-500"
+              className={`font-semibold ${themeClasses.textHighlightedClass} ${themeClasses.textHoveredClass}`}
             >
               Log in Here!
             </Link>

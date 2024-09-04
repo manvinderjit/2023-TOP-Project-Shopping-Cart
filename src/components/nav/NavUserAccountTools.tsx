@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../../features/auth/authSlice";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 const NavUserAccountTools = ():React.JSX.Element => {
-
+  
+  const { isDarkMode, themeClasses } = useContext(ThemeContext);
   const [showOptionsMenu, setShowOptionsMenu] = useState<boolean>(false);
   const dispatch = useDispatch();
 
@@ -21,7 +23,7 @@ const NavUserAccountTools = ():React.JSX.Element => {
                 type="button"
                 onClick={() => setShowOptionsMenu(!showOptionsMenu)}
                 onMouseEnter={() => setShowOptionsMenu(true)}
-                className="inline-flex flex-col w-full items-center justify-center gap-x-1.5 rounded-md px-3 py-2 text-white shadow-sm ring-0 ring-inset ring-white hover:text-[#646cff]"
+                className={`inline-flex flex-col w-full items-center justify-center gap-x-1.5 rounded-md px-3 py-2  ring-0 ring-inset   ${themeClasses.textClass} ${themeClasses.textHoveredClass}`}
                 id="menu-button"
                 aria-label="User Account Tools"
                 aria-expanded={showOptionsMenu}
@@ -46,7 +48,9 @@ const NavUserAccountTools = ():React.JSX.Element => {
                   <svg
                     className="absolute z-10 h-5 w-5 mt-9 text-gray-400"
                     viewBox="0 0 20 20"
-                    fill="white"
+                    fill={`${
+                      isDarkMode ? "white" : `${themeClasses.textClass}`
+                    }`}
                     aria-hidden="true"
                   >
                     <path
@@ -62,7 +66,11 @@ const NavUserAccountTools = ():React.JSX.Element => {
             </div>
             {showOptionsMenu ? (
               <div
-                className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg border ring-white ring-opacity-5 focus:outline-none bg-[#242424]"
+                className={`absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y rounded-md shadow-lg border ring-white ring-opacity-5 focus:outline-none  ${
+                  isDarkMode
+                    ? "bg-[#242424] divide-gray-100"
+                    : `bg-white ${themeClasses.inputRingClass} divide-violet-800`
+                } ${themeClasses.textClass}`}
                 role="menu"
                 onMouseLeave={() => setShowOptionsMenu(false)}
                 aria-orientation="vertical"
@@ -72,18 +80,18 @@ const NavUserAccountTools = ():React.JSX.Element => {
                 <div className="py-1" role="none">
                   <Link
                     to="/dashboard"
-                    className="block px-4 py-2 text-sm text-white"
+                    className={`block px-4 py-2 text-sm  ${themeClasses.textHoveredClass}`}
                     role="menuitem"
                     tabIndex={-1}
                     id="menu-item-0"
                   >
-                    Profile
+                    Dashboard
                   </Link>
                 </div>
                 <div className="py-1" role="none">
                   <Link
                     to="orders"
-                    className="block px-4 py-2 text-sm text-white"
+                    className={`block px-4 py-2 text-sm  ${themeClasses.textHoveredClass}`}
                     role="menuitem"
                     tabIndex={-1}
                     id="menu-item-2"
@@ -93,7 +101,7 @@ const NavUserAccountTools = ():React.JSX.Element => {
                 </div>
                 <div className="py-1" role="none">
                   <button
-                    className="block w-full text-left px-4 py-2 text-sm text-white font-medium hover:text-[#646cff]"
+                    className={`block w-full text-left px-4 py-2 text-sm  font-medium  ${themeClasses.textHoveredClass}`}
                     role="menuitem"
                     tabIndex={-1}
                     onClick={handleLogout}
@@ -106,7 +114,6 @@ const NavUserAccountTools = ():React.JSX.Element => {
               <></>
             )}
           </div>
-          
         </div>
       </div>
     );

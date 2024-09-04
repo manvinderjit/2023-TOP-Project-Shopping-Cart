@@ -7,6 +7,9 @@ import { useAppSelector } from "../application/reduxHooks";
 import { getCurrentToken } from "../features/auth/authSlice";
 import { apiURL } from "../features/api/apiSlice";
 import type { PriceDetails } from "../components/checkout/orderSummary/CheckoutSummary.types";
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
+import Button from "../components/button/Button";
 
 interface CartItemDetails {
   id: string,
@@ -28,6 +31,7 @@ const Cart = ():React.JSX.Element => {
   const token: string | null = useAppSelector(getCurrentToken);  
   const priceDetails: PriceDetails = useAppSelector(calculatePriceDetails);
   const navigate = useNavigate();
+  const {isDarkMode, themeClasses } = useContext(ThemeContext);
 
   const _emptyCart = (): void => {
     dispatch(emptyCart());
@@ -73,19 +77,27 @@ const Cart = ():React.JSX.Element => {
     <section
       id="section-cart"
       role="sectionCart"
-      className="m-4 md:w-5/6 2xl:w-3/4 flex-grow flex self-center items-center"
+      className={`m-4 md:w-5/6 2xl:w-3/4 flex-grow flex self-center items-center`}
     >
       {cartItems.length > 0 ? (
-        <div className="sm:border rounded-xl flex w-full min-h-[50vh] flex-col justify-center items-center xl:flex-row">
+        <div
+          className={`sm:border rounded-xl flex w-full min-h-[50vh] flex-col justify-center items-center xl:flex-row ${
+            themeClasses.secondaryBorderClass
+          } ${isDarkMode ? "" : "bg-white shadow-2xl"}`}
+        >
           <div className="lg:w-4/5 xl:w-2/3 flex flex-col justify-center items-center min-w-80">
-            <h2 className="text-4xl font-bold my-10">Shopping Cart</h2>
+            <h2
+              className={`text-4xl font-bold my-10 ${themeClasses.textClass}`}
+            >
+              Shopping Cart
+            </h2>
             <div className="">
               <ul className="flex flex-col px-10">
                 {cartItems.map((item) => {
                   return (
                     <li
                       key={item.id}
-                      className="grid grid-cols-1 sm:grid-cols-5 xl:gap-4 2xl:gap-4 border-t-[1px] border-b-[1px] xl:border-b-0 py-14 items-center justify-center"
+                      className={`grid grid-cols-1 sm:grid-cols-5 xl:gap-4 2xl:gap-4 border-t-[1px] border-b-[1px] xl:border-b-0 py-14 items-center justify-center ${themeClasses.secondaryBorderClass}`}
                     >
                       <div className="col-span-1 min-w-28 max-w-72 sm:max-w-60 ">
                         <img
@@ -94,7 +106,9 @@ const Cart = ():React.JSX.Element => {
                           className="rounded-lg"
                         />
                       </div>
-                      <div className="col-span-1 sm:col-span-2 flex flex-col py-4 gap-2 items-center sm:items-start sm:pl-8">
+                      <div
+                        className={`col-span-1 sm:col-span-2 flex flex-col py-4 gap-2 items-center sm:items-start sm:pl-8 ${themeClasses.textClass}`}
+                      >
                         <h4 className="text-lg font-semibold">{item.name}</h4>
                         <p>${item.price}</p>
                       </div>
@@ -102,7 +116,7 @@ const Cart = ():React.JSX.Element => {
                         <div className=" col-span-1 min-w-32 flex flex-col py-4 items-center gap-4">
                           <label
                             htmlFor="item-quantity"
-                            className="text-lg font-semibold"
+                            className={`text-lg font-semibold ${themeClasses.textClass}`}
                           >
                             Qty
                           </label>
@@ -110,7 +124,9 @@ const Cart = ():React.JSX.Element => {
                             name="item-quantity"
                             id="item-quantity"
                             aria-label={`Change Quantity ${item.name}`}
-                            className="w-16 p-2 text-center rounded-md focus:border-blue-700 focus:border"
+                            className={`w-16 p-2 text-center rounded-md focus:border ${
+                              !isDarkMode ? themeClasses.primaryBgClass : ""
+                            }`}
                             value={item.itemQuantity}
                             onChange={(e) => {
                               dispatch(
@@ -152,7 +168,7 @@ const Cart = ():React.JSX.Element => {
                         <div className=" col-span-1 min-w-32 flex flex-col items-center py-4 gap-4">
                           <label
                             htmlFor="removeItem"
-                            className="text-lg font-semibold"
+                            className={`text-lg font-semibold ${themeClasses.textClass}`}
                           >
                             Remove
                           </label>
@@ -161,7 +177,7 @@ const Cart = ():React.JSX.Element => {
                             onClick={() =>
                               dispatch(removeItemFromCart(item.id))
                             }
-                            className="w-8 h-8 rounded-full  flex items-center justify-center "
+                            className={`w-8 h-8 rounded-full  flex items-center justify-center ${themeClasses.textClass}`}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -184,46 +200,67 @@ const Cart = ():React.JSX.Element => {
               </ul>
             </div>
           </div>
-          <div className="self-center w-3/4 md:w-2/3 my-10 xl:w-1/3 flex flex-col gap-4 border rounded-lg px-8 py-6 mx-10 min-w-80">
-            <h2 className="text-2xl font-semibold border-b-[1px]">
+          <div
+            className={`self-center w-3/4 md:w-2/3 my-10 xl:w-1/3 flex flex-col gap-4 border rounded-lg px-8 py-6 mx-10 min-w-80 ${themeClasses.secondaryBorderClass}`}
+          >
+            <h2
+              className={`text-2xl font-semibold border-b-[1px] ${themeClasses.secondaryBorderClass} ${themeClasses.textClass}`}
+            >
               Order Summary
             </h2>
             <div className="flex flex-col gap-4 px-2">
-              <div className="flex flex-row justify-between border-b-[1px] border-dashed">
+              <div
+                className={`flex flex-row justify-between border-b-[1px] border-dashed ${themeClasses.secondaryBorderClass} ${themeClasses.textClass}`}
+              >
                 <h4>Subtotal</h4>
                 <p>${priceDetails.subTotal}</p>
               </div>
-              <div className="flex flex-row justify-between border-b-[1px] border-dashed">
+              <div
+                className={`flex flex-row justify-between border-b-[1px] border-dashed ${themeClasses.secondaryBorderClass} ${themeClasses.textClass}`}
+              >
                 <h4>Shipping Estimate</h4>
                 <p>$10</p>
               </div>
-              <div className="flex flex-row justify-between border-b-[1px] border-dashed">
+              <div
+                className={`flex flex-row justify-between border-b-[1px] border-dashed ${themeClasses.secondaryBorderClass} ${themeClasses.textClass}`}
+              >
                 <h4>Tax Estimate</h4>
                 <p>${priceDetails.taxes}</p>
               </div>
-              <div className="flex flex-row justify-between font-semibold text-xl">
-                <h4>Order Total</h4>                
+              <div
+                className={`flex flex-row justify-between font-semibold text-xl ${themeClasses.textClass}`}
+              >
+                <h4>Order Total</h4>
                 <p>${priceDetails.finalAmount}</p>
               </div>
             </div>
-            <div className="border-t-[1px] pt-4 flex justify-center items-center">
-              <button
+            <div
+              className={`border-t-[1px] pt-4 flex justify-center items-center ${themeClasses.secondaryBorderClass}`}
+            >
+              {/* <button
                 onClick={handleCheckout}
                 className="w-48 h-10 rounded-xl bg-indigo-600 hover:bg-violet-400"
               >
                 Checkout
-              </button>
+              </button> */}
+              <Button
+                ariaLabel="Checkout"
+                buttonLabel="Checkout"
+                onClick={handleCheckout}
+              />
             </div>
-            <div className="border-t-[1px] pt-4 flex justify-center items-center gap-4 flex-col 2xl:flex-row">
+            <div
+              className={`border-t-[1px] pt-4 flex justify-center items-center gap-4 flex-col 2xl:flex-row ${themeClasses.secondaryBorderClass}`}
+            >
               <button
                 onClick={_emptyCart}
-                className="w-48 h-10 rounded-xl border border-indigo-600 hover:bg-indigo-600 font-normal"
+                className={`w-48 h-10 rounded-xl border  font-normal ${themeClasses.primaryBorderClass} ${themeClasses.textClass} ${themeClasses.primaryBgHoveredClass} hover:text-white`}
               >
                 Empty Cart
               </button>
               <Link
                 to={"/"}
-                className="w-48 h-10 rounded-xl border border-indigo-600 hover:bg-indigo-600 font-normal flex justify-center items-center text-center"
+                className={`w-48 h-10 rounded-xl border font-normal flex justify-center items-center text-center ${themeClasses.primaryBorderClass} ${themeClasses.textClass} ${themeClasses.primaryBgHoveredClass} hover:text-white`}
               >
                 Keep Shopping
               </Link>

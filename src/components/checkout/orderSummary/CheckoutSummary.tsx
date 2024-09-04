@@ -4,11 +4,14 @@ import { apiURL } from "../../../features/api/apiSlice";
 import { calculatePriceDetails } from "../../../features/cart/cartSlice";
 import { useAppSelector } from "../../../application/reduxHooks";
 import type { PriceDetails } from "./CheckoutSummary.types";
+import { useContext } from "react";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 
 const CheckoutSummary = (): React.JSX.Element => {
 
     const cartItems: CartItemDetails[] = useSelector((state: CartItems) => state.cart.cartItems);
     const priceDetails: PriceDetails = useAppSelector(calculatePriceDetails);
+    const { themeClasses } = useContext(ThemeContext);
     
     const calculateItemTotal = (a: number, b: number): number =>
       parseFloat(
@@ -50,22 +53,22 @@ const CheckoutSummary = (): React.JSX.Element => {
                       </h3>
                     </div>
                   </div>
-                  <hr className="border-1 mx-auto my-10" />
+                  <hr className={`border-1 mx-auto my-10 ${themeClasses.secondaryBorderClass}`} />
                 </li>
               );
             })}
           </ul>
         </div>
         <div className="flex flex-col gap-4 px-2">
-          <div className="flex flex-row justify-between border-b-[1px] border-dashed">
+          <div className={`flex flex-row justify-between border-b-[1px] border-dashed ${themeClasses.secondaryBorderClass}`}>
             <h4>Subtotal</h4>
             <p data-testid="subTotal">${priceDetails.subTotal}</p>
           </div>
-          <div className="flex flex-row justify-between border-b-[1px] border-dashed">
+          <div className={`flex flex-row justify-between border-b-[1px] border-dashed ${themeClasses.secondaryBorderClass}`}>
             <h4>Shipping Estimate</h4>
             <p data-testid="shippingEstimate">$10</p>
           </div>
-          <div className="flex flex-row justify-between border-b-[1px] border-dashed">
+          <div className={`flex flex-row justify-between border-b-[1px] border-dashed ${themeClasses.secondaryBorderClass}`}>
             <h4>Tax Estimate</h4>
             <p data-testid="taxEstimate">${priceDetails.taxes}</p>
           </div>

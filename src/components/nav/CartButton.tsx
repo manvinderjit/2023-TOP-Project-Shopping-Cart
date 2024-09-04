@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../application/reduxHooks";
 import { totalQuantity } from "../../features/cart/cartSlice";
+import { useContext } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 const CartButton = (): React.JSX.Element => {
   const totalCartQuantity: number = useAppSelector(totalQuantity);
+  const { themeClasses } = useContext(ThemeContext);
 
-  const content:React.JSX.Element = 
-   (
+  const content: React.JSX.Element = (
     <div className="justify-end">
-      <Link to='/cart'>      
+      <Link to="/cart">
         <div className="relative mx-6 py-2">
           <div className="t-0 absolute left-3">
-            <p className="flex h-2 w-2 items-center justify-center rounded-full bg-[#646cff] p-3 text-xs text-white">
+            <p
+              className={`flex h-2 w-2 items-center justify-center rounded-full p-3 text-xs text-white ${themeClasses.primaryBgClass}`}
+            >
               {totalCartQuantity}
             </p>
           </div>

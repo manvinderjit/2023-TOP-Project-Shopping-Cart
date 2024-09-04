@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useAppSelector } from "../application/reduxHooks";
 import { getCurrentToken } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +6,12 @@ import { useGetUserOrdersQuery } from "../features/api/apiSlice";
 import Spinner from "../components/utility/Spinner";
 import UserOrder from "../components/userOrders/userOrder/UserOrder";
 import type { OrderDetails } from "../components/userOrders/UserOrders.types";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const UserOrders = (): React.JSX.Element => {
     const token: string | null = useAppSelector(getCurrentToken);
     const navigate = useNavigate();
+    const { themeClasses } = useContext(ThemeContext);
 
     const {
         data: userOrders,
@@ -46,7 +48,7 @@ const UserOrders = (): React.JSX.Element => {
     return (
     <section aria-label="User Orders">
         <div className=" w-full flex flex-col justify-center items-center p-10 gap-10">
-            <h2 className="text-2xl font-semibold">Your Orders</h2>
+            <h2 className={`text-2xl font-semibold ${themeClasses.textClass}`}>Your Orders</h2>
             {content}
         </div>
     </section>)
