@@ -115,7 +115,7 @@ const Login = ():React.JSX.Element => {
                 type="email"
                 onChange={handleOnInputChange}
                 required
-                className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
+                className={`mt-2 block w-full rounded-md border-0 p-1.5 ${themeClasses.textClass} shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
               />
               <span
                 className={`flex justify-center pt-1 h-6 ${isLoginError} text-red-400`}
@@ -160,7 +160,7 @@ const Login = ():React.JSX.Element => {
               <button
                 type="button"
                 onClick={handleLogin}
-                className={`flex w-full justify-center rounded-md ${themeClasses.primaryBgClass} ${themeClasses.primaryBgHoveredClass} px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                className={`flex w-full justify-center rounded-md ${themeClasses.primaryBgClass} ${themeClasses.primaryBgHoveredClass} px-3 py-1.5 text-sm font-semibold leading-6 ${themeClasses.textClass} shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
               >
                 Sign in
               </button>

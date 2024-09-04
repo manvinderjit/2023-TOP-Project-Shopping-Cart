@@ -9,6 +9,7 @@ const ThemeContext = createContext<ThemeContext>({
     textHighlightedClass: "text-indigo-500",
     textHoveredClass: "hover:text-indigo-400 cursor-pointer",
     primaryBgClass: "bg-indigo-500",
+    secondaryBgClass: "bg-[#2A2A2A]",
     primaryBorderClass: "border-indigo-500",
     secondaryBorderClass: "border-[#e5e7eb]",
     primaryBgHoveredClass: "hover:bg-indigo-500",

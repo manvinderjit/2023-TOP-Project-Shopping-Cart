@@ -241,7 +241,7 @@ const Register = (): React.JSX.Element => {
                   onChange={onInputValueChange}
                   value={userConfirmPassword}
                   required
-                  className={`mt-2 block w-full rounded-md border-0 p-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
+                  className={`mt-2 block w-full rounded-md border-0 p-1.5 ${themeClasses.textClass} shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-l sm:leading-6 ${themeClasses.inputRingClass} ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
                 />
               </div>
               <span
@@ -255,7 +255,7 @@ const Register = (): React.JSX.Element => {
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className={`flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${themeClasses.primaryBgClass} ${themeClasses.primaryBgHoveredClass}`}
+                className={`flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 ${themeClasses.textClass} shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${themeClasses.primaryBgClass} ${themeClasses.primaryBgHoveredClass}`}
               >
                 Sign Up
               </button>
