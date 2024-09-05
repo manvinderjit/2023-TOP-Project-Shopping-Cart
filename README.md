@@ -1,23 +1,16 @@
 # Shopping WebApp by Manvinderjit
 
-`Note`: The live website is the older Bootstrap-based version. The new version is not live yet.
+## New Live Version
 
-## New Design Previews
-A new version of this website is in development. Here are a few design previews.
-
-#### New Color Scheme
-![](designPreviews/login.png)
-
-#### Resonsive Home Page Design
-![](designPreviews/home.gif)
-
-#### Resonsive Cart Design
-![](designPreviews/cart.gif)
-
-## Existing Live Version
+The new version of the website is now deployed. Some features of the website are under development.
 
 `Live Link`: [Shopping App](https://2023-top-project-shopping-cart.pages.dev/)
 
+## New Design Preview
+![](designPreviews/newHome.gif)
+
+
+## Details
 A Vite-React Redux Webapp e-commerce portal allows customers to purchase products. It has been updated to use Tailwind CSS, React Redux, React Router Dom, and JWT technologies. For testing it uses React Testing Library and ViTest.
 
 Is a part of a two-app ecosystem for an organization selling computer hardware. Leverages RESTful APIs provided by the [Inventory Management App](https://ia.manvinderjit.com/), which is the other app in the ecosystem. 
