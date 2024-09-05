@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { ProductDataAndCategoryDataLists } from "../../types/types.js";
 import type { CarouselImagesData } from "../../components/hero/Slider.types.js";
-import type { OrderDetails } from "../../components/userOrders/UserOrders.types.js";
+import type { OrdersList } from "../../components/userOrders/UserOrders.types.js";
 export const apiURL = import.meta.env.VITE_API_BASE_URL;
 
 // Define our single API slice object
@@ -35,8 +35,8 @@ export const apiSlice = createApi({
       }),
     }),
     // The `getUserOrders` endpoint is a "query" operation that gets all orders for a user
-    getUserOrders: builder.query<OrderDetails, undefined>({
-      query: (token) => ({
+    getUserOrders: builder.query<OrdersList, string | null>({
+      query: (token: string | null) => ({
         url: "/orders",
         headers: { Authorization: `Bearer ${token}` },
       }),

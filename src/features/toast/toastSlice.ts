@@ -24,7 +24,7 @@ export const toastSlice = createSlice({
     }
 });
 
-export const getAllToastAlerts = (state) => state.toast.toastAlerts;
+export const getAllToastAlerts = (state: { toast: { toastAlerts: any; }; }) => state.toast.toastAlerts;
 
 export const { addToastAlert, removeToastAlert } = toastSlice.actions;
 

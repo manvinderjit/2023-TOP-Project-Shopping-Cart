@@ -6,6 +6,7 @@ import { setCredentials } from "../features/auth/authSlice";
 import { addToastAlert, removeToastAlert } from "../features/toast/toastSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { isApiResponseError } from "../application/helpers";
 
 const isEmailValidRegEx:RegExp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -95,7 +96,9 @@ const Login = ():React.JSX.Element => {
         </div>
         <div className="flex justify-center mb-4">
           {isLoginError === true ? (
-            <p className=" text-red-400">{`Error! ${loginError?.data?.error}`}</p>
+            <p className=" text-red-400">{`Error! ${
+              isApiResponseError(loginError) ? loginError.data.error : JSON.stringify(loginError)
+            }`}</p>
           ) : (
             <></>
           )}
@@ -167,9 +170,7 @@ const Login = ():React.JSX.Element => {
             </div>
           </form>
           <p className="mt-2 text-center text-sm ">
-            <span
-              className={`mr-2 h-6  ${themeClasses.textClass}`}
-            >
+            <span className={`mr-2 h-6  ${themeClasses.textClass}`}>
               Not a member?
             </span>
             <Link

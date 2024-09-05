@@ -35,7 +35,7 @@ const Products = ():React.JSX.Element => {
                   </div>
               </>
   } else if (isError) {
-    content = <div>{error.data}</div>
+    content = <div>{JSON.stringify(error)}</div>
   }
 
   return (

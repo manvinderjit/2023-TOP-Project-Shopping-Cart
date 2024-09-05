@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useState } from "react";
 import type { ThemeContext } from "./ThemeContext.types";
 
 const ThemeContext = createContext<ThemeContext>({
@@ -19,7 +19,7 @@ const ThemeContext = createContext<ThemeContext>({
   },
 });
 
-const ThemeContextProvider = (props) => {
+const ThemeContextProvider = (props: { children: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => {
 
     const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
 

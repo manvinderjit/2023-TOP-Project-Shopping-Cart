@@ -7,6 +7,7 @@ import Spinner from "../components/utility/Spinner";
 import UserOrder from "../components/userOrders/userOrder/UserOrder";
 import type { OrderDetails } from "../components/userOrders/UserOrders.types";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { isApiResponseError } from "../application/helpers";
 
 const UserOrders = (): React.JSX.Element => {
     const token: string | null = useAppSelector(getCurrentToken);
@@ -30,6 +31,7 @@ const UserOrders = (): React.JSX.Element => {
         // If Loading User Orders
         content = <Spinner />;
     } else if (isSuccessUserOrders) {
+      console.log(userOrders)
         // If User Orders
         content = (
           <div className="w-11/12 lg:w-5/6 xl:w-4/5 text-center mx-auto ">
@@ -42,7 +44,7 @@ const UserOrders = (): React.JSX.Element => {
         );
     } else if (isErrorUserOrders) {
         // If error occured
-        content = <div>{errorUserOrders.data}</div>
+        content = <div>{isApiResponseError(errorUserOrders) ? errorUserOrders.data.error : JSON.stringify(errorUserOrders)}</div>
     }
     
     return (

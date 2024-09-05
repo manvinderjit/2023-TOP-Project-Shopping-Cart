@@ -7,6 +7,7 @@ import UserOrderItem from "../components/userOrders/userOrder/userOrderItem/User
 import Button from "../components/button/Button";
 import { useContext, useEffect } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { isApiResponseError } from "../application/helpers";
 
 const ManageOrder = (): React.JSX.Element => {
     const { orderId } = useParams<string>();
@@ -15,7 +16,7 @@ const ManageOrder = (): React.JSX.Element => {
     const { themeClasses } = useContext(ThemeContext);
 
     const { data: userOrders, isSuccess: isSuccessUserOrders, } = useGetUserOrdersQuery(token);
-    const order = userOrders.ordersList.find((order) => order.id === orderId);
+    const order = userOrders?.ordersList.find((order: { id: string }) => order.id === orderId);
 
     const [cancelOrder,
         {
@@ -49,7 +50,11 @@ const ManageOrder = (): React.JSX.Element => {
         <>
           <div className="flex justify-center mb-4">
             {isCancelOrderError === true ? (
-              <p className=" text-red-400">{`Error! ${cancelOrderError?.data.error}`}</p>
+              <p className=" text-red-400">{`Error! ${
+                isApiResponseError(cancelOrderError)
+                  ? cancelOrderError.data.error
+                  : JSON.stringify(cancelOrderError)
+              }`}</p>
             ) : (
               <></>
             )}
@@ -86,13 +91,17 @@ const ManageOrder = (): React.JSX.Element => {
                 <p aria-label="Order Updated On">{order.updatedAt}</p>
               </div>
             </div>
-            <div className={`flex flex-col gap-6 py-6 ${themeClasses.secondaryBgClass}`}>
+            <div
+              className={`flex flex-col gap-6 py-6 ${themeClasses.secondaryBgClass}`}
+            >
               {order.items.map((item: OrderItemDetails) => (
                 <UserOrderItem key={item.itemDetails.id} item={item} />
               ))}
             </div>
 
-            <div className={`flex justify-center items-center pb-4 rounded-md ${themeClasses.secondaryBgClass}`}>
+            <div
+              className={`flex justify-center items-center pb-4 rounded-md ${themeClasses.secondaryBgClass}`}
+            >
               <Button
                 ariaLabel="Cancel Order"
                 buttonLabel="Cancel Order"
@@ -104,7 +113,11 @@ const ManageOrder = (): React.JSX.Element => {
       );      
     } else if (isCancelOrderError) { // Error
       content = (
-        <p className=" text-red-400 ">{`Error! ${cancelOrderError?.data.error}`}</p>
+        <p className=" text-red-400 ">{`Error! ${
+          isApiResponseError(cancelOrderError)
+            ? cancelOrderError.data.error
+            : JSON.stringify(cancelOrderError)
+        }`}</p>
       );
     } else  { // Error Redundancy
       content = (

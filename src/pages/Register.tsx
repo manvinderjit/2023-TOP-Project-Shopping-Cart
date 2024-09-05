@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegisterUserMutation } from "../features/api/apiSlice";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { isApiResponseError } from "../application/helpers";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -159,7 +160,11 @@ const Register = (): React.JSX.Element => {
             <p
               aria-label="Registration Status"
               className=" text-red-400"
-            >{`Error! ${registrationError?.data?.error}`}</p>
+            >{`Error! ${
+              isApiResponseError(registrationError)
+                ? registrationError.data.error
+                : JSON.stringify(registrationError)
+            }`}</p>
           ) : (
             <></>
           )}

@@ -25,5 +25,9 @@ export interface OrderDetails {
 }
 
 export interface Orderable {
-    order: OrderDetails
+  order: OrderDetails
+}
+
+export interface OrdersList {
+  ordersList: OrderDetails[];
 }
