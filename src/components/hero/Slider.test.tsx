@@ -7,7 +7,7 @@ import { carouselImagesData } from "../../../__test__/mockdata";
 
 describe("Hero Slider", () => {
   beforeEach(() => {
-    render(<Slider carouselImagesData={carouselImagesData} />);    
+    render(<Slider carouselPromos={carouselImagesData} />);    
   })
   it("renders Hero Slider", () => {
     expect(screen.getByRole("region", { name: 'Hero Image Slider' })).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe("Hero Slider", () => {
 
 describe("Hero Slider Buttons", () => {
   beforeEach(() => {
-    render(<Slider carouselImagesData={carouselImagesData} />);
+    render(<Slider carouselPromos={carouselImagesData} />);
   })
 
   it("Should render the last image when previousSlideButton is clicked when on the first image", async () => {
@@ -129,7 +129,7 @@ describe("Hero Slider Buttons", () => {
 describe("Hero Image Buttons", () => {
 
   it('should render the respective image when a button is clicked', async () => {
-    render(<Slider carouselImagesData={carouselImagesData} />);
+    render(<Slider carouselPromos={carouselImagesData} />);
     
     // Setup
     const user = userEvent.setup();

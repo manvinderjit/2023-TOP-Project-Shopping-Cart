@@ -94,9 +94,9 @@ describe("Register Page", () => {
     expect(screen.getByText(/Sign Up For Our Website/i)).toBeInTheDocument();
   });
 
-  it("should render 'Register' link in the Navigation bar in #646cff color", () => {
+  it("should render 'Register' link in the Navigation bar in indigo-500 color", () => {
     const navItemRegister = screen.getByRole("link", { name: 'Register' });
-    expect(navItemRegister.parentElement?.classList.contains('text-[#646cff]')).toBe(true);
+    expect(navItemRegister.parentElement?.classList.contains('text-indigo-500')).toBe(true);
   });
 
   it("should render the Email Input Textbox", () => {

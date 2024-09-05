@@ -20,9 +20,9 @@ describe("Cart Page When Empty Cart", () => {
     expect(screen.getByText(/Shopping Cart/i)).toBeInTheDocument();
   });
 
-  it("should render 'Cart' in the Navigation bar in #646cff color", () => {
+  it("should render 'Cart' in the Navigation bar in indigo-500 color", () => {
     const cartAsNavMenuItem = screen.getByRole("link", { name: 'Cart' });
-    expect(cartAsNavMenuItem.parentElement?.classList.contains('text-[#646cff]')).toBe(true);
+    expect(cartAsNavMenuItem.parentElement?.classList.contains('text-indigo-500')).toBe(true);
   });
 
   it("should show 'Empty Cart' message", () => {

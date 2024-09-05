@@ -11,25 +11,25 @@ const NavItemsTop = (): React.JSX.Element => {
 
     const content: React.JSX.Element = (
       <ul className="hidden lg:flex flex-row mr-auto">
-        <li className={`flex flex-col justify-center text-center w-24 text-l ${themeClasses.textHoveredClass} ${currentLocation.pathname === '/' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
-          <Link to="/">Home</Link>
+        <li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
+          <Link className={`${themeClasses.textHoveredClass}`} to="/">Home</Link>
         </li>
         {token && token !== null ? (
-          <li className={`flex flex-col justify-center text-center w-24 text-l ${themeClasses.textHoveredClass} ${currentLocation.pathname === '/dashboard' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
-            <Link to="/dashboard">Dashboard</Link>
+          <li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/dashboard' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
+            <Link className={`${themeClasses.textHoveredClass}`} to="/dashboard">Dashboard</Link>
           </li>
         ) : (
           <>
-            <li className={`flex flex-col justify-center text-center w-24 text-l ${themeClasses.textHoveredClass} ${currentLocation.pathname === '/login' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
-              <Link to="/login">Login</Link>
+            <li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/login' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
+              <Link className={`${themeClasses.textHoveredClass}`} to="/login">Login</Link>
             </li>
-            <li className={`flex flex-col justify-center text-center w-24 text-l ${themeClasses.textHoveredClass} ${currentLocation.pathname === '/register' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
-              <Link to="/register">Register</Link>
+            <li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/register' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
+              <Link className={`${themeClasses.textHoveredClass}`} to="/register">Register</Link>
             </li>
           </>
         )}
-        <li className={`flex flex-col justify-center text-center w-24 text-l ${themeClasses.textHoveredClass} ${currentLocation.pathname === '/cart' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
-          <Link to="/cart">Cart</Link>
+        <li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/cart' ? `${themeClasses.textHighlightedClass} underline` : ''}`}>
+          <Link className={`${themeClasses.textHoveredClass}`} to="/cart">Cart</Link>
         </li>
       </ul>
     );

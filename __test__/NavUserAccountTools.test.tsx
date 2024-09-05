@@ -48,7 +48,7 @@ describe("should render NavUser Account Tools", () => {
     const linksUserAccountTools = screen.queryAllByRole("menuitem");
     expect(linksUserAccountTools).toHaveLength(0);
 
-    const menuItemProfile = screen.queryByRole('menuitem', { name: /Profile/i});
+    const menuItemProfile = screen.queryByRole('menuitem', { name: /Dashboard/i});
     expect(menuItemProfile).not.toBeInTheDocument();
 
     const menuItemMyOrders = screen.queryByRole("menuitem", { name: /My Orders/i });
@@ -65,7 +65,7 @@ describe("should render NavUser Account Tools", () => {
     expect(screen.queryByRole("menu", { name: /User Account Tools/i})).not.toBeInTheDocument();
     const linksUserAccountTools = screen.queryAllByRole("menuitem");
     expect(linksUserAccountTools).toHaveLength(0);
-    expect(screen.queryByRole('menuitem', { name: /Profile/i})).not.toBeInTheDocument();
+    expect(screen.queryByRole('menuitem', { name: /Dashboard/i})).not.toBeInTheDocument();
     expect(screen.queryByRole('menuitem', { name: /Logout/i})).not.toBeInTheDocument();
     expect(screen.queryByRole('menuitem', { name: /My Orders/i})).not.toBeInTheDocument();
 
@@ -76,7 +76,7 @@ describe("should render NavUser Account Tools", () => {
     expect(screen.getByRole("menu", { name: /User Account Tools/i})).toBeInTheDocument();
     const menuItemsUserAccountTools = screen.getAllByRole("menuitem");
     expect(menuItemsUserAccountTools).toHaveLength(3);
-    expect(screen.getByRole('menuitem', { name: /Profile/i})).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /Dashboard/i})).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /Logout/i})).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /My Orders/i})).toBeInTheDocument();
       
@@ -89,7 +89,7 @@ describe("should render NavUser Account Tools", () => {
     expect(screen.queryByRole("menu", { name: /User Account Tools/i})).not.toBeInTheDocument();
     const linksUserAccountTools = screen.queryAllByRole("menuitem");
     expect(linksUserAccountTools).toHaveLength(0);
-    expect(screen.queryByRole('menuitem', { name: /Profile/i})).not.toBeInTheDocument();
+    expect(screen.queryByRole('menuitem', { name: /Dashboard/i})).not.toBeInTheDocument();
     expect(screen.queryByRole('menuitem', { name: /Logout/i})).not.toBeInTheDocument();
     expect(screen.queryByRole('menuitem', { name: /My Orders/i})).not.toBeInTheDocument();
     
@@ -100,7 +100,7 @@ describe("should render NavUser Account Tools", () => {
     expect(screen.getByRole("menu", { name: /User Account Tools/i})).toBeInTheDocument();
     const menuItemsUserAccountTools = screen.getAllByRole("menuitem");
     expect(menuItemsUserAccountTools).toHaveLength(3);
-    expect(screen.getByRole('menuitem', { name: /Profile/i})).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /Dashboard/i})).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /Logout/i})).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /My Orders/i})).toBeInTheDocument();
       
@@ -118,7 +118,7 @@ describe("should render NavUser Account Tools", () => {
 
     const menuItemsUserAccountTools = screen.getAllByRole("menuitem");
     expect(menuItemsUserAccountTools).toHaveLength(3);
-    expect(screen.getByRole('menuitem', { name: /Profile/i})).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /Dashboard/i})).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /Logout/i})).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /My Orders/i})).toBeInTheDocument();
 
@@ -130,7 +130,7 @@ describe("should render NavUser Account Tools", () => {
 
     const linksUserAccountTools = screen.queryAllByRole("menuitem");
     expect(linksUserAccountTools).toHaveLength(0);
-    expect(screen.queryByRole('menuitem', { name: /Profile/i})).not.toBeInTheDocument();
+    expect(screen.queryByRole('menuitem', { name: /Dashboard/i})).not.toBeInTheDocument();
     expect(screen.queryByRole('menuitem', { name: /Logout/i})).not.toBeInTheDocument();
     expect(screen.queryByRole('menuitem', { name: /My Orders/i})).not.toBeInTheDocument();
   });
@@ -148,7 +148,7 @@ describe("should render NavUser Account Tools", () => {
     const menuItemsUserAccountTools = screen.getAllByRole("menuitem");
     expect(menuItemsUserAccountTools).toHaveLength(3);
 
-    expect(screen.getByRole('menuitem', { name: /Profile/i})).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /Dashboard/i})).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /Logout/i})).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /My Orders/i})).toBeInTheDocument();
     
@@ -159,7 +159,7 @@ describe("should render NavUser Account Tools", () => {
     await waitFor(() => {
       const linksUserAccountTools = screen.queryAllByRole("menuitem");
       expect(linksUserAccountTools).toHaveLength(0);
-      expect(screen.queryByRole('menuitem', { name: /Profile/i})).not.toBeInTheDocument();
+      expect(screen.queryByRole('menuitem', { name: /Dashboard/i})).not.toBeInTheDocument();
       expect(screen.queryByRole('menuitem', { name: /Logout/i})).not.toBeInTheDocument();
       expect(screen.queryByRole('menuitem', { name: /My Orders/i})).not.toBeInTheDocument();
     });
