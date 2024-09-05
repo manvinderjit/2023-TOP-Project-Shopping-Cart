@@ -30,7 +30,6 @@ const Checkout = (): React.JSX.Element => {
     const [
       placeOrder,
       {
-        data: placeOrderData,
         isSuccess: isPlaceOrderSuccess,
         isError: isPlaceOrderError,
         error: placeOrderError,
@@ -57,6 +56,20 @@ const Checkout = (): React.JSX.Element => {
         navigate("/orders")
       }
     }, [isPlaceOrderSuccess, navigate, dispatch]);
+
+    useEffect(() => {
+      if (isPlaceOrderError) {
+        const toastId = nanoid();
+        dispatch(
+          addToastAlert({
+            toastId,
+            toastTextContent: `Error! ${JSON.stringify(placeOrderError)}`,
+            toastType: "error",
+          })
+        );
+        setTimeout(() => dispatch(removeToastAlert(toastId)), 3000);
+      }
+    }, [isPlaceOrderError, placeOrderError, navigate, dispatch]);
 
     const content: React.JSX.Element = (
       <div

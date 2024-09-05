@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 const ButtonToggle = (): React.JSX.Element => {
-  const { isDarkMode, toggleDarkMode, themeClasses } = useContext(ThemeContext);
+  const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
 
   const content: React.JSX.Element = (
     <div className="flex flex-col justify-evenly">

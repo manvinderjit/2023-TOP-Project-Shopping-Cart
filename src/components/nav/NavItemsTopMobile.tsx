@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../application/reduxHooks";
-import { getCurrentToken, getCurrentUserDetails } from "../../features/auth/authSlice";
+import { getCurrentToken } from "../../features/auth/authSlice";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 

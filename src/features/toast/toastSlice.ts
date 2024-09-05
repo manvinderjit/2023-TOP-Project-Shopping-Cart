@@ -1,14 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-interface ToastMessageDetails {
-    toastId: number,
-    toastTextContent: string,
-    toastType: 'success' | 'error' | 'warning',    
-}
-
-interface ToastAlerts {
-    toastAlerts: ToastMessageDetails[]
-}
+import type { ToastAlerts } from "../../types/types"; 
 
 const initialState: ToastAlerts = {
     toastAlerts: []

@@ -1,5 +1,4 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../application/store";
 
 interface CartItemDetails {
     id: string;
@@ -80,7 +79,7 @@ export const { addItemToCart, removeItemFromCart, changeItemQuantity, emptyCart 
 
 export default cartSlice.reducer;
 
-const cartItems = (state) => state.cart.cartItems;
+const cartItems = (state: { cart: { cartItems: CartItemDetails[]; }; }) => state.cart.cartItems;
 
 export const totalQuantity = createSelector([cartItems], (cartItems) =>
   cartItems.reduce(

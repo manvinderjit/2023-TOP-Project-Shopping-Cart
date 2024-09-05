@@ -3,7 +3,7 @@ import type { ButtonProps } from "./Button.types";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 const Button = (props: ButtonProps): React.JSX.Element => {
-  const { isDarkMode, themeClasses } = useContext(ThemeContext);
+  const { themeClasses } = useContext(ThemeContext);
 
   const content: React.JSX.Element = (
     <button

@@ -11,5 +11,5 @@ export interface CarouselImageData {
 }
 
 export interface CarouselImagesData {
-  carouselImagesData: CarouselImageData[];
+  carouselPromos: CarouselImageData[];
 }

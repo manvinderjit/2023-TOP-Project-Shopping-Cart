@@ -30,6 +30,7 @@ const ThemeContextProvider = (props) => {
           textHighlightedClass: "text-indigo-600",
           textHoveredClass: "hover:text-indigo-400 cursor-pointer",
           primaryBgClass: "bg-indigo-600",
+          secondaryBgClass: "bg-[#2A2A2A]",
           primaryBorderClass: "border-indigo-600",
           secondaryBorderClass: "border-[#e5e7eb]",
           primaryBgHoveredClass: "hover:bg-indigo-500",

@@ -58,3 +58,13 @@ export interface LoginDetails {
   userEmail: string,
   userPassword: string,
 }
+
+export interface ToastMessageDetails {
+  toastId: number;
+  toastTextContent: string;
+  toastType: "success" | "error" | "warning";
+}
+
+export interface ToastAlerts {
+  toastAlerts: ToastMessageDetails[];
+}
