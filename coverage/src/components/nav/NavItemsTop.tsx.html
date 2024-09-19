@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>30/30</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/30</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -100,11 +100,17 @@
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">140x</span>
 <span class="cline-any cline-yes">140x</span>
 <span class="cline-any cline-yes">140x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -140,32 +146,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Link, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../application/reduxHooks";
 import { getCurrentToken } from "../../features/auth/authSlice";
+import { useContext } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
 &nbsp;
 const NavItemsTop = (): React.JSX.Element =&gt; {
   const token: string | null = useAppSelector(getCurrentToken);
   const currentLocation = useLocation();
+  const { themeClasses } = useContext(ThemeContext);
 &nbsp;
     const content: React.JSX.Element = (
-      &lt;ul className="flex flex-row mr-auto"&gt;
-        &lt;li className={`flex flex-col justify-center text-center w-24 text-l ${currentLocation.pathname === '/' ? 'text-[#646cff]' : ''}`}&gt;
-          &lt;Link to="/"&gt;Home&lt;/Link&gt;
+      &lt;ul className="hidden lg:flex flex-row mr-auto"&gt;
+        &lt;li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/' ? `${themeClasses.textHighlightedClass} underline` : ''}`}&gt;
+          &lt;Link className={`${themeClasses.textHoveredClass}`} to="/"&gt;Home&lt;/Link&gt;
         &lt;/li&gt;
         {token &amp;&amp; token !== null ? (
-          &lt;li className={`flex flex-col justify-center text-center w-24 text-l ${currentLocation.pathname === '/dashboard' ? 'text-[#646cff]' : ''}`}&gt;
-            &lt;Link to="/dashboard"&gt;Dashboard&lt;/Link&gt;
+          &lt;li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/dashboard' ? `${themeClasses.textHighlightedClass} underline` : ''}`}&gt;
+            &lt;Link className={`${themeClasses.textHoveredClass}`} to="/dashboard"&gt;Dashboard&lt;/Link&gt;
           &lt;/li&gt;
         ) : (
           &lt;&gt;
-            &lt;li className={`flex flex-col justify-center text-center w-24 text-l ${currentLocation.pathname === '/login' ? 'text-[#646cff]' : ''}`}&gt;
-              &lt;Link to="/login"&gt;Login&lt;/Link&gt;
+            &lt;li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/login' ? `${themeClasses.textHighlightedClass} underline` : ''}`}&gt;
+              &lt;Link className={`${themeClasses.textHoveredClass}`} to="/login"&gt;Login&lt;/Link&gt;
             &lt;/li&gt;
-            &lt;li className={`flex flex-col justify-center text-center w-24 text-l ${currentLocation.pathname === '/register' ? 'text-[#646cff]' : ''}`}&gt;
-              &lt;Link to="/register"&gt;Register&lt;/Link&gt;
+            &lt;li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/register' ? `${themeClasses.textHighlightedClass} underline` : ''}`}&gt;
+              &lt;Link className={`${themeClasses.textHoveredClass}`} to="/register"&gt;Register&lt;/Link&gt;
             &lt;/li&gt;
           &lt;/&gt;
         )}
-        &lt;li className={`flex flex-col justify-center text-center w-24 text-l ${currentLocation.pathname === '/cart' ? 'text-[#646cff]' : ''}`}&gt;
-          &lt;Link to="/cart"&gt;Cart&lt;/Link&gt;
+        &lt;li className={`flex flex-col justify-center text-center w-24 text-l  ${currentLocation.pathname === '/cart' ? `${themeClasses.textHighlightedClass} underline` : ''}`}&gt;
+          &lt;Link className={`${themeClasses.textHoveredClass}`} to="/cart"&gt;Cart&lt;/Link&gt;
         &lt;/li&gt;
       &lt;/ul&gt;
     );
@@ -181,7 +190,7 @@ export default NavItemsTop;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-09-02T00:43:41.539Z
+                at 2024-09-19T18:32:41.264Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
