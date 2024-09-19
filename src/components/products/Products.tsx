@@ -34,6 +34,8 @@ const Products = ():React.JSX.Element => {
     content = <Spinner/>
   } else if (isSuccess) {
     
+    if(apiData.productList && apiData.productList !== null && apiData.productList.length > 0) {
+        
     content = (
       <>
         <div className="max-w-screen-2xl w-full mx-auto grid grid-cols-3">
@@ -93,8 +95,42 @@ const Products = ():React.JSX.Element => {
         />
       </>
     );
+  } else  {
+    content = (
+      <div className="max-w-screen-2xl w-full mx-auto flex flex-col">
+        <h2
+          className={`col-start-2 my-3 mx-auto text-center text-2xl py-2 font-bold ${themeClasses.textClass}`}
+        >
+          Our Products
+        </h2>
+        <div
+          className={`max-w-screen-2xl w-full mx-auto 2xl:border  rounded-lg py-10 ${themeClasses.primaryBorderClass}`}
+        >
+          <div className="w-11/12 lg:w-5/6 text-center mx-auto ">
+            <h3>No Products found</h3>
+          </div>
+        </div>
+      </div>
+    );
+  } 
+
   } else if (isError) {
-    content = <div>{JSON.stringify(error)}</div>
+    content = (
+      <div className="max-w-screen-2xl w-full mx-auto flex flex-col">
+        <h2
+          className={`col-start-2 my-3 mx-auto text-center text-2xl py-2 font-bold ${themeClasses.textClass}`}
+        >
+          Our Products
+        </h2>
+        <div
+          className={`max-w-screen-2xl w-full mx-auto 2xl:border  rounded-lg py-10 ${themeClasses.primaryBorderClass}`}
+        >
+          <div className="w-11/12 lg:w-5/6 text-center mx-auto ">
+            <h3>OOPS! Something went wrong!</h3>
+          </div>
+        </div>
+      </div>
+    );    
   }
 
   return (
