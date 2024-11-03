@@ -30,6 +30,7 @@ export interface CategoriesListData {
 export interface ProductDataAndCategoryDataLists {
   categoryList: CategoryDetails[];
   productList: ProductDetails[];
+  totalPages: number;
 }
 
 export interface AuthSliceState {
