@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../../features/auth/authSlice";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { apiSlice } from "../../features/api/apiSlice";
 
 const NavUserAccountTools = ():React.JSX.Element => {
   
@@ -12,6 +13,8 @@ const NavUserAccountTools = ():React.JSX.Element => {
 
   const handleLogout = (): void => {
     dispatch(logOut());
+    dispatch(apiSlice.util.resetApiState());
+    dispatch(apiSlice.util.invalidateTags(['Order']));    
   };
 
     const content: React.JSX.Element = (

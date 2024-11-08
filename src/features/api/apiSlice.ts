@@ -2,12 +2,23 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { ProductDataAndCategoryDataLists } from "../../types/types.js";
 import type { CarouselImagesData } from "../../components/hero/Slider.types.js";
 import type { OrdersList } from "../../components/userOrders/UserOrders.types.js";
+import { RootState } from "../../application/store.js";
 export const apiURL = import.meta.env.VITE_API_BASE_URL;
 
 // Define our single API slice object
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: `${apiURL}/api` }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: `${apiURL}/api`,
+    prepareHeaders: (headers, { getState }) => {
+      // Get the token from the state or wherever you're storing it
+      const token = (getState() as RootState).auth.token; // Adjust based on your state structure
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   tagTypes: ["Order"],
   endpoints: (builder) => ({
     // The `getCarousel` endpoint is a "query" operation that returns carousel data
@@ -39,10 +50,10 @@ export const apiSlice = createApi({
       }),
     }),
     // The `getUserOrders` endpoint is a "query" operation that gets all orders for a user
-    getUserOrders: builder.query<OrdersList, string | null>({
-      query: (token: string | null) => ({
+    getUserOrders: builder.query<OrdersList, Record<string, number> | undefined>({
+      query: (params) => ({
         url: "/orders",
-        headers: { Authorization: `Bearer ${token}` },
+        params,
       }),
       providesTags: ["Order"],
     }),
@@ -59,7 +70,7 @@ export const apiSlice = createApi({
     // The `placeOrder` endpoint is a "query" operation that places an order for a user
     placeOrder: builder.mutation({
       query: ({ token, orderDetails }) => ({
-        url: `/checkout`,
+        url: `/orders/checkout`,
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: orderDetails,

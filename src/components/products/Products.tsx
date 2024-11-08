@@ -8,7 +8,7 @@ import Pagination from "../pagination/Pagination";
 
 const Products = ():React.JSX.Element => {
 
-  const { isDarkMode, themeClasses } = useContext(ThemeContext);
+  const { themeClasses } = useContext(ThemeContext);
 
   const [productPageNumber, setProductPageNumber] = useState<number>(1);
   const [viewItemsLimit, setViewItemsLimit] = useState<number>(6);
@@ -25,7 +25,6 @@ const Products = ():React.JSX.Element => {
     isLoading,
     isSuccess,
     isError,
-    error,
   } = useGetProductsQuery({ page: productPageNumber, limit: viewItemsLimit });
 
   let content: React.JSX.Element = <></>;
@@ -54,9 +53,7 @@ const Products = ():React.JSX.Element => {
             <select
               name="view-number"
               id="view-number"
-              className={`w-16 p-2 text-center rounded-md focus:border focus:${
-                themeClasses.primaryBorderClass
-              } ${!isDarkMode ? themeClasses.primaryBgClass : ""}`}
+              className={`w-16 p-2 text-center  rounded-md ${themeClasses.primaryBgClass} focus:border focus:${themeClasses.primaryBorderClass} `}
               value={viewItemsLimit}
               onChange={(e) =>
                 handleChangeViewItemsLimit(Number(e.target.value))
@@ -87,7 +84,7 @@ const Products = ():React.JSX.Element => {
               )}
             </div>
           </div>
-        </div>        
+        </div>
         <Pagination
           totalPages={apiData.totalPages}
           currentPageIndex={productPageNumber}

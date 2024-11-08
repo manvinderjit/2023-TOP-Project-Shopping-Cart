@@ -29,5 +29,6 @@ export interface Orderable {
 }
 
 export interface OrdersList {
+  totalOrdersPages: number;
   ordersList: OrderDetails[];
 }

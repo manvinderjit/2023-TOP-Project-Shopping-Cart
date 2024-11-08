@@ -44,11 +44,10 @@ const Pagination = ({ totalPages, currentPageIndex, handleChangeIndex }: Paginat
           {[...Array(totalPages)].map((_, i) => (
             <li key={i + 1}>
               <button
-                className={`flex items-center justify-center px-3 h-8 leading-tight  border  ${
-                  i + 1 === currentPageIndex? themeClasses.primaryBgClass : ""
-                } ${themeClasses.textClass} ${
-                  themeClasses.primaryBgHoveredClass
-                } ${themeClasses.primaryBorderClass}`}
+                className={`flex items-center justify-center px-3 h-8 leading-tight border 
+                  ${ i + 1 === currentPageIndex? `${themeClasses.primaryBgClass} text-white` : "" } 
+                  ${themeClasses.textClass} 
+                  ${themeClasses.primaryBgHoveredClass} ${themeClasses.primaryBorderClass}`}
                 onClick={() => handleChangeIndex(i + 1)}
               >
                 {i + 1}

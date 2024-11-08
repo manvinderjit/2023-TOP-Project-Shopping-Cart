@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAppSelector } from "../application/reduxHooks";
 import { getCurrentToken } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +8,16 @@ import UserOrder from "../components/userOrders/userOrder/UserOrder";
 import type { OrderDetails } from "../components/userOrders/UserOrders.types";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { isApiResponseError } from "../application/helpers";
+import Pagination from "../components/pagination/Pagination";
 
 const UserOrders = (): React.JSX.Element => {
     const token: string | null = useAppSelector(getCurrentToken);
     const navigate = useNavigate();
     const { themeClasses } = useContext(ThemeContext);
+
+    const[ordersPageNumber, setOrdersPageNumber] = useState<number>(1);
+    
+    const handleChangeOrdersPageNumber = (newPageNumber: number): void | null => newPageNumber !== ordersPageNumber ? setOrdersPageNumber(newPageNumber) : null;
 
     const {
         data: userOrders,
@@ -20,27 +25,34 @@ const UserOrders = (): React.JSX.Element => {
         isSuccess: isSuccessUserOrders,
         isError: isErrorUserOrders,
         error: errorUserOrders,
-    } = useGetUserOrdersQuery(token);
+    } = useGetUserOrdersQuery({ page: ordersPageNumber });
 
     useEffect(() => {
         if(!token || token === null) navigate('/login');
     },[navigate, token])
     
-    let content: React.JSX.Element = <></>; 
+    let content: React.JSX.Element = <></>;
+
     if (isLoadingUserOrders) {
         // If Loading User Orders
         content = <Spinner />;
-    } else if (isSuccessUserOrders) {
-      console.log(userOrders)
+    } else if (isSuccessUserOrders) {      
         // If User Orders
         content = (
-          <div className="w-11/12 lg:w-5/6 xl:w-4/5 text-center mx-auto ">
-            <div className="flex flex-col justify-evenly">
-              {userOrders.ordersList.map((order:OrderDetails) => (
-                <UserOrder key={order.id} order={order} />
-              ))}
+          <>
+            <div className="w-11/12 lg:w-5/6 xl:w-4/5 text-center mx-auto ">
+              <div className="flex flex-col justify-evenly">
+                {userOrders.ordersList.map((order: OrderDetails) => (
+                  <UserOrder key={order.id} order={order} />
+                ))}
+              </div>
             </div>
-          </div>
+            <Pagination
+              totalPages={userOrders.totalOrdersPages}
+              currentPageIndex={ordersPageNumber}
+              handleChangeIndex={handleChangeOrdersPageNumber}
+            />
+          </>
         );
     } else if (isErrorUserOrders) {
         // If error occured
