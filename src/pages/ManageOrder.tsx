@@ -15,7 +15,7 @@ const ManageOrder = (): React.JSX.Element => {
     const navigate: NavigateFunction = useNavigate();
     const { themeClasses } = useContext(ThemeContext);
 
-    const { data: userOrders, isSuccess: isSuccessUserOrders, } = useGetUserOrdersQuery(token);
+    const { data: userOrders, isSuccess: isSuccessUserOrders, } = useGetUserOrdersQuery(undefined);
     const order = userOrders?.ordersList.find((order: { id: string }) => order.id === orderId);
 
     const [cancelOrder,
