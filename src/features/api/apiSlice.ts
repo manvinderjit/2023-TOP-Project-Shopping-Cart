@@ -70,7 +70,7 @@ export const apiSlice = createApi({
     // The `placeOrder` endpoint is a "query" operation that places an order for a user
     placeOrder: builder.mutation({
       query: ({ token, orderDetails }) => ({
-        url: `/checkout`,
+        url: `/orders/checkout`,
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: orderDetails,
