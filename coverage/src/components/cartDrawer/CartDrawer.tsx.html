@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>60/60</span>
+                <span class='fraction'>62/62</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>60/60</span>
+                <span class='fraction'>62/62</span>
             </div>
         
             
@@ -140,15 +140,19 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38x</span>
 <span class="cline-any cline-yes">38x</span>
 <span class="cline-any cline-yes">38x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -217,24 +221,26 @@
 <span class="cline-any cline-yes">38x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState } from "react";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ButtonX from "../buttonX/ButtonX";
 import CartDrawerItem from "./cartDrawerItem/CartDrawerItem";
 import type { CartItems } from "./CartDrawer.types";
+import { ThemeContext } from "../../contexts/ThemeContext";
 &nbsp;
 const CartDrawer = (): React.JSX.Element =&gt; {
 &nbsp;
     const [showCartDrawer, setShowCartDrawer] = useState&lt;boolean&gt;(false);
     const cartItems = useSelector((state: CartItems) =&gt; state.cart.cartItems);
+    const { themeClasses } = useContext(ThemeContext);
 &nbsp;
     const content: React.JSX.Element = showCartDrawer ? (
       &lt;section
         aria-label="Current Cart Items"
         className={`${
           showCartDrawer ? <span class="branch-0 cbranch-no" title="branch not covered" >"xl:fixed" : "hidden"</span>
-        } right-0 top-0 w-48 pt-2 bg-black bg-opacity-60 h-full border-indigo-600 border-2 rounded-lg`}
+        } right-0 top-0 w-48 pt-2 bg-black bg-opacity-60 h-full ${themeClasses.primaryBorderClass} border-2 rounded-lg`}
       &gt;
         &lt;div className="flex justify-end mr-2"&gt;
           &lt;ButtonX
@@ -242,7 +248,7 @@ const CartDrawer = (): React.JSX.Element =&gt; {
             onClick={() =&gt; setShowCartDrawer(false)}
           /&gt;
         &lt;/div&gt;
-        &lt;h2 className="mx-auto w-4/5 text-center pb-1 border-b-2 text-lg font-semibold border-indigo-600"&gt;
+        &lt;h2 className={`mx-auto w-4/5 text-center pb-1 border-b-2 text-lg font-semibold ${themeClasses.primaryBorderClass}`}&gt;
           Your Cart
         &lt;/h2&gt;
         
@@ -255,9 +261,9 @@ const CartDrawer = (): React.JSX.Element =&gt; {
           )}
         
         &lt;div&gt;
-          &lt;hr className="mx-auto rounded-lg border-indigo-600 border-t-2 w-4/5" /&gt;
+          &lt;hr className={`mx-auto rounded-lg ${themeClasses.primaryBorderClass} border-t-2 w-4/5`} /&gt;
           &lt;Link
-            className="mt-4 flex justify-center items-center mx-auto h-10 bg-indigo-600 w-4/5 rounded-lg"
+            className={`mt-4 flex justify-center items-center mx-auto h-10 ${themeClasses.primaryBgClass} w-4/5 rounded-lg`}
             to={"/cart"}
           &gt;
             Go To Cart
@@ -265,12 +271,12 @@ const CartDrawer = (): React.JSX.Element =&gt; {
         &lt;/div&gt;
       &lt;/section&gt;
     ) : (
-      &lt;div className="top-3 right-3 fixed flex justify-center"&gt;
+      &lt;div className="hidden top-3 right-3 fixed md:flex justify-center"&gt;
         &lt;button
           aria-label="Show Items in Cart"
           onClick={() =&gt; setShowCartDrawer(true)}
         &gt;
-          &lt;div className="animate-pulse dark:bg-indigo-600 p-1 w-8 h-8 ring-1 ring-slate-900/5 dark:ring-indigo-600 shadow-lg rounded-full flex items-center justify-center"&gt;
+          &lt;div className={`animate-pulse ${themeClasses.primaryBgClass} p-1 w-8 h-8 ring-1 ring-slate-900/5  shadow-lg rounded-full flex items-center justify-center`}&gt;
             &lt;svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -301,7 +307,7 @@ export default CartDrawer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-09-02T00:43:41.539Z
+                at 2024-09-19T18:32:41.264Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

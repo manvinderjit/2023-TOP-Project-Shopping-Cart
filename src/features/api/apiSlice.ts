@@ -15,8 +15,12 @@ export const apiSlice = createApi({
       query: () => "/promos/carousel",
     }),
     // The `getCarousel` endpoint is a "query" operation that returns product data and product category list
-    getProducts: builder.query<ProductDataAndCategoryDataLists, undefined>({
-      query: () => "/products",
+    getProducts: builder.query<ProductDataAndCategoryDataLists, Record<string, number> | undefined>({
+      query: (params) => { 
+        return { 
+          url:"/products", 
+          params
+      }},
     }),
     // The `registerUser` endpoint is a "query" operation that registers a user
     registerUser: builder.mutation({

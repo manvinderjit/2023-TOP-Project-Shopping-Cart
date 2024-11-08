@@ -42,7 +42,7 @@ const CartDrawerItem = (props:CartDrawerItemable): React.JSX.Element => {
               name="item-quantity"
               id="item-quantity"
               aria-label={`Change Quantity ${props.name}`}
-              className="w-14 h-8 p-2 text-center rounded-md focus:border-blue-700 focus:border"
+              className="w-14 h-8 p-2 text-center rounded-md  focus:border"
               value={props.itemQuantity}
               onChange={(e) => {
                 dispatch(
