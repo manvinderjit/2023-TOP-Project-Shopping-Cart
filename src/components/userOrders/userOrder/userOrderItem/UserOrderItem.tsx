@@ -13,7 +13,7 @@ const UserOrderItem = ({item}: OrderItemable): React.JSX.Element => {
         <div className="col-span-1 flex justify-center items-center">
           <img
             className="w-28 rounded-md"
-            src={`${apiURL}/api/products/image/${item.itemDetails.imageFilename}`}
+            src={`${apiURL}/api/products/image/thumbs/${item.itemDetails.imageFilename}`}
             alt={item.itemDetails.name}
           />
         </div>

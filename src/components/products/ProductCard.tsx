@@ -41,7 +41,7 @@ const ProductCard = ({ productData }: ProductData): React.JSX.Element => {
       <div className={`min-w-72 rounded-xl ${themeClasses.textClass} ${isDarkMode ? ' bg-[#2a2a2a] shadow-xl ' : ' bg-white shadow-2xl'} duration-500`}>
         <div className="max-w-96 mx-auto">
           <img
-            src={`${apiURL}/api/products/image/${productData.imageFilename}`}
+            src={`${apiURL}/api/products/image/thumbs/${productData.imageFilename}`}
             alt={`${productData.name}`}
             className="h-full rounded-t-md w-full object-contain lg:h-full lg:w-full"
           />
