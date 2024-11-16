@@ -1,8 +1,17 @@
 # Shopping WebApp by Manvinderjit
 
+## New Live Version
+
+The new version of the website is now deployed. Some features of the website are under development.
+
 `Live Link`: [Shopping App](https://2023-top-project-shopping-cart.pages.dev/)
 
-A Vite-React Webapp e-commerce portal allows customers to purchase products. It makes use of Bootstrap 5, React Bootstrap, React Redux, React Router Dom, and JWT technologies.
+## New Design Preview
+![](designPreviews/newHome.gif)
+
+
+## Details
+A Vite-React Redux Webapp e-commerce portal allows customers to purchase products. It has been updated to use Tailwind CSS, React Redux, React Router Dom, and JWT technologies. For testing it uses React Testing Library and ViTest.
 
 Is a part of a two-app ecosystem for an organization selling computer hardware. Leverages RESTful APIs provided by the [Inventory Management App](https://ia.manvinderjit.com/), which is the other app in the ecosystem. 
 
@@ -26,8 +35,8 @@ Shopping App is an e-commerce store that supports the following functions:
 The `Shopping App` makes use of the following technologies and packages:
 - `React Vite`: React is used for the front-end with Vite build tool.
 - `React Redux`: React Redux is used for state management.
-- `React Bootstrap 5`: Bootstrap is used for CSS styling.
-- `HTML Fetch`: RESTful API calls are made using HTML Fetch.
+- `Tailwind CSS`: Tailwind CSS is now used for CSS styling. Formerly it used React Bootstrap.
+- `Redux RTK Queries`: RESTful API calls are made through Redux RTK queries and mutations. Previously HTML fetch was used.
 - `JWT Tokens`: Authentication is established through JWT tokens stored in Redux state.
 
 ### Deployment Stack
@@ -46,9 +55,12 @@ The Shopping Cart is created to demonstrate the following coding abilities:
 
     3. Exhibit capability to work with JWT tokens for authentication.
 
-    4. Demonstrate familiarity with and use of Bootstrap, React Bootstrap, and React Router Dom packages.
+    4. Demonstrate familiarity with and use of Tailwind CSS and React Router Dom packages.
 
-    5. Utilizing a CI/CD pipeline for integration and deployment of new features automatically.
+    5. Demonstrate TDD (Test-Driven Development) by using React Testing Library and ViTest.
+
+    6. Utilizing a CI/CD pipeline for integration and deployment of new features automatically.
+    
     
 ## 2.2 Functional Objectives
 The Shopping Cart webapp has the following functional objectives:
@@ -60,3 +72,15 @@ The Shopping Cart webapp has the following functional objectives:
 Inventory App GitHub Repo [Click Here for Inventory App GitHub Repo Page](https://github.com/manvinderjit/2023-TOP-Project-Inventory-Application).
 
 Inventory App Live Link [Click Here for Inventory App Live Link](https://ia.manvinderjit.com/).
+
+# 3. Test Coverage
+
+### Live Test Coverage Report:
+[Click here for Live Coverage report through html-preview.github.io](https://html-preview.github.io/?url=https://raw.githubusercontent.com/manvinderjit/2023-TOP-Project-Shopping-Cart/main/coverage/index.html)
+
+### Current Test Coverage Report(main branch):
+The following is the current test coverage report screenshot for the main branch.
+
+![alt text](TestCoverage.png)
+
+
