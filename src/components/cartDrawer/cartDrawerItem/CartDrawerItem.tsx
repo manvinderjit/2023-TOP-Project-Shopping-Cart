@@ -23,7 +23,7 @@ const CartDrawerItem = (props:CartDrawerItemable): React.JSX.Element => {
       <li key={props.id} className="p-4">
         <div className="w-24 mx-auto">
           <img
-            src={`${apiURL}/api/products/image/${props.imageFilename}`}
+            src={`${apiURL}/api/products/image/thumbs/${props.imageFilename}`}
             alt={`${props.imageFilename}`}
             className={`rounded-lg ${themeClasses.primaryBorderClass} border-2`}
           />
