@@ -101,7 +101,7 @@ const Cart = ():React.JSX.Element => {
                     >
                       <div className="col-span-1 min-w-28 max-w-72 sm:max-w-60 ">
                         <img
-                          src={`${apiURL}/api/products/image/${item.imageFilename}`}
+                          src={`${apiURL}/api/products/image/thumbs/${item.imageFilename}`}
                           alt={`${item.imageFilename}`}
                           className="rounded-lg"
                         />

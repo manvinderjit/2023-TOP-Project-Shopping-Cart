@@ -32,7 +32,7 @@ const CheckoutSummary = (): React.JSX.Element => {
                   <div className="grid grid-cols-4 ">
                     <div className="col-span-1 w-24 mt-1">
                       <img
-                        src={`${apiURL}/api/products/image/${item.imageFilename}`}
+                        src={`${apiURL}/api/products/image/thumbs/${item.imageFilename}`}
                         alt={`${item.name}`}
                         className="rounded-lg"
                       />
