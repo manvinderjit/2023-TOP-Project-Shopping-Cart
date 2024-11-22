@@ -124,7 +124,7 @@ describe("should render the items in the UserOrder component", () => {
         const imgItem = screen.getByRole("img", { name: "ABC 27G2SP Monitor" })
         expect(imgItem).toBeInTheDocument();
         expect(imgItem).toHaveAttribute("alt", "ABC 27G2SP Monitor");
-        expect(imgItem).toHaveAttribute("src", `${apiURL}/api/products/image/abc-27g2sp-monitor.jpg`);
+        expect(imgItem).toHaveAttribute("src", `${apiURL}/api/products/image/thumbs/abc-27g2sp-monitor.jpg`);
     });
 
     it("should render the item's name", () => {
@@ -161,7 +161,7 @@ describe("should render the items in the UserOrder component", () => {
         const imgItem = screen.getByRole("img", { name: "Cool Keyboards" })
         expect(imgItem).toBeInTheDocument();
         expect(imgItem).toHaveAttribute("alt", "Cool Keyboards");
-        expect(imgItem).toHaveAttribute("src", `${apiURL}/api/products/image/cool-keyboards.jpg`);
+        expect(imgItem).toHaveAttribute("src", `${apiURL}/api/products/image/thumbs/cool-keyboards.jpg`);
     });
 
     it("should render the item's name", () => {

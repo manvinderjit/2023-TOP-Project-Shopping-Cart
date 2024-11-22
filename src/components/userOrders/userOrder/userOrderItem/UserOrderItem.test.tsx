@@ -28,7 +28,7 @@ describe("should render UserOrderItem component", () => {
         const imgItem = screen.getByRole("img", { name: "Cool Keys RGB Keyboard" })
         expect(imgItem).toBeInTheDocument();
         expect(imgItem).toHaveAttribute("alt", "Cool Keys RGB Keyboard");
-        expect(imgItem).toHaveAttribute("src", `${apiURL}/api/products/image/cool-keys-rgb-keyboard.jpg`);
+        expect(imgItem).toHaveAttribute("src", `${apiURL}/api/products/image/thumbs/cool-keys-rgb-keyboard.jpg`);
     });
 
     it("should render the item's name", () => {

@@ -38,7 +38,7 @@ describe("should render Product Card", () => {
     it("should render Product Image", () => {
         const imageProduct = screen.getByRole("img", {  name: "ABC 27G2SP Monitor"});
         expect(imageProduct).toBeInTheDocument();
-        expect(imageProduct).toHaveAttribute("src", `${apiURL}/api/products/image/abc-27g2sp-monitor.jpg`);
+        expect(imageProduct).toHaveAttribute("src", `${apiURL}/api/products/image/thumbs/abc-27g2sp-monitor.jpg`);
         expect(imageProduct).toHaveAttribute("alt", "ABC 27G2SP Monitor");
     });
 

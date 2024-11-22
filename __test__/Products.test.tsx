@@ -48,7 +48,7 @@ describe("should render all Products", () => {
         await waitFor(() => {
             const imageProduct = screen.getByRole("img", { name: "ABC 27G2SP Monitor" });
             expect(imageProduct).toBeInTheDocument();
-            expect(imageProduct).toHaveAttribute("src",`${apiURL}/api/products/image/abc-27g2sp-monitor.jpg`);
+            expect(imageProduct).toHaveAttribute("src",`${apiURL}/api/products/image/thumbs/abc-27g2sp-monitor.jpg`);
             expect(imageProduct).toHaveAttribute("alt", "ABC 27G2SP Monitor");
 
             const headingProductName = screen.getByRole("heading", {  name: "ABC 27G2SP Monitor"});
@@ -74,7 +74,7 @@ describe("should render all Products", () => {
         await waitFor(() => {
             const imageProduct = screen.getByRole("img", { name: "Cool Keyboards" });
             expect(imageProduct).toBeInTheDocument();
-            expect(imageProduct).toHaveAttribute("src",`${apiURL}/api/products/image/cool-keyboards.jpg`);
+            expect(imageProduct).toHaveAttribute("src",`${apiURL}/api/products/image/thumbs/cool-keyboards.jpg`);
             expect(imageProduct).toHaveAttribute("alt", "Cool Keyboards");
 
             const headingProductName = screen.getByRole("heading", {  name: "Cool Keyboards"});
@@ -100,7 +100,7 @@ describe("should render all Products", () => {
         await waitFor(() => {
             const imageProduct = screen.getByRole("img", { name: "Cool Keys RGB Keyboard" });
             expect(imageProduct).toBeInTheDocument();
-            expect(imageProduct).toHaveAttribute("src",`${apiURL}/api/products/image/cool-keys-rgb-keyboard.jpg`);
+            expect(imageProduct).toHaveAttribute("src",`${apiURL}/api/products/image/thumbs/cool-keys-rgb-keyboard.jpg`);
             expect(imageProduct).toHaveAttribute("alt", "Cool Keys RGB Keyboard");
 
             const headingProductName = screen.getByRole("heading", {  name: "Cool Keys RGB Keyboard"});
