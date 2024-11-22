@@ -13,7 +13,7 @@ const NavUserAccountTools = ():React.JSX.Element => {
 
   const handleLogout = (): void => {
     dispatch(logOut());    
-    dispatch(apiSlice.util.invalidateTags(['Order']));
+    dispatch(apiSlice.util.invalidateTags(['Order', 'SubStatus']));
   };
 
     const content: React.JSX.Element = (
