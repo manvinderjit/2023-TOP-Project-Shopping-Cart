@@ -64,7 +64,7 @@ const mockedAuth =  {
 
 describe("should render ManageOrder", () => {
   
-    // Create Router
+  // Create Router
   const router = createMemoryRouter(routerConfig, {
     initialEntries: ["/orders"],
   });
@@ -100,12 +100,12 @@ describe("should render ManageOrder", () => {
   // Disable API mocking after the tests are done.
   afterAll(() => server.close());
 
-  it("should render the ManageOrder component", async () => {
+  it("should render the ManageOrder component", async () => {    
     await waitFor(() => {
       const linkManageOrder = screen.getByRole("link", {
         name: "Manage Order",
       });
-      userEvent.click(linkManageOrder);
+      userEvent.click(linkManageOrder);      
     });
 
     await waitFor(() => {
@@ -144,11 +144,15 @@ describe("should render ManageOrder", () => {
       const valueOrderUpdatedOn = screen.getByLabelText("Order Updated On");
       expect(valueOrderUpdatedOn).toBeInTheDocument();
       expect(valueOrderUpdatedOn.textContent).toEqual("3/22/2024");
-
-      const buttonCancelOrder = screen.getByRole("button", {
-        name: "Cancel Order",
+      
+      const buttonCancelOrder = screen.getByRole("link", {
+        name: /Manage Order/i,
       });
       expect(buttonCancelOrder).toBeInTheDocument();
+      const headingYourOrder = screen.getByRole("heading", {
+        name: /Your Orders/i,
+      });
+      expect(headingYourOrder).toBeInTheDocument();
     });
   });
 });
@@ -236,8 +240,7 @@ describe("should render backend error", () => {
         ordersList,
       });
     }),
-    http.post(`${apiURL}/api/orders/cancel`, async () => {
-        console.log('interrupted');
+    http.post(`${apiURL}/api/orders/cancel`, async () => {        
       return HttpResponse.json({
         error:	"Invalid orderId!",
       }, { status: 400 });
@@ -270,9 +273,10 @@ describe("should render backend error", () => {
         name: "Manage Order",
       });
       // Setup: Go to the Manage Order page
-      userEvent.click(linkManageOrder);
+      expect(linkManageOrder).toBeInTheDocument();
+      userEvent.click(linkManageOrder);      
     });
-
+    
     await waitFor(async () => {
       // Pre Expectations: Expect the Cancel Order button to be rendered
       const buttonCancelOrder = screen.getByRole("button", {

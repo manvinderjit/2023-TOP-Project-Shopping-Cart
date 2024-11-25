@@ -45,7 +45,7 @@ describe("should render Order Summary", () => {
     it("should render the image for the first item", () => {
         const imageFirstItem = screen.getByRole('img', { name: 'ABC 27G2SP Monitor'});
         expect(imageFirstItem).toBeInTheDocument();
-        expect(imageFirstItem).toHaveAttribute("src", `${apiURL}/api/products/image/abc-27g2sp-monitor.jpg`);
+        expect(imageFirstItem).toHaveAttribute("src", `${apiURL}/api/products/image/thumbs/abc-27g2sp-monitor.jpg`);
         expect(imageFirstItem).toHaveAttribute("alt", "ABC 27G2SP Monitor");
     });
 
@@ -64,7 +64,7 @@ describe("should render Order Summary", () => {
     it("should render the image for the second item", () => {
         const imageSecondItem = screen.getByRole('img', { name: 'Cool Keyboards'});
         expect(imageSecondItem).toBeInTheDocument();
-        expect(imageSecondItem).toHaveAttribute("src", `${apiURL}/api/products/image/cool-keyboards.jpg`);
+        expect(imageSecondItem).toHaveAttribute("src", `${apiURL}/api/products/image/thumbs/cool-keyboards.jpg`);
         expect(imageSecondItem).toHaveAttribute("alt", "Cool Keyboards");
     });
 

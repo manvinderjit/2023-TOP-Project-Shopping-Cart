@@ -149,7 +149,7 @@ describe("should render UserOrders component", () => {
         const imgItem1 = screen.getByRole("img", { name: "ABC 27G2SP Monitor" })
         expect(imgItem1).toBeInTheDocument();
         expect(imgItem1).toHaveAttribute("alt", "ABC 27G2SP Monitor");
-        expect(imgItem1).toHaveAttribute("src", `${apiURL}/api/products/image/abc-27g2sp-monitor.jpg`);
+        expect(imgItem1).toHaveAttribute("src", `${apiURL}/api/products/image/thumbs/abc-27g2sp-monitor.jpg`);
 
         const headingItem1Name = screen.getByRole("heading", { name: "ABC 27G2SP Monitor" });
         expect(headingItem1Name).toBeInTheDocument();
@@ -163,7 +163,7 @@ describe("should render UserOrders component", () => {
         const imgItem2 = screen.getByRole("img", { name: "Cool Keyboards" })
         expect(imgItem2).toBeInTheDocument();
         expect(imgItem2).toHaveAttribute("alt", "Cool Keyboards");
-        expect(imgItem2).toHaveAttribute("src", `${apiURL}/api/products/image/cool-keyboards.jpg`);
+        expect(imgItem2).toHaveAttribute("src", `${apiURL}/api/products/image/thumbs/cool-keyboards.jpg`);
         
         const headingItem2Name = screen.getByRole("heading", { name: "Cool Keyboards" });
         expect(headingItem2Name).toBeInTheDocument();
@@ -177,7 +177,7 @@ describe("should render UserOrders component", () => {
         const imgItem3 = screen.getByRole("img", { name: "Cool Keys RGB Keyboard" })
         expect(imgItem3).toBeInTheDocument();
         expect(imgItem3).toHaveAttribute("alt", "Cool Keys RGB Keyboard");
-        expect(imgItem3).toHaveAttribute("src", `${apiURL}/api/products/image/cool-keys-rgb-keyboard.jpg`);
+        expect(imgItem3).toHaveAttribute("src", `${apiURL}/api/products/image/thumbs/cool-keys-rgb-keyboard.jpg`);
         
         const headingItem3Name = screen.getByRole("heading", { name: "Cool Keys RGB Keyboard" });
         expect(headingItem3Name).toBeInTheDocument();

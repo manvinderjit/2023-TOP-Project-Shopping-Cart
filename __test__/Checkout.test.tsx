@@ -85,7 +85,7 @@ describe("should checkout order", () => {
 
   const handlers = [
     // Register request handler
-    http.post(`${apiURL}/api/checkout`, async () => {
+    http.post(`${apiURL}/api/orders/checkout`, async () => {
       return HttpResponse.json({
         message: "Order create successfully!",
       });
