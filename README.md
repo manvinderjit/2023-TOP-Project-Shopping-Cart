@@ -1,23 +1,27 @@
 # Shopping WebApp by Manvinderjit
 
-## New Live Version
+## Details
+A Vite-React Redux Webapp e-commerce portal allows customers to purchase products. It has been updated to use `TypeScript`, `JavaScript`, `Tailwind CSS`, `React Redux`, `React Router Dom`, and `JWT` technologies. For testing it uses `React Testing Library` and `ViTest` along with `msw` for mocking.
 
-The new version of the website is now deployed. Some features of the website are under development.
+Is a part of a two-app ecosystem for an organization selling computer hardware. Leverages RESTful APIs provided by the [Inventory Management App - Live Link](https://ia.manvinderjit.com/), which is the other app in the ecosystem. [Click here for Inventory App's GitHub Page](https://github.com/manvinderjit/2023-TOP-Project-Inventory-Application). 
+
+### New Design
+
+The new version of the website is now deployed.
 
 `Live Link`: [Shopping App](https://2023-top-project-shopping-cart.pages.dev/)
 
-## New Design Preview
 ![](designPreviews/newHome.gif)
 
-
-## Details
-A Vite-React Redux Webapp e-commerce portal allows customers to purchase products. It has been updated to use Tailwind CSS, React Redux, React Router Dom, and JWT technologies. For testing it uses React Testing Library and ViTest.
-
-Is a part of a two-app ecosystem for an organization selling computer hardware. Leverages RESTful APIs provided by the [Inventory Management App](https://ia.manvinderjit.com/), which is the other app in the ecosystem. 
+## App Ecosystem
 
 The app ecosystem consists of two user roles:
 - `Customers:` They use this [Shopping App](https://2023-top-project-shopping-cart.pages.dev/) to place orders.
-- `Employees`: They use the [Inventory App](https://ia.manvinderjit.com) to perform inventory and logistics operations, including processing orders received through this `Shopping App`. Promos and products displayed on the `Shopping App` are also managed through the `Inventory App`.
+- `Employees`: They use the [Inventory App](https://ia.manvinderjit.com) to perform inventory and logistics operations, including processing orders received through this `Shopping App`. Promos and products displayed on the `Shopping App` are also managed through the CMS provided by the `Inventory App`.
+
+The following diagram provides an architectural view of the ecosystem. This Shopping App is only the React Single Page Application. The RESTful APIs and backend services are provided by the Inventory App. Visit the [Inventory App's GitHub Page](https://github.com/manvinderjit/2023-TOP-Project-Inventory-Application) for more information on the backend.
+
+![alt text](architectureGrid.png)
 
 # 1. Description
 
@@ -28,6 +32,7 @@ Shopping App is an e-commerce store that supports the following functions:
 3. `Cart Functionality`: Customers can add items to cart and checkout.
 4. `Order History`: Customers can view their order history.
 5. `Manage Orders`: Customers can manage their orders and cancel them as required.
+6. `Subscription`: Customers can manage subscription to promotional offers from the Dashboard.
 
 ## Tech Stack
 
