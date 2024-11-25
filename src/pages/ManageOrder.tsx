@@ -1,4 +1,4 @@
-import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate, useParams } from "react-router-dom";
 import { useCancelAnOrderMutation, useGetUserOrdersQuery } from "../features/api/apiSlice";
 import { useAppSelector } from "../application/reduxHooks";
 import { getCurrentToken } from "../features/auth/authSlice";
@@ -31,10 +31,6 @@ const ManageOrder = (): React.JSX.Element => {
     useEffect((): void => {
       if (!token || token === null) navigate("/login");
     }, [navigate, token]);
-
-    useEffect((): void => {
-      if (!order || order === null || order === undefined) navigate("/orders");
-    }, [navigate, order, token]);
 
     const handleCancelOrder = (): void => {
       cancelOrder({ token, orderId });
@@ -111,14 +107,6 @@ const ManageOrder = (): React.JSX.Element => {
           </div>
         </>
       );      
-    } else if (isCancelOrderError) { // Error
-      content = (
-        <p className=" text-red-400 ">{`Error! ${
-          isApiResponseError(cancelOrderError)
-            ? cancelOrderError.data.error
-            : JSON.stringify(cancelOrderError)
-        }`}</p>
-      );
     } else  { // Error Redundancy
       content = (
         <p className=" text-red-400">{`An Error Occured!`}</p>
@@ -127,12 +115,22 @@ const ManageOrder = (): React.JSX.Element => {
 
     return (
       <div className="w-4/5 m-auto">
-            <h2 className={`my-6 text-center text-2xl font-medium ${themeClasses.textClass}`}>
-              Manage Order
-            </h2>
-            {content}
+        <h2
+          className={`my-6 text-center text-2xl font-medium ${themeClasses.textClass}`}
+        >
+          Manage Order
+        </h2>
+        {content}
+        
+          <Link
+            to={"/orders"}
+            className={`mx-auto flex w-48 h-10 my-10 self-center justify-center items-center rounded-xl font-semibold text-white shadow-sm hover:text-white ${themeClasses.primaryBgClass} ${themeClasses.primaryBgHoveredClass}`}
+          >
+            Back to All Orders
+          </Link>
+        
       </div>
-      );
+    );
 }
 
 export default ManageOrder;

@@ -8,30 +8,34 @@ export const apiURL = import.meta.env.VITE_API_BASE_URL;
 // Define our single API slice object
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ 
+  baseQuery: fetchBaseQuery({
     baseUrl: `${apiURL}/api`,
     prepareHeaders: (headers, { getState }) => {
       // Get the token from the state or wherever you're storing it
       const token = (getState() as RootState).auth.token; // Adjust based on your state structure
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ["Order"],
+  tagTypes: ["Order", "SubStatus"],
   endpoints: (builder) => ({
     // The `getCarousel` endpoint is a "query" operation that returns carousel data
     getCarousel: builder.query<CarouselImagesData, undefined>({
       query: () => "/promos/carousel",
     }),
     // The `getCarousel` endpoint is a "query" operation that returns product data and product category list
-    getProducts: builder.query<ProductDataAndCategoryDataLists, Record<string, number> | undefined>({
-      query: (params) => { 
-        return { 
-          url:"/products", 
-          params
-      }},
+    getProducts: builder.query<
+      ProductDataAndCategoryDataLists,
+      Record<string, number> | undefined
+    >({
+      query: (params) => {
+        return {
+          url: "/products",
+          params,
+        };
+      },
     }),
     // The `registerUser` endpoint is a "query" operation that registers a user
     registerUser: builder.mutation({
@@ -50,7 +54,10 @@ export const apiSlice = createApi({
       }),
     }),
     // The `getUserOrders` endpoint is a "query" operation that gets all orders for a user
-    getUserOrders: builder.query<OrdersList, Record<string, number> | undefined>({
+    getUserOrders: builder.query<
+      OrdersList,
+      Record<string, number> | undefined
+    >({
       query: (params) => ({
         url: "/orders",
         params,
@@ -77,6 +84,28 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Order"],
     }),
+    // The `getSubscriptionStatus` endpoint is a "query" operation that gets the subscription status for a user
+    getSubscriptionStatus: builder.query({
+      query: () => ({
+        url: "/subscribe",
+        method: "GET",
+      }),
+      providesTags: ["SubStatus"],
+    }),
+    subscribeToOffers: builder.mutation({
+      query: () => ({
+        url: "/subscribe",
+        method: "POST",
+      }),
+      invalidatesTags: ["SubStatus"],
+    }),
+    cancelSubscription: builder.mutation({
+      query: () => ({
+        url: "/subscribe/cancel",
+        method: "POST",
+      }),
+      invalidatesTags: ["SubStatus"],
+    }),
   }),
 });
 
@@ -88,4 +117,7 @@ export const {
   useGetUserOrdersQuery,
   useCancelAnOrderMutation,
   usePlaceOrderMutation,
+  useGetSubscriptionStatusQuery,
+  useSubscribeToOffersMutation,
+  useCancelSubscriptionMutation,
 } = apiSlice;
