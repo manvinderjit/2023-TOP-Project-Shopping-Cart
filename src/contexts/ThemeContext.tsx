@@ -14,6 +14,7 @@ const ThemeContext = createContext<ThemeContext>({
     secondaryBorderClass: "border-[#e5e7eb]",
     primaryBgHoveredClass: "hover:bg-indigo-500",
     inputRingClass: "ring-gray-300 ",
+    inputRingClassPrimary: "ring-indigo-600",
     inputBgClass: "bg-[#2B2A33]",
     primaryColor: "#4f46e5",
   },
@@ -35,6 +36,7 @@ const ThemeContextProvider = (props: { children: string | number | boolean | Rea
           secondaryBorderClass: "border-[#e5e7eb]",
           primaryBgHoveredClass: "hover:bg-indigo-500",
           inputRingClass: "ring-gray-300",
+          inputRingClassPrimary: "ring-indigo-600",
           inputBgClass: "bg-[#2B2A33]",
           primaryColor: "#4f46e5",
         }
@@ -48,6 +50,7 @@ const ThemeContextProvider = (props: { children: string | number | boolean | Rea
           secondaryBorderClass: "border-violet-800",
           primaryBgHoveredClass: "hover:bg-[#9354ed] cursor-pointer",
           inputRingClass: "ring-violet-800",
+          inputRingClassPrimary: "ring-violet-800",
           inputBgClass: "bg-gray-400",
           primaryColor: "#5b21b6",
         };

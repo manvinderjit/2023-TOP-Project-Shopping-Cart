@@ -5,6 +5,7 @@ import type { ProductData } from "./Product.types";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import Pagination from "../pagination/Pagination";
+import Search from "../search/Search";
 
 const Products = ():React.JSX.Element => {
 
@@ -72,6 +73,7 @@ const Products = ():React.JSX.Element => {
           </div>
         </div>
 
+        <Search categoriesList={apiData.categoryList}/>
         <div
           className={`max-w-screen-2xl w-full mx-auto 2xl:border  rounded-lg py-10 ${themeClasses.primaryBorderClass}`}
         >

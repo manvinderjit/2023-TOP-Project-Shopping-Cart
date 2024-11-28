@@ -10,6 +10,7 @@ export interface ThemeContext {
     primaryBorderClass: string;
     primaryBgHoveredClass: string;
     inputRingClass: string;
+    inputRingClassPrimary: string;
     inputBgClass: string;
     secondaryBorderClass: string;
     primaryColor: string;
