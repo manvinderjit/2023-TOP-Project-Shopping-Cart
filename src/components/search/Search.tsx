@@ -1,13 +1,16 @@
-import { SetStateAction, useContext, useState } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
-const Search = ({ categoriesList }) => {
-    const { themeClasses } = useContext(ThemeContext);
-    const [selectedCategory, setSelectedCategory] = useState<string>('1');
+interface SearchBarProps {
+  categoriesList?: {
+    _id: string;
+    name: string;
+  }[];
+  handleChangeCategory: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}
 
-    const handleCategoryChange = (e: { target: { value: SetStateAction<string>; }; }) => {
-      setSelectedCategory(e.target.value);
-    };
+const Search = (props:SearchBarProps) => {
+    const { themeClasses } = useContext(ThemeContext);
 
   return (
     <div className="flex flex-col items-center">
@@ -17,7 +20,7 @@ const Search = ({ categoriesList }) => {
             id="searh-dropdown"
             data-dropdown-toggle="dropdown"
             className={`flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center rounded-s-lg shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset ${themeClasses.inputRingClassPrimary} focus:ring-indigo-600 ${themeClasses.textClass} ${themeClasses.inputBgClass}`}
-            onChange={handleCategoryChange}
+            onChange={props.handleChangeCategory}
           >
             <svg
               className="w-2.5 h-2.5 ms-2.5"
@@ -35,7 +38,7 @@ const Search = ({ categoriesList }) => {
               />
             </svg>
             <option value={""}>All</option>;
-            {categoriesList.map((category) => {
+            {props.categoriesList && props.categoriesList.map((category) => {
               return <option value={category._id}>{category.name}</option>;
             })}
           </select>

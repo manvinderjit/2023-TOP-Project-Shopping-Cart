@@ -1,5 +1,5 @@
 import ProductCard from "./ProductCard";
-import { useGetProductsQuery } from "../../features/api/apiSlice";
+import { useGetProductCategoriesQuery, useGetProductsQuery } from "../../features/api/apiSlice";
 import Spinner from "../utility/Spinner";
 import type { ProductData } from "./Product.types";
 import { useContext, useState } from "react";
@@ -8,11 +8,11 @@ import Pagination from "../pagination/Pagination";
 import Search from "../search/Search";
 
 const Products = ():React.JSX.Element => {
-
   const { themeClasses } = useContext(ThemeContext);
-
   const [productPageNumber, setProductPageNumber] = useState<number>(1);
   const [viewItemsLimit, setViewItemsLimit] = useState<number>(6);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const handleChangeViewItemsLimit = (itemsLimit:number) => { 
     setViewItemsLimit(itemsLimit)
@@ -20,6 +20,21 @@ const Products = ():React.JSX.Element => {
   };
 
   const handleChangeProductPageNumber = (newPageNumber: number) => newPageNumber !== productPageNumber ? setProductPageNumber(newPageNumber) : null;
+
+  const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  // const handleSearchButtonClick = (e: React.FormEventHandler<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setSearchQuery(e.target.value);
+  // };
+
+  const {
+    data: dataProductCategories,    
+    isSuccess: isSuccessProductCategories,
+    isError: isErrorProductCategories,
+  } = useGetProductCategoriesQuery(undefined);
 
   const {
     data: apiData,
@@ -73,7 +88,15 @@ const Products = ():React.JSX.Element => {
           </div>
         </div>
 
-        <Search categoriesList={apiData.categoryList}/>
+        {isSuccessProductCategories && (
+          <Search
+            categoriesList={dataProductCategories.productCategories}
+            handleChangeCategory={handleChangeCategory}
+          />
+        )}
+        {isErrorProductCategories && (
+          <Search handleChangeCategory={handleChangeCategory} />
+        )}
         <div
           className={`max-w-screen-2xl w-full mx-auto 2xl:border  rounded-lg py-10 ${themeClasses.primaryBorderClass}`}
         >
