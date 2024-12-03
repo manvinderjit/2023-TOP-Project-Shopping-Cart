@@ -25,6 +25,10 @@ export const apiSlice = createApi({
     getCarousel: builder.query<CarouselImagesData, undefined>({
       query: () => "/promos/carousel",
     }),
+    // The `getProductCategories` endpoint is a "query" operation that returns product categories
+    getProductCategories: builder.query({
+      query: () => "/products/categories",
+    }),
     // The `getCarousel` endpoint is a "query" operation that returns product data and product category list
     getProducts: builder.query<
       ProductDataAndCategoryDataLists,
@@ -120,4 +124,5 @@ export const {
   useGetSubscriptionStatusQuery,
   useSubscribeToOffersMutation,
   useCancelSubscriptionMutation,
+  useGetProductCategoriesQuery,
 } = apiSlice;

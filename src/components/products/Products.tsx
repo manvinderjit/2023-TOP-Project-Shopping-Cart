@@ -1,5 +1,5 @@
 import ProductCard from "./ProductCard";
-import { useGetProductsQuery } from "../../features/api/apiSlice";
+import { useGetProductCategoriesQuery, useGetProductsQuery } from "../../features/api/apiSlice";
 import Spinner from "../utility/Spinner";
 import type { ProductData } from "./Product.types";
 import { useContext, useState } from "react";
@@ -20,6 +20,12 @@ const Products = ():React.JSX.Element => {
   };
 
   const handleChangeProductPageNumber = (newPageNumber: number) => newPageNumber !== productPageNumber ? setProductPageNumber(newPageNumber) : null;
+
+  const {
+    data: dataProductCategories,    
+    isSuccess: isSuccessProductCategories,
+    isError: isErrorProductCategories,
+  } = useGetProductCategoriesQuery(undefined);
 
   const {
     data: apiData,
@@ -73,7 +79,12 @@ const Products = ():React.JSX.Element => {
           </div>
         </div>
 
-        <Search categoriesList={apiData.categoryList}/>
+        {isSuccessProductCategories && (
+          <Search categoriesList={dataProductCategories.productCategories} />
+        )}
+        {isErrorProductCategories && (
+          <Search />
+        )}
         <div
           className={`max-w-screen-2xl w-full mx-auto 2xl:border  rounded-lg py-10 ${themeClasses.primaryBorderClass}`}
         >

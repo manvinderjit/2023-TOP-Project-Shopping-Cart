@@ -1,7 +1,14 @@
 import { SetStateAction, useContext, useState } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
-const Search = ({ categoriesList }) => {
+interface SearchBarProps {
+  categoriesList? : {
+    _id: string,
+    name: string
+  }[];
+}
+
+const Search = (props:SearchBarProps) => {
     const { themeClasses } = useContext(ThemeContext);
     const [selectedCategory, setSelectedCategory] = useState<string>('1');
 
@@ -35,7 +42,7 @@ const Search = ({ categoriesList }) => {
               />
             </svg>
             <option value={""}>All</option>;
-            {categoriesList.map((category) => {
+            {props.categoriesList && props.categoriesList.map((category) => {
               return <option value={category._id}>{category.name}</option>;
             })}
           </select>
