@@ -1,5 +1,6 @@
 import ProductCard from "./ProductCard";
 import { useGetProductCategoriesQuery, useGetProductsQuery } from "../../features/api/apiSlice";
+import { useGetProductCategoriesQuery, useGetProductsQuery } from "../../features/api/apiSlice";
 import Spinner from "../utility/Spinner";
 import type { ProductData } from "./Product.types";
 import { useContext, useState } from "react";

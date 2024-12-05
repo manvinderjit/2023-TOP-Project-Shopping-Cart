@@ -37,7 +37,7 @@ const Search = (props:SearchBarProps) => {
                 d="m1 1 4 4 4-4"
               />
             </svg>
-            <option value={""}>All</option>;
+            <option value={""}>All</option>;            
             {props.categoriesList && props.categoriesList.map((category) => {
               return <option value={category._id}>{category.name}</option>;
             })}
